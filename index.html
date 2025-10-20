@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Beranda | Rumah BUMN Banjarmasin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <script>
+        tailwind = {};
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#195770',
+                        secondary: '#1ba0db',
+                        accent: '#0f8fab'
+                    },
+                    fontFamily: {
+                        manrope: ['Manrope', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        batikOne: "url('https://images.unsplash.com/photo-1568252542512-9fe8fe9c87ac?auto=format&fit=crop&w=1600&q=60')",
+                        batikTwo: "url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=60')"
+                    }
+                }
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="font-manrope text-gray-900 bg-gray-50">
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-screen-xl mx-4 sm:mx-6 lg:mx-12 2xl:mx-auto py-3 flex items-center gap-4">
+            <button id="nav-toggle" class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100" aria-label="Toggle navigation" aria-expanded="false">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+            <img src="https://res.cloudinary.com/dkfindonesia/image/upload/v1734675600/rumah-bumn/rumah-bumn-logo.png"
+                 alt="Logo Rumah BUMN" class="h-12 w-auto md:ml-0 ml-2">
+            <div class="flex flex-col max-sm:text-sm">
+                <span class="text-sm text-gray-500 uppercase tracking-widest">Rumah BUMN</span>
+                <span class="font-bold text-lg text-primary leading-tight">Banjarmasin</span>
+            </div>
+            <div class="ml-auto flex items-center gap-3">
+                <a href="tel:+62511345678" class="hidden sm:inline-flex items-center text-sm text-gray-500 hover:text-primary">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5a1.5 1.5 0 0 0 1.5-1.5v-2.172a1.5 1.5 0 0 0-1.03-1.425l-3.03-1.01a1.5 1.5 0 0 0-1.54.374l-.97.97a11.044 11.044 0 0 1-4.95-4.95l.97-.97a1.5 1.5 0 0 0 .374-1.54l-1.01-3.03A1.5 1.5 0 0 0 8.922 2.25H6.75A1.5 1.5 0 0 0 5.25 3.75v3z"/>
+                    </svg>
+                    +62 511 345 678
+                </a>
+                <a href="#hubungi-kami"
+                   class="hidden sm:inline-flex border border-primary text-primary font-semibold rounded-md px-4 py-2 hover:bg-primary hover:text-white transition">
+                    Hubungi Kami
+                </a>
+            </div>
+        </div>
+        <nav class="bg-primary text-white sticky top-[58px] sm:top-[72px]" style="background-image: linear-gradient(135deg, rgba(25,87,112,0.95), rgba(27,160,219,0.95));">
+            <div class="max-w-screen-xl mx-4 sm:mx-6 lg:mx-12 2xl:mx-auto flex items-center justify-between py-2">
+                <ul id="nav-menu" class="hidden md:flex md:items-center md:gap-6 text-sm font-medium">
+                    <li><a href="#beranda" class="nav-link active">Beranda</a></li>
+                    <li><a href="#layanan" class="nav-link">Layanan</a></li>
+                    <li><a href="#statistik" class="nav-link">Statistik</a></li>
+                    <li><a href="#peran" class="nav-link">Peran</a></li>
+                    <li><a href="#testimoni" class="nav-link">Testimoni</a></li>
+                    <li><a href="#berita" class="nav-link">Berita</a></li>
+                    <li><a href="#mitra" class="nav-link">Mitra</a></li>
+                </ul>
+            </div>
+            <div id="nav-dropdown" class="md:hidden block w-full bg-primary/95 text-white shadow-lg border-t border-primary/40 origin-top transition-transform duration-300 ease-out">
+                <ul class="flex flex-col divide-y divide-white/10 px-4 sm:px-6 pb-4">
+                    <li><a href="#beranda" class="block py-3 font-medium text-white hover:bg-white/10 rounded-md px-2">Beranda</a></li>
+                    <li><a href="#layanan" class="block py-3 font-medium text-white hover:bg-white/10 rounded-md px-2">Layanan</a></li>
+                    <li><a href="#statistik" class="block py-3 font-medium text-white hover:bg-white/10 rounded-md px-2">Statistik</a></li>
+                    <li><a href="#peran" class="block py-3 font-medium text-white hover:bg-white/10 rounded-md px-2">Peran</a></li>
+                    <li><a href="#testimoni" class="block py-3 font-medium text-white hover:bg-white/10 rounded-md px-2">Testimoni</a></li>
+                    <li><a href="#berita" class="block py-3 font-medium text-white hover:bg-white/10 rounded-md px-2">Berita</a></li>
+                    <li><a href="#mitra" class="block py-3 font-medium text-white hover:bg-white/10 rounded-md px-2">Mitra</a></li>
+                    <li class="pt-4">
+                        <a href="#hubungi-kami" class="inline-flex w-full items-center justify-center border border-white/60 text-white font-semibold rounded-md px-4 py-3 hover:bg-white hover:text-primary transition">
+                            Hubungi Kami
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main id="beranda">
+        <section class="bg-white" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1600&q=60'); background-position: top right; background-repeat: no-repeat; background-size: cover;">
+            <div class="bg-white/90">
+                <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto py-16 md:py-24 flex flex-col-reverse lg:flex-row gap-12 items-center">
+                    <div class="w-full lg:w-1/2 space-y-6" data-aos="fade-right">
+                        <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-semibold">
+                            <span class="w-2 h-2 bg-secondary rounded-full"></span>
+                            Akselerator UMKM Kalimantan Selatan
+                        </span>
+                        <h1 class="text-3xl md:text-5xl font-extrabold text-primary leading-tight">
+                            Rumah BUMN Banjarmasin
+                        </h1>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            Wadah kolaborasi BUMN untuk memajukan UMKM, wirausaha muda, dan ekonomi kreatif di Banjarmasin dan sekitarnya melalui pelatihan, digitalisasi, serta akses pasar.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
+                            <a href="#layanan" class="inline-flex items-center justify-center px-6 py-3 rounded-md bg-primary text-white font-semibold hover:bg-secondary transition">
+                                Jelajahi Program
+                            </a>
+                            <div class="flex items-center gap-3">
+                                <div class="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
+                                    320+
+                                </div>
+                                <span class="text-sm text-gray-600">UMKM telah dibina sepanjang 2021-2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2" data-aos="fade-left">
+                        <div class="swiper hero-swiper rounded-2xl shadow-2xl">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="https://images.unsplash.com/photo-1597303962624-bb0ff63e3d3a?auto=format&fit=crop&w=1400&q=60"
+                                         alt="Pelatihan UMKM Banjarmasin" class="w-full h-[320px] md:h-[420px] object-cover rounded-2xl">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1400&q=60"
+                                         alt="Produk UMKM Lokal" class="w-full h-[320px] md:h-[420px] object-cover rounded-2xl">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=60"
+                                         alt="Coworking Space Rumah BUMN" class="w-full h-[320px] md:h-[420px] object-cover rounded-2xl">
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="layanan" class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto my-20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-white shadow-lg border border-gray-100 text-center space-y-4" data-aos="fade-up" data-aos-delay="0">
+                    <div class="mx-auto h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3 3 0 0 0 3.75-.615A2.99 2.99 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.99 2.99 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3 3 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary">Bergabung Sebagai UMKM Binaan</h3>
+                    <p class="text-gray-600 leading-relaxed">Dapatkan pendampingan, legalitas usaha, dan peningkatan kapasitas untuk memperkuat usaha Anda.</p>
+                    <a href="mailto:rumahbumn.banjarmasin@bumn.go.id" class="btn-outline">Daftar Sekarang</a>
+                </div>
+                <div class="p-8 rounded-2xl bg-white shadow-lg border border-gray-100 text-center space-y-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mx-auto h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5A2.25 2.25 0 0 1 5.25 5.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25M3 18.75A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75M3 18.75v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5M8.25 9V5.25m7.5 3.75V5.25" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary">Ikuti Event Rumah BUMN</h3>
+                    <p class="text-gray-600 leading-relaxed">Pelatihan tematik, workshop digital marketing, hingga business coaching setiap bulan.</p>
+                    <a href="https://forms.gle/DV5gBanjarmasinEvent" class="btn-outline">Jadwal Event</a>
+                </div>
+                <div class="p-8 rounded-2xl bg-white shadow-lg border border-gray-100 text-center space-y-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mx-auto h-20 w-20 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M16.5 21v-5.25A2.25 2.25 0 0 0 14.25 13.5h-4.5A2.25 2.25 0 0 0 7.5 15.75V21m9 0h4.5A2.25 2.25 0 0 0 23.25 18.75V7.5A2.25 2.25 0 0 0 21 5.25H3A2.25 2.25 0 0 0 .75 7.5v11.25A2.25 2.25 0 0 0 3 21h4.5" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary">Booking Coworking Space</h3>
+                    <p class="text-gray-600 leading-relaxed">Ruang kreatif dengan fasilitas lengkap untuk pertemuan bisnis, komunitas, dan sesi produksi konten.</p>
+                    <a href="https://wa.me/6281355558888" class="btn-outline">Hubungi Admin</a>
+                </div>
+            </div>
+        </section>
+        <section id="statistik" class="py-24 bg-primary text-white">
+            <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto">
+                <div class="flex flex-col lg:flex-row items-center gap-10 text-white">
+                    <div class="lg:w-1/2 space-y-6" data-aos="fade-right">
+                        <h2 class="text-3xl md:text-5xl font-bold leading-tight drop-shadow-[0_6px_18px_rgba(0,0,0,0.35)]">Statistik Pembinaan Rumah BUMN</h2>
+                        <p class="text-lg text-slate-100 leading-relaxed drop-shadow-[0_3px_6px_rgba(0,0,0,0.35)]">
+                            Data menunjukkan transformasi UMKM binaan kami ke arah digitalisasi, modernisasi, dan perluasan pasar daring.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="stat-card bg-white/10 backdrop-blur rounded-xl p-5">
+                                <span class="block text-sm uppercase text-white/60">UMKM Go Digital</span>
+                                <span class="text-3xl font-extrabold mt-2">4.215</span>
+                            </div>
+                            <div class="stat-card bg-white/10 backdrop-blur rounded-xl p-5">
+                                <span class="block text-sm uppercase text-white/60">UMKM Go Modern</span>
+                                <span class="text-3xl font-extrabold mt-2">3.704</span>
+                            </div>
+                            <div class="stat-card bg-white/10 backdrop-blur rounded-xl p-5">
+                                <span class="block text-sm uppercase text-white/60">UMKM Go Online</span>
+                                <span class="text-3xl font-extrabold mt-2">1.145</span>
+                            </div>
+                            <div class="stat-card bg-white/10 backdrop-blur rounded-xl p-5">
+                                <span class="block text-sm uppercase text-white/60">Event Terselenggara</span>
+                                <span class="text-3xl font-extrabold mt-2">48</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 w-full" data-aos="fade-left">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="chart-card chart-card--featured md:col-span-2">
+                                <div class="chart-card__heading">Go Digital</div>
+                                <div id="chart-digital" class="chart-card__canvas"></div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-card__heading">Go Modern</div>
+                                <div id="chart-modern" class="chart-card__canvas"></div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-card__heading">Go Online</div>
+                                <div id="chart-online" class="chart-card__canvas"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-20 bg-white">
+            <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto flex flex-col lg:flex-row gap-8 items-center" data-aos="zoom-in-up">
+                <iframe class="w-full lg:w-3/5 aspect-video rounded-xl shadow-lg border-4 border-white"
+                        src="https://www.youtube.com/embed/Sl0ewsGmmK8"
+                        title="Video Profil Rumah BUMN Banjarmasin"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="lg:w-2/5 space-y-4">
+                    <h3 class="text-3xl font-bold text-primary">Video Profil</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Kenali fasilitas, layanan, dan kisah inspiratif para pelaku UMKM yang bertumbuh bersama Rumah BUMN Banjarmasin.
+                    </p>
+                    <a href="https://www.youtube.com/@RumahBUMNBanjarmasin" target="_blank" class="inline-flex items-center gap-2 text-secondary font-semibold hover:underline">
+                        Lihat kanal YouTube kami
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.5 4.5 21 12l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section id="peran" class="py-24 bg-primary/5">
+            <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto space-y-8">
+                <div class="flex flex-col md:flex-row justify-between gap-4 items-start md:items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary">Peran Rumah BUMN Banjarmasin</h2>
+                        <p class="text-gray-600 mt-2 max-w-3xl">Kami hadir sebagai pusat pembinaan terpadu yang menumbuhkan ekosistem kewirausahaan lokal melalui empat pilar utama.</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-primary">
+                        <button id="peran-prev" class="carousel-button">
+                            <span class="sr-only">Sebelumnya</span>
+                            &#8592;
+                        </button>
+                        <button id="peran-next" class="carousel-button">
+                            <span class="sr-only">Berikutnya</span>
+                            &#8594;
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-hidden relative">
+                    <div id="peran-carousel" class="flex gap-6 transition-transform duration-500">
+                        <article class="peran-card" data-aos="fade-up">
+                            <h3 class="peran-title">Pengembangan UMKM</h3>
+                            <div class="peran-body">
+                                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=60"
+                                     alt="Pengembangan UMKM" class="peran-image">
+                                <p class="peran-text">Pendampingan intensif untuk kurasi produk, legalitas usaha, hingga packaging yang siap masuk retail modern.</p>
+                            </div>
+                        </article>
+                        <article class="peran-card" data-aos="fade-up" data-aos-delay="50">
+                            <h3 class="peran-title">Basecamp Milenial</h3>
+                            <div class="peran-body">
+                                <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=60"
+                                     alt="Basecamp Milenial" class="peran-image">
+                                <p class="peran-text">Ruang kolaborasi anak muda untuk belajar teknologi, konten kreatif, dan inkubasi bisnis digital.</p>
+                            </div>
+                        </article>
+                        <article class="peran-card" data-aos="fade-up" data-aos-delay="100">
+                            <h3 class="peran-title">Coworking Space</h3>
+                            <div class="peran-body">
+                                <img src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?auto=format&fit=crop&w=800&q=60"
+                                     alt="Coworking Space" class="peran-image">
+                                <p class="peran-text">Fasilitas produktivitas dengan internet cepat, studio mini, dan peralatan hybrid meeting.</p>
+                            </div>
+                        </article>
+                        <article class="peran-card" data-aos="fade-up" data-aos-delay="150">
+                            <h3 class="peran-title">Pusat Akses Pasar</h3>
+                            <div class="peran-body">
+                                <img src="https://images.unsplash.com/photo-1543248939-4296e1fea89b?auto=format&fit=crop&w=800&q=60"
+                                     alt="Akses Pasar" class="peran-image">
+                                <p class="peran-text">Menghubungkan UMKM dengan marketplace, B2B, dan event promosi unggulan Kalimantan Selatan.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="testimoni" class="py-24 bg-white">
+            <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto space-y-10">
+                <div class="flex flex-col md:flex-row justify-between gap-6 md:items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary">Apa Kata UMKM Binaan</h2>
+                        <p class="text-gray-600 mt-2 max-w-3xl">Cerita transformasi UMKM yang telah memanfaatkan fasilitas dan pendampingan kami.</p>
+                    </div>
+                    <a href="https://forms.gle/rumahbumnTestimoni" class="inline-flex items-center gap-2 text-secondary font-semibold hover:underline">
+                        Bagikan testimoni
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.5 4.5 21 12l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="swiper testimonial-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">
+                                    “Rumah BUMN membantu kami upgrade kemasan dan memasarkan produk kuliner Banjar ke marketplace nasional. Omzet kami naik 3x lipat dalam 6 bulan.”
+                                </p>
+                                <div class="testimonial-author">
+                                    <div>
+                                        <p class="author-name">Siti Rahmah</p>
+                                        <p class="author-role">Pendiri Rasa Banjar Kitchen</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">
+                                    “Pendampingan digital marketing dan akses pembiayaan membuat bisnis fesyen etnik kami semakin dikenal. Tim mentor sangat responsif.”
+                                </p>
+                                <div class="testimonial-author">
+                                    <div>
+                                        <p class="author-name">Andi Pratama</p>
+                                        <p class="author-role">Owner Borneo Batik Craft</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">
+                                    “Coworking space-nya nyaman untuk komunitas technopreneur kami. Banyak kolaborasi baru lahir dari sini.”
+                                </p>
+                                <div class="testimonial-author">
+                                    <div>
+                                        <p class="author-name">Rizky Maulana</p>
+                                        <p class="author-role">Lead Komunitas Digital Kalimantan</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+        <section id="berita" class="py-24 bg-white text-black">
+            <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto space-y-8">
+                <div class="flex flex-col md:flex-row justify-between gap-6 md:items-center text-black">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold">Berita Terkini</h2>
+                        <p class="mt-2 max-w-2xl text-black/70">Update kegiatan, kolaborasi, dan capaian UMKM binaan Rumah BUMN Banjarmasin.</p>
+                    </div>
+                    <a href="mailto:rumahbumn.banjarmasin@bumn.go.id"
+                       class="inline-flex items-center gap-2 font-semibold px-5 py-3 rounded-lg border border-black/50 text-black bg-white hover:bg-black hover:text-white transition shadow-lg">
+                        Kirim press release
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.5 4.5 21 12l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" data-news-grid>
+                    <div class="col-span-full flex flex-col items-center justify-center text-gray-400 py-16" data-news-loading>
+                        <svg class="w-8 h-8 animate-spin mb-3" viewBox="0 0 24 24" fill="none">
+                            <circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-70" d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+                        </svg>
+                        <p class="text-sm">Memuat berita terbaru...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="mitra" class="py-24 bg-white">
+            <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto space-y-10">
+                <div class="flex flex-col md:flex-row justify-between gap-6 md:items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary">Mitra & Kolaborator</h2>
+                        <p class="text-gray-600 mt-2 max-w-3xl">Kolaborasi berbagai instansi, komunitas, dan marketplace untuk memperkuat UMKM Banjarmasin.</p>
+                    </div>
+                    <a href="mailto:rumahbumn.banjarmasin@bumn.go.id" class="inline-flex items-center gap-2 text-secondary font-semibold hover:underline">
+                        Jadwalkan kolaborasi
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.5 4.5 21 12l-7.5 7.5M21 12H3" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="hidden md:flex flex-wrap justify-center gap-10 items-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnYGDgOsdBs-vMW8Fzvot55YXngbF3heryCOnmsVN9xNQvxDKooe_p5o6omQ" alt="Telkom Indonesia" class="partner-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_zpDSPX4d397Q9scHHoRtnLviAXkPmE9-DuWeb40GgOYXuU7HdlOljLW-Z88" alt="Bank BRI" class="partner-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKqVULQAlXv-qGKbTqfUZO0RM4xqfkFSY_oitYiTJXlCKqFsZ7f4ckiyrsOQ" alt="Pegadaian" class="partner-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFX-3nVuIhysme8whQMPuxn_UcNs8pCbBZukjWNfViaWN6-5eFccXsQU2ykA" alt="PNM" class="partner-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL4-ujc1QPr2EWLHujPA64o7vQCz5332syFyZgUjA_s5nSppc6gLXfz82IQ" alt="Pertamina" class="partner-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNoEZ3OLQct20RwsCx2YKOR-CTacVOTf8842qZBzr3fPj_JmyooySiOhmDew" alt="Bank Kalsel" class="partner-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBic8fP_sIWArrSDKaG0OSeFnwJV2O3B9XSHVRwY4OtKL-jKlrvvQCE7NzcQ" alt="Tokopedia" class="partner-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp7GTc4GmiVGbI4AtwrioMRFVVknUcjDNtlLao_hn5jOeIHrBLRCkuNs1FdRo" alt="Shopee" class="partner-logo">
+                </div>
+                <div class="md:hidden overflow-hidden">
+                    <div class="partner-marquee flex gap-10">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnYGDgOsdBs-vMW8Fzvot55YXngbF3heryCOnmsVN9xNQvxDKooe_p5o6omQ" alt="Telkom Indonesia" class="partner-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_zpDSPX4d397Q9scHHoRtnLviAXkPmE9-DuWeb40GgOYXuU7HdlOljLW-Z88" alt="Bank BRI" class="partner-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKqVULQAlXv-qGKbTqfUZO0RM4xqfkFSY_oitYiTJXlCKqFsZ7f4ckiyrsOQ" alt="Pegadaian" class="partner-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFX-3nVuIhysme8whQMPuxn_UcNs8pCbBZukjWNfViaWN6-5eFccXsQU2ykA" alt="PNM" class="partner-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL4-ujc1QPr2EWLHujPA64o7vQCz5332syFyZgUjA_s5nSppc6gLXfz82IQ" alt="Pertamina" class="partner-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNoEZ3OLQct20RwsCx2YKOR-CTacVOTf8842qZBzr3fPj_JmyooySiOhmDew" alt="Bank Kalsel" class="partner-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBic8fP_sIWArrSDKaG0OSeFnwJV2O3B9XSHVRwY4OtKL-jKlrvvQCE7NzcQ" alt="Tokopedia" class="partner-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp7GTc4GmiVGbI4AtwrioMRFVVknUcjDNtlLao_hn5jOeIHrBLRCkuNs1FdRo" alt="Shopee" class="partner-logo">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-gray-100 text-black" id="hubungi-kami">
+        <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="space-y-4">
+                <img src="https://res.cloudinary.com/dkfindonesia/image/upload/v1734675600/rumah-bumn/rumah-bumn-logo-white.png"
+                     alt="Logo Rumah BUMN putih" class="h-14 w-auto">
+                <p class="text-gray-700 leading-relaxed">
+                    Jl. Brigjen Hasan Basri No. 3, Sungai Miai, Banjarmasin Utara, Kalimantan Selatan 70122
+                </p>
+                <p class="text-gray-500">Senin - Jumat, 08.00 - 17.00 WITA</p>
+            </div>
+            <div class="space-y-3">
+                <h4 class="font-semibold text-lg">Kontak</h4>
+                <a href="mailto:rumahbumn.banjarmasin@bumn.go.id" class="block text-gray-700 hover:text-primary transition">
+                    rumahbumn.banjarmasin@bumn.go.id
+                </a>
+                <a href="tel:+62511345678" class="block text-gray-700 hover:text-primary transition">
+                    +62 511 345 678
+                </a>
+                <a href="https://maps.app.goo.gl/LokasiRumahBUMNBanjarmasin" target="_blank" class="block text-gray-700 hover:text-primary transition">
+                    Lihat di Google Maps
+                </a>
+            </div>
+            <div class="space-y-3">
+                <h4 class="font-semibold text-lg">Ikuti Kami</h4>
+                <div class="flex gap-3">
+                    <a href="https://www.instagram.com/rumahbumnbanjarmasin" class="social-icon" aria-label="Instagram">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT37uulR9B6vAjs0ISE5KqKuz4UlGCyhrm5iN-MWcbLWNtnnpvPmVgc2G5llq0" alt="Instagram" class="h-8 w-8">
+                    </a>
+                    <a href="https://www.tiktok.com/@rumahbumnbanjarmasin" class="social-icon" aria-label="TikTok">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtVkwkHpxzGP7PJX05oXZqgrVZ13LNPVQlA-Ntt6vTrjz_bMuh_LKYRmb6Bg" alt="TikTok" class="h-8 w-8">
+                    </a>
+                </div>
+                <p class="text-sm text-gray-500">
+                    <a href="/admin/" class="underline underline-offset-4 hover:text-primary">Staff Login</a>
+                </p>
+            </div>
+        </div>
+        <div class="bg-gray-200">
+            <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto py-4 flex flex-col sm:flex-row justify-between text-sm text-gray-600">
+                <span>&copy; 2025 Rumah BUMN Banjarmasin. Semua hak dilindungi.</span>
+                <span>Dikelola oleh Telkom Indonesia &amp; BUMN Kolaborator</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on('init', user => {
+                if (!user) {
+                    window.netlifyIdentity.on('login', () => document.location.reload());
+                }
+            });
+        }
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

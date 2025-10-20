@@ -1,0 +1,38 @@
+backend:
+  name: git-gateway
+  branch: main # ganti bila default branch kamu bukan 'main'
+local_backend: true
+media_folder: "static/uploads"
+public_folder: "/static/uploads"
+publish_mode: editorial_workflow
+
+collections:
+  - name: "content"
+    label: "Konten Situs"
+    files:
+      - name: "news"
+        label: "Berita Terkini"
+        file: "data/news.json"
+        format: "json"
+        fields:
+          - label: "Daftar Berita"
+            name: "entries"
+            widget: "list"
+            summary: "{{fields.tag}} · {{fields.title}}"
+            fields:
+              - { label: "Judul", name: "title", widget: "string" }
+              - { label: "Kategori / Tag", name: "tag", widget: "string" }
+              - {
+                  label: "Gambar",
+                  name: "image",
+                  widget: "image",
+                  allow_multiple: false,
+                  choose_url: true,
+                }
+              - { label: "Ringkasan", name: "excerpt", widget: "text" }
+              - {
+                  label: "Tautan (Opsional)",
+                  name: "link",
+                  widget: "string",
+                  required: false,
+                }
