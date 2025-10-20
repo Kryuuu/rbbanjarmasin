@@ -1,8 +1,8 @@
 local_backend: true
+
 backend:
-  name: github
-  repo: your-github-username/rumah-bumn-banjarmasin
-  branch: main
+  name: git-gateway
+  branch: main # sesuaikan jika default branch repo-mu bukan 'main'
 
 media_folder: "static/uploads"
 public_folder: "/static/uploads"
