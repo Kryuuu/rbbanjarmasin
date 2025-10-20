@@ -1,7 +1,9 @@
-backend:
-  name: git-gateway
-  branch: main # ganti bila default branch kamu bukan 'main'
 local_backend: true
+backend:
+  name: github
+  repo: your-github-username/rumah-bumn-banjarmasin
+  branch: main
+
 media_folder: "static/uploads"
 public_folder: "/static/uploads"
 publish_mode: editorial_workflow
@@ -18,7 +20,7 @@ collections:
           - label: "Daftar Berita"
             name: "entries"
             widget: "list"
-            summary: "{{fields.tag}} · {{fields.title}}"
+            summary: "{{fields.tag}} - {{fields.title}}"
             fields:
               - { label: "Judul", name: "title", widget: "string" }
               - { label: "Kategori / Tag", name: "tag", widget: "string" }
@@ -35,4 +37,160 @@ collections:
                   name: "link",
                   widget: "string",
                   required: false,
+                }
+
+      - name: "statistics"
+        label: "Statistik Pembinaan"
+        file: "data/statistics.json"
+        format: "json"
+        fields:
+          - label: "Kartu Statistik"
+            name: "cards"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - {
+                  label: "Nilai",
+                  name: "value",
+                  widget: "number",
+                  value_type: "int",
+                }
+              - {
+                  label: "Ikon (Opsional)",
+                  name: "icon",
+                  widget: "image",
+                  required: false,
+                  choose_url: true,
+                }
+          - label: "Data Chart"
+            name: "charts"
+            widget: "object"
+            fields:
+              - label: "Go Digital"
+                name: "digital"
+                widget: "object"
+                fields:
+                  - { label: "Judul", name: "title", widget: "string" }
+                  - {
+                      label: "Warna",
+                      name: "color",
+                      widget: "string",
+                      default: "#4FC3F7",
+                    }
+                  - {
+                      label: "Tinggi Chart",
+                      name: "height",
+                      widget: "number",
+                      default: 320,
+                      value_type: "int",
+                    }
+                  - label: "Data Tahunan"
+                    name: "entries"
+                    widget: "list"
+                    fields:
+                      - { label: "Tahun", name: "tahun", widget: "string" }
+                      - {
+                          label: "Jumlah",
+                          name: "jumlah",
+                          widget: "number",
+                          value_type: "int",
+                        }
+              - label: "Go Modern"
+                name: "modern"
+                widget: "object"
+                fields:
+                  - { label: "Judul", name: "title", widget: "string" }
+                  - {
+                      label: "Warna",
+                      name: "color",
+                      widget: "string",
+                      default: "#A78BFA",
+                    }
+                  - {
+                      label: "Tinggi Chart",
+                      name: "height",
+                      widget: "number",
+                      default: 260,
+                      value_type: "int",
+                    }
+                  - label: "Data Tahunan"
+                    name: "entries"
+                    widget: "list"
+                    fields:
+                      - { label: "Tahun", name: "tahun", widget: "string" }
+                      - {
+                          label: "Jumlah",
+                          name: "jumlah",
+                          widget: "number",
+                          value_type: "int",
+                        }
+              - label: "Go Online"
+                name: "online"
+                widget: "object"
+                fields:
+                  - { label: "Judul", name: "title", widget: "string" }
+                  - {
+                      label: "Warna",
+                      name: "color",
+                      widget: "string",
+                      default: "#34D399",
+                    }
+                  - {
+                      label: "Tinggi Chart",
+                      name: "height",
+                      widget: "number",
+                      default: 260,
+                      value_type: "int",
+                    }
+                  - label: "Data Tahunan"
+                    name: "entries"
+                    widget: "list"
+                    fields:
+                      - { label: "Tahun", name: "tahun", widget: "string" }
+                      - {
+                          label: "Jumlah",
+                          name: "jumlah",
+                          widget: "number",
+                          value_type: "int",
+                        }
+
+      - name: "testimonials"
+        label: "Apa Kata UMKM Binaan"
+        file: "data/testimonials.json"
+        format: "json"
+        fields:
+          - label: "Daftar Testimoni"
+            name: "entries"
+            widget: "list"
+            fields:
+              - { label: "Testimoni", name: "quote", widget: "text" }
+              - { label: "Nama", name: "name", widget: "string" }
+              - {
+                  label: "Peran / Usaha",
+                  name: "role",
+                  widget: "string",
+                  required: false,
+                }
+
+      - name: "partners"
+        label: "Mitra & Kolaborator"
+        file: "data/partners.json"
+        format: "json"
+        fields:
+          - label: "Daftar Mitra"
+            name: "entries"
+            widget: "list"
+            fields:
+              - { label: "Nama Mitra", name: "name", widget: "string" }
+              - {
+                  label: "Tautan (Opsional)",
+                  name: "url",
+                  widget: "string",
+                  required: false,
+                }
+              - {
+                  label: "Logo",
+                  name: "logo",
+                  widget: "image",
+                  choose_url: true,
                 }

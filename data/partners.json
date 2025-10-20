@@ -1,0 +1,44 @@
+{
+  "entries": [
+    {
+      "name": "Telkom Indonesia",
+      "url": "https://www.telkom.co.id",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnYGDgOsdBs-vMW8Fzvot55YXngbF3heryCOnmsVN9xNQvxDKooe_p5o6omQ"
+    },
+    {
+      "name": "Bank BRI",
+      "url": "https://bri.co.id",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_zpDSPX4d397Q9scHHoRtnLviAXkPmE9-DuWeb40GgOYXuU7HdlOljLW-Z88"
+    },
+    {
+      "name": "Pegadaian",
+      "url": "https://www.pegadaian.co.id",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKqVULQAlXv-qGKbTqfUZO0RM4xqfkFSY_oitYiTJXlCKqFsZ7f4ckiyrsOQ"
+    },
+    {
+      "name": "PNM",
+      "url": "https://www.pnm.co.id",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFX-3nVuIhysme8whQMPuxn_UcNs8pCbBZukjWNfViaWN6-5eFccXsQU2ykA"
+    },
+    {
+      "name": "Pertamina",
+      "url": "https://www.pertamina.com",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdL4-ujc1QPr2EWLHujPA64o7vQCz5332syFyZgUjA_s5nSppc6gLXfz82IQ"
+    },
+    {
+      "name": "Bank Kalsel",
+      "url": "https://bankkalsel.co.id",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNoEZ3OLQct20RwsCx2YKOR-CTacVOTf8842qZBzr3fPj_JmyooySiOhmDew"
+    },
+    {
+      "name": "Tokopedia",
+      "url": "https://www.tokopedia.com",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBic8fP_sIWArrSDKaG0OSeFnwJV2O3B9XSHVRwY4OtKL-jKlrvvQCE7NzcQ"
+    },
+    {
+      "name": "Shopee",
+      "url": "https://shopee.co.id",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp7GTc4GmiVGbI4AtwrioMRFVVknUcjDNtlLao_hn5jOeIHrBLRCkuNs1FdRo"
+    }
+  ]
+}
