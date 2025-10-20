@@ -1,25 +1,11 @@
 {
   "entries": [
     {
-      "title": "Peluncuran Klinik Keuangan UMKM Kalimantan Selatan",
-      "tag": "Program",
-      "image": "https://images.unsplash.com/photo-1530023367847-a683933f4177?auto=format&fit=crop&w=800&q=60",
-      "excerpt": "Program kolaborasi Telkom, BRI, Pegadaian, dan PNM untuk membantu UMKM menyusun laporan keuangan digital.",
-      "link": "#"
-    },
-    {
-      "title": "Bootcamp Digital Marketing untuk UMKM Kuliner",
-      "tag": "Bootcamp",
-      "image": "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?auto=format&fit=crop&w=800&q=60",
-      "excerpt": "50 pelaku usaha kuliner Banjar mengikuti bootcamp selama 5 hari untuk meningkatkan penjualan daring.",
-      "link": "#"
-    },
-    {
-      "title": "Kolaborasi Komunitas Kreatif Banjarmasin",
-      "tag": "Kolaborasi",
-      "image": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=60",
-      "excerpt": "Komunitas videografi, desain, dan UMKM menggelar showcase produk kreatif di Rumah BUMN.",
-      "link": "#"
+      "title": "AiMazingID: Inovasi AI Karya Perwira Pertamina dan AI Accelerate",
+      "tag": "Teknologi",
+      "excerpt": "AiMazingID memperkenalkan solusi AI untuk mempercepat layanan, meningkatkan efisiensi operasional, dan memperkuat kesiapan digital Rumah BUMN.",
+      "link": "https://nasional.kompas.com/read/2025/07/13/18062011/aimazingid-inovasi-ai-karya-perwira-pertamina-dan-ai-accelerate-untuk",
+      "image": "https://asset.kompas.com/crops/3Gn-6qwaIztP6_xmHIlSsgy3AnY=/0x0:1599x1066/1200x800/data/photo/2025/07/13/68738f074e791.jpeg"
     }
   ]
 }
