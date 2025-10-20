@@ -1,0 +1,4 @@
+*** Begin Patch
+*** Delete File: admin/config.yml
+*** End Patch
+

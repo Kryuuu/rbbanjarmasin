@@ -17,7 +17,7 @@
     },
     {
       "label": "Event Terselenggara",
-      "value": 42,
+      "value": 48,
       "icon": "../images/informasi/statistik-4.png"
     }
   ],
@@ -27,22 +27,10 @@
       "color": "#4FC3F7",
       "height": 320,
       "entries": [
-        {
-          "tahun": "2021",
-          "jumlah": 210
-        },
-        {
-          "tahun": "2022",
-          "jumlah": 280
-        },
-        {
-          "tahun": "2023",
-          "jumlah": 410
-        },
-        {
-          "tahun": "2024",
-          "jumlah": 520
-        }
+        { "tahun": "2021", "jumlah": 210 },
+        { "tahun": "2022", "jumlah": 280 },
+        { "tahun": "2023", "jumlah": 410 },
+        { "tahun": "2024", "jumlah": 520 }
       ]
     },
     "modern": {
@@ -50,22 +38,10 @@
       "color": "#A78BFA",
       "height": 260,
       "entries": [
-        {
-          "tahun": "2021",
-          "jumlah": 180
-        },
-        {
-          "tahun": "2022",
-          "jumlah": 260
-        },
-        {
-          "tahun": "2023",
-          "jumlah": 340
-        },
-        {
-          "tahun": "2024",
-          "jumlah": 460
-        }
+        { "tahun": "2021", "jumlah": 180 },
+        { "tahun": "2022", "jumlah": 260 },
+        { "tahun": "2023", "jumlah": 340 },
+        { "tahun": "2024", "jumlah": 460 }
       ]
     },
     "online": {
@@ -73,22 +49,10 @@
       "color": "#34D399",
       "height": 260,
       "entries": [
-        {
-          "tahun": "2021",
-          "jumlah": 90
-        },
-        {
-          "tahun": "2022",
-          "jumlah": 180
-        },
-        {
-          "tahun": "2023",
-          "jumlah": 260
-        },
-        {
-          "tahun": "2024",
-          "jumlah": 335
-        }
+        { "tahun": "2021", "jumlah": 90 },
+        { "tahun": "2022", "jumlah": 180 },
+        { "tahun": "2023", "jumlah": 260 },
+        { "tahun": "2024", "jumlah": 335 }
       ]
     }
   }
