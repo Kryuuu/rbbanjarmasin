@@ -2,10 +2,10 @@ local_backend: true
 
 backend:
   name: github
-  repo: Kryuuu/rbbanjarmasin        # <- WAJIB pakai format owner/repo
+  repo: Kryuuu/rbbanjarmasin        # pakai format owner/repo
   branch: main
-  base_url: "https://rbbanjarmasin.vercel.app"   # tanpa trailing slash
-  auth_endpoint: "/api/oauth/authorize"          # endpoint OAuth buatan kita
+  base_url: "https://rbbanjarmasin.vercel.app"   # tanpa slash di akhir
+  auth_endpoint: "/api/oauth/authorize"
 
 media_folder: "static/uploads"
 public_folder: "/static/uploads"
@@ -29,39 +29,13 @@ collections:
             summary: "{{fields.tag}} • {{fields.title}}"
             collapsed: true
             fields:
-              - label: "Judul"
-                name: "title"
-                widget: "string"
-                hint: "Judul utama berita (maksimal 80 karakter)."
-                pattern: ["^.{1,80}$", "Gunakan maksimal 80 karakter"]
-              - label: "Kategori / Tag"
-                name: "tag"
-                widget: "string"
-                hint: "Contoh: Program, Event, Pembinaan"
+              - { label: "Judul", name: "title", widget: "string", hint: "Maks 80 karakter", pattern: ["^.{1,80}$", "Gunakan maksimal 80 karakter"] }
+              - { label: "Kategori / Tag", name: "tag", widget: "string", hint: "Contoh: Program, Event, Pembinaan" }
+              - { label: "Gambar", name: "image", widget: "image", allow_multiple: false, choose_url: true, hint: "Ideal 1280x720px" }
+              - { label: "Ringkasan", name: "excerpt", widget: "text", hint: "1–2 kalimat, maks 200 karakter", pattern: ["^.{1,200}$", "Maks 200 karakter"] }
               - {
-                  label: "Gambar",
-                  name: "image",
-                  widget: "image",
-                  allow_multiple: false,
-                  choose_url: true,
-                  hint: "Resolusi ideal 1280x720px. Gunakan tombol Upload atau paste URL gambar.",
-                }
-              - label: "Ringkasan"
-                name: "excerpt"
-                widget: "text"
-                hint: "Tulis ringkasan singkat 1-2 kalimat (maksimal 200 karakter)."
-                pattern: ["^.{1,200}$", "Gunakan maksimal 200 karakter"]
-              - {
-                  label: "Tautan (Opsional)",
-                  name: "link",
-                  widget: "string",
-                  required: false,
-                  hint: "Link eksternal atau internal. Isi bila berita lengkap ada di tempat lain.",
-                  pattern:
-                    [
-                      '^(https?:\/\/.+|\/.*)?$',
-                      "Gunakan URL lengkap atau path relatif, atau kosongkan.",
-                    ],
+                  label: "Tautan (Opsional)", name: "link", widget: "string", required: false,
+                  hint: "URL penuh atau path relatif", pattern: ['^(https?:\/\/.+|\/.*)?$', "URL penuh / path relatif atau kosongkan"]
                 }
 
       - name: "statistics"
@@ -79,17 +53,10 @@ collections:
             fields:
               - { label: "Label", name: "label", widget: "string" }
               - { label: "Nilai", name: "value", widget: "number", value_type: "int" }
-              - {
-                  label: "Ikon",
-                  name: "icon",
-                  widget: "string",
-                  required: false,
-                  hint: "URL penuh atau path relatif ikon (contoh: ../images/informasi/statistik-1.png)",
-                }
+              - { label: "Ikon", name: "icon", widget: "string", required: false, hint: "URL/relatif ikon" }
           - label: "Data Chart"
             name: "charts"
             widget: "object"
-            collapsed: false
             fields:
               - label: "Go Digital"
                 name: "digital"
@@ -143,7 +110,6 @@ collections:
         label_singular: "Testimoni"
         file: "data/testimonials.json"
         format: "json"
-        description: "Testimoni singkat dari UMKM binaan terkait dampak program Rumah BUMN."
         fields:
           - label: "Daftar Testimoni"
             name: "entries"
@@ -151,7 +117,7 @@ collections:
             summary: "{{fields.name}} • {{fields.role}}"
             collapsed: true
             fields:
-              - { label: "Testimoni", name: "quote", widget: "text", hint: "Maks 280 karakter.", pattern: ["^.{1,280}$", "Gunakan maksimal 280 karakter"] }
+              - { label: "Testimoni", name: "quote", widget: "text", hint: "Maks 280 karakter", pattern: ["^.{1,280}$", "Maks 280 karakter"] }
               - { label: "Nama", name: "name", widget: "string" }
               - { label: "Peran / Usaha", name: "role", widget: "string", required: false }
 
@@ -160,7 +126,6 @@ collections:
         label_singular: "Mitra"
         file: "data/partners.json"
         format: "json"
-        description: "Logo mitra dan kolaborator yang tampil pada bagian marquee mitra."
         fields:
           - label: "Daftar Mitra"
             name: "entries"
@@ -169,11 +134,5 @@ collections:
             collapsed: true
             fields:
               - { label: "Nama Mitra", name: "name", widget: "string" }
-              - {
-                  label: "Tautan (Opsional)",
-                  name: "url",
-                  widget: "string",
-                  required: false,
-                  pattern: ['^(https?:\/\/.+|\/.*)?$', "Gunakan URL lengkap atau kosongkan"],
-                }
-              - { label: "Logo", name: "logo", widget: "image", choose_url: true, hint: "PNG transparan direkomendasikan." }
+              - { label: "Tautan (Opsional)", name: "url", widget: "string", required: false, pattern: ['^(https?:\/\/.+|\/.*)?$', "URL lengkap / kosongkan"] }
+              - { label: "Logo", name: "logo", widget: "image", choose_url: true, hint: "PNG transparan direkomendasikan" }
