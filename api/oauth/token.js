@@ -1,12 +1,15 @@
+const FALLBACK_CLIENT_ID = 'Ov23liS8nyAOfYlEuFnZ';
+
 export default async function handler(req, res) {
-  const clientId = process.env.GITHUB_CLIENT_ID;
+  const clientId = process.env.GITHUB_CLIENT_ID || FALLBACK_CLIENT_ID;
   const clientSecret = process.env.GITHUB_CLIENT_SECRET;
   if (!clientId || !clientSecret) {
     return res.status(500).json({ error: 'Missing GitHub OAuth env vars' });
   }
 
   try {
-    const { code } = req.body || {};
+    const body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+    const { code } = body;
     if (!code) return res.status(400).json({ error: 'Missing code' });
 
     const gh = await fetch('https://github.com/login/oauth/access_token', {
