@@ -33,9 +33,10 @@ collections:
                   label: "Judul",
                   name: "title",
                   widget: "string",
-                  hint: "Maks 80 karakter",
-                  pattern: ["^.{1,80}$", "Gunakan maksimal 80 karakter"],
+                  hint: "Maks 200 karakter",
+                  pattern: ["^.{1,200}$", "Gunakan maksimal 200 karakter"],
                 }
+
               - {
                   label: "Kategori / Tag",
                   name: "tag",
