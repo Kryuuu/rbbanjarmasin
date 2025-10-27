@@ -1,6 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
+  "functions": {
+    "api/**/*.js": { "runtime": "nodejs22.x" }
+  },
   "rewrites": [
     { "source": "/admin",  "destination": "/admin/index.html" },
     { "source": "/admin/", "destination": "/admin/index.html" },
