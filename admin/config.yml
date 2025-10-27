@@ -2,9 +2,9 @@ local_backend: true
 
 backend:
   name: github
-  repo: Kryuuu/rbbanjarmasin        # pakai format owner/repo
+  repo: Kryuuu/rbbanjarmasin
   branch: main
-  base_url: "https://rbbanjarmasin.vercel.app"   # tanpa slash di akhir
+  base_url: "https://rbbanjarmasin.vercel.app"
   auth_endpoint: "/api/oauth/authorize"
 
 media_folder: "static/uploads"
@@ -29,13 +29,45 @@ collections:
             summary: "{{fields.tag}} • {{fields.title}}"
             collapsed: true
             fields:
-              - { label: "Judul", name: "title", widget: "string", hint: "Maks 80 karakter", pattern: ["^.{1,80}$", "Gunakan maksimal 80 karakter"] }
-              - { label: "Kategori / Tag", name: "tag", widget: "string", hint: "Contoh: Program, Event, Pembinaan" }
-              - { label: "Gambar", name: "image", widget: "image", allow_multiple: false, choose_url: true, hint: "Ideal 1280x720px" }
-              - { label: "Ringkasan", name: "excerpt", widget: "text", hint: "1–2 kalimat, maks 200 karakter", pattern: ["^.{1,200}$", "Maks 200 karakter"] }
               - {
-                  label: "Tautan (Opsional)", name: "link", widget: "string", required: false,
-                  hint: "URL penuh atau path relatif", pattern: ['^(https?:\/\/.+|\/.*)?$', "URL penuh / path relatif atau kosongkan"]
+                  label: "Judul",
+                  name: "title",
+                  widget: "string",
+                  hint: "Maks 80 karakter",
+                  pattern: ["^.{1,80}$", "Gunakan maksimal 80 karakter"],
+                }
+              - {
+                  label: "Kategori / Tag",
+                  name: "tag",
+                  widget: "string",
+                  hint: "Contoh: Program, Event, Pembinaan",
+                }
+              - {
+                  label: "Gambar",
+                  name: "image",
+                  widget: "image",
+                  allow_multiple: false,
+                  choose_url: true,
+                  hint: "Ideal 1280x720px",
+                }
+              - {
+                  label: "Ringkasan",
+                  name: "excerpt",
+                  widget: "text",
+                  hint: "1–2 kalimat, maks 200 karakter",
+                  pattern: ["^.{1,200}$", "Maks 200 karakter"],
+                }
+              - {
+                  label: "Tautan (Opsional)",
+                  name: "link",
+                  widget: "string",
+                  required: false,
+                  hint: "URL penuh atau path relatif",
+                  pattern:
+                    [
+                      '^(https?:\/\/.+|\/.*)?$',
+                      "URL penuh / path relatif atau kosongkan",
+                    ],
                 }
 
       - name: "statistics"
@@ -52,8 +84,19 @@ collections:
             collapsed: true
             fields:
               - { label: "Label", name: "label", widget: "string" }
-              - { label: "Nilai", name: "value", widget: "number", value_type: "int" }
-              - { label: "Ikon", name: "icon", widget: "string", required: false, hint: "URL/relatif ikon" }
+              - {
+                  label: "Nilai",
+                  name: "value",
+                  widget: "number",
+                  value_type: "int",
+                }
+              - {
+                  label: "Ikon",
+                  name: "icon",
+                  widget: "string",
+                  required: false,
+                  hint: "URL/relatif ikon",
+                }
           - label: "Data Chart"
             name: "charts"
             widget: "object"
@@ -63,8 +106,19 @@ collections:
                 widget: "object"
                 fields:
                   - { label: "Judul", name: "title", widget: "string" }
-                  - { label: "Warna", name: "color", widget: "string", default: "#4FC3F7" }
-                  - { label: "Tinggi Chart", name: "height", widget: "number", default: 320, value_type: "int" }
+                  - {
+                      label: "Warna",
+                      name: "color",
+                      widget: "string",
+                      default: "#4FC3F7",
+                    }
+                  - {
+                      label: "Tinggi Chart",
+                      name: "height",
+                      widget: "number",
+                      default: 320,
+                      value_type: "int",
+                    }
                   - label: "Data Tahunan"
                     name: "entries"
                     widget: "list"
@@ -72,15 +126,32 @@ collections:
                     collapsed: true
                     fields:
                       - { label: "Tahun", name: "tahun", widget: "string" }
-                      - { label: "Jumlah", name: "jumlah", widget: "number", value_type: "int" }
+                      - {
+                          label: "Jumlah",
+                          name: "jumlah",
+                          widget: "number",
+                          value_type: "int",
+                        }
 
               - label: "Go Modern"
                 name: "modern"
                 widget: "object"
                 fields:
                   - { label: "Judul", name: "title", widget: "string" }
-                  - { label: "Warna", name: "color", widget: "color", default: "#A78BFA", allow_input: true }
-                  - { label: "Tinggi Chart", name: "height", widget: "number", default: 260, value_type: "int" }
+                  - {
+                      label: "Warna",
+                      name: "color",
+                      widget: "color",
+                      default: "#A78BFA",
+                      allow_input: true,
+                    }
+                  - {
+                      label: "Tinggi Chart",
+                      name: "height",
+                      widget: "number",
+                      default: 260,
+                      value_type: "int",
+                    }
                   - label: "Data Tahunan"
                     name: "entries"
                     widget: "list"
@@ -88,22 +159,44 @@ collections:
                     collapsed: true
                     fields:
                       - { label: "Tahun", name: "tahun", widget: "string" }
-                      - { label: "Jumlah", name: "jumlah", widget: "number", value_type: "int" }
+                      - {
+                          label: "Jumlah",
+                          name: "jumlah",
+                          widget: "number",
+                          value_type: "int",
+                        }
 
               - label: "Go Online"
                 name: "online"
                 widget: "object"
                 fields:
                   - { label: "Judul", name: "title", widget: "string" }
-                  - { label: "Warna", name: "color", widget: "color", default: "#34D399", allow_input: true }
-                  - { label: "Tinggi Chart", name: "height", widget: "number", default: 260, value_type: "int" }
+                  - {
+                      label: "Warna",
+                      name: "color",
+                      widget: "color",
+                      default: "#34D399",
+                      allow_input: true,
+                    }
+                  - {
+                      label: "Tinggi Chart",
+                      name: "height",
+                      widget: "number",
+                      default: 260,
+                      value_type: "int",
+                    }
                   - label: "Data Tahunan"
                     name: "entries"
                     widget: "list"
                     summary: "{{fields.tahun}} - {{fields.jumlah}}"
                     fields:
                       - { label: "Tahun", name: "tahun", widget: "string" }
-                      - { label: "Jumlah", name: "jumlah", widget: "number", value_type: "int" }
+                      - {
+                          label: "Jumlah",
+                          name: "jumlah",
+                          widget: "number",
+                          value_type: "int",
+                        }
 
       - name: "testimonials"
         label: "Apa Kata UMKM Binaan"
@@ -117,9 +210,20 @@ collections:
             summary: "{{fields.name}} • {{fields.role}}"
             collapsed: true
             fields:
-              - { label: "Testimoni", name: "quote", widget: "text", hint: "Maks 280 karakter", pattern: ["^.{1,280}$", "Maks 280 karakter"] }
+              - {
+                  label: "Testimoni",
+                  name: "quote",
+                  widget: "text",
+                  hint: "Maks 280 karakter",
+                  pattern: ["^.{1,280}$", "Maks 280 karakter"],
+                }
               - { label: "Nama", name: "name", widget: "string" }
-              - { label: "Peran / Usaha", name: "role", widget: "string", required: false }
+              - {
+                  label: "Peran / Usaha",
+                  name: "role",
+                  widget: "string",
+                  required: false,
+                }
 
       - name: "partners"
         label: "Mitra & Kolaborator"
@@ -134,5 +238,18 @@ collections:
             collapsed: true
             fields:
               - { label: "Nama Mitra", name: "name", widget: "string" }
-              - { label: "Tautan (Opsional)", name: "url", widget: "string", required: false, pattern: ['^(https?:\/\/.+|\/.*)?$', "URL lengkap / kosongkan"] }
-              - { label: "Logo", name: "logo", widget: "image", choose_url: true, hint: "PNG transparan direkomendasikan" }
+              - {
+                  label: "Tautan (Opsional)",
+                  name: "url",
+                  widget: "string",
+                  required: false,
+                  pattern:
+                    ['^(https?:\/\/.+|\/.*)?$', "URL lengkap / kosongkan"],
+                }
+              - {
+                  label: "Logo",
+                  name: "logo",
+                  widget: "image",
+                  choose_url: true,
+                  hint: "PNG transparan direkomendasikan",
+                }
