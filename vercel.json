@@ -1,0 +1,9 @@
+{
+  "trailingSlash": false,
+  "routes": [
+    {
+      "src": "/admin",
+      "dest": "/admin/index.html"
+    }
+  ]
+}

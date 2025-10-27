@@ -394,7 +394,7 @@
                 </div>
 
                 <div class="quick-note">
-                    <strong>Tips:</strong> Jika tombol Publish tidak aktif, pastikan Anda sudah login melalui Netlify Identity. Untuk uji lokal jalankan perintah <code>npx netlify-cms-proxy-server</code> agar mode <em>local backend</em> berfungsi.
+                    <strong>Tips:</strong> Pada produksi Anda akan diminta login GitHub melalui jendela pop-up. Untuk uji lokal jalankan perintah <code>npx decap-server</code> agar mode <em>local backend</em> berfungsi.
                 </div>
             </aside>
         </div>
@@ -404,10 +404,8 @@
 
     <footer>&copy; 2025 Rumah BUMN Banjarmasin</footer>
 
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://unpkg.com/netlify-cms@^2/dist/netlify-cms.js"></script>
+    <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
     <script>
-        const identity = window.netlifyIdentity;
         const body = document.body;
         const cmsRoot = document.getElementById('nc-root');
         const openCmsButton = document.getElementById('open-cms');
@@ -683,17 +681,6 @@
                 startCMS();
             });
         }
-
-        if (identity) {
-            identity.on('init', (user) => {
-                if (user) {
-                    startCMS();
-                } else {
-                    identity.on('login', startCMS);
-                }
-            });
-        }
-
         const datasetStats = document.getElementById('dataset-stats');
         const datasets = [
             { key: 'news', label: 'Berita Terkini', path: '../data/news.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'artikel' },
