@@ -2,10 +2,10 @@ local_backend: true
 
 backend:
   name: github
-  repo: rbbanjarmasin # Ganti dengan repo GitHub Anda
+  repo: Kryuuu/rbbanjarmasin        # <- WAJIB pakai format owner/repo
   branch: main
-  base_url: "https://rbbanjarmasin.vercel.app/" # Ganti dengan domain Vercel produksi
-  auth_endpoint: "oauth/authorize"
+  base_url: "https://rbbanjarmasin.vercel.app"   # tanpa trailing slash
+  auth_endpoint: "/api/oauth/authorize"          # endpoint OAuth buatan kita
 
 media_folder: "static/uploads"
 public_folder: "/static/uploads"
@@ -63,6 +63,7 @@ collections:
                       "Gunakan URL lengkap atau path relatif, atau kosongkan.",
                     ],
                 }
+
       - name: "statistics"
         label: "Statistik Pembinaan"
         label_singular: "Statistik"
@@ -77,12 +78,7 @@ collections:
             collapsed: true
             fields:
               - { label: "Label", name: "label", widget: "string" }
-              - {
-                  label: "Nilai",
-                  name: "value",
-                  widget: "number",
-                  value_type: "int",
-                }
+              - { label: "Nilai", name: "value", widget: "number", value_type: "int" }
               - {
                   label: "Ikon",
                   name: "icon",
@@ -100,19 +96,8 @@ collections:
                 widget: "object"
                 fields:
                   - { label: "Judul", name: "title", widget: "string" }
-                  - {
-                      label: "Warna",
-                      name: "color",
-                      widget: "string",
-                      default: "#4FC3F7",
-                    }
-                  - {
-                      label: "Tinggi Chart",
-                      name: "height",
-                      widget: "number",
-                      default: 320,
-                      value_type: "int",
-                    }
+                  - { label: "Warna", name: "color", widget: "string", default: "#4FC3F7" }
+                  - { label: "Tinggi Chart", name: "height", widget: "number", default: 320, value_type: "int" }
                   - label: "Data Tahunan"
                     name: "entries"
                     widget: "list"
@@ -120,31 +105,15 @@ collections:
                     collapsed: true
                     fields:
                       - { label: "Tahun", name: "tahun", widget: "string" }
-                      - {
-                          label: "Jumlah",
-                          name: "jumlah",
-                          widget: "number",
-                          value_type: "int",
-                        }
+                      - { label: "Jumlah", name: "jumlah", widget: "number", value_type: "int" }
+
               - label: "Go Modern"
                 name: "modern"
                 widget: "object"
                 fields:
                   - { label: "Judul", name: "title", widget: "string" }
-                  - {
-                      label: "Warna",
-                      name: "color",
-                      widget: "color",
-                      default: "#A78BFA",
-                      allow_input: true,
-                    }
-                  - {
-                      label: "Tinggi Chart",
-                      name: "height",
-                      widget: "number",
-                      default: 260,
-                      value_type: "int",
-                    }
+                  - { label: "Warna", name: "color", widget: "color", default: "#A78BFA", allow_input: true }
+                  - { label: "Tinggi Chart", name: "height", widget: "number", default: 260, value_type: "int" }
                   - label: "Data Tahunan"
                     name: "entries"
                     widget: "list"
@@ -152,43 +121,23 @@ collections:
                     collapsed: true
                     fields:
                       - { label: "Tahun", name: "tahun", widget: "string" }
-                      - {
-                          label: "Jumlah",
-                          name: "jumlah",
-                          widget: "number",
-                          value_type: "int",
-                        }
+                      - { label: "Jumlah", name: "jumlah", widget: "number", value_type: "int" }
+
               - label: "Go Online"
                 name: "online"
                 widget: "object"
                 fields:
                   - { label: "Judul", name: "title", widget: "string" }
-                  - {
-                      label: "Warna",
-                      name: "color",
-                      widget: "color",
-                      default: "#34D399",
-                      allow_input: true,
-                    }
-                  - {
-                      label: "Tinggi Chart",
-                      name: "height",
-                      widget: "number",
-                      default: 260,
-                      value_type: "int",
-                    }
+                  - { label: "Warna", name: "color", widget: "color", default: "#34D399", allow_input: true }
+                  - { label: "Tinggi Chart", name: "height", widget: "number", default: 260, value_type: "int" }
                   - label: "Data Tahunan"
                     name: "entries"
                     widget: "list"
                     summary: "{{fields.tahun}} - {{fields.jumlah}}"
                     fields:
                       - { label: "Tahun", name: "tahun", widget: "string" }
-                      - {
-                          label: "Jumlah",
-                          name: "jumlah",
-                          widget: "number",
-                          value_type: "int",
-                        }
+                      - { label: "Jumlah", name: "jumlah", widget: "number", value_type: "int" }
+
       - name: "testimonials"
         label: "Apa Kata UMKM Binaan"
         label_singular: "Testimoni"
@@ -202,19 +151,9 @@ collections:
             summary: "{{fields.name}} • {{fields.role}}"
             collapsed: true
             fields:
-              - label: "Testimoni"
-                name: "quote"
-                widget: "text"
-                hint: "Gunakan 1 paragraf singkat (maksimal 280 karakter)."
-                pattern: ["^.{1,280}$", "Gunakan maksimal 280 karakter"]
+              - { label: "Testimoni", name: "quote", widget: "text", hint: "Maks 280 karakter.", pattern: ["^.{1,280}$", "Gunakan maksimal 280 karakter"] }
               - { label: "Nama", name: "name", widget: "string" }
-              - {
-                  label: "Peran / Usaha",
-                  name: "role",
-                  widget: "string",
-                  required: false,
-                  hint: "Contoh: Owner Batik Banjar, Pendiri UMKM X",
-                }
+              - { label: "Peran / Usaha", name: "role", widget: "string", required: false }
 
       - name: "partners"
         label: "Mitra & Kolaborator"
@@ -235,16 +174,6 @@ collections:
                   name: "url",
                   widget: "string",
                   required: false,
-                  pattern:
-                    [
-                      '^(https?:\/\/.+|\/.*)?$',
-                      "Gunakan URL lengkap atau kosongkan",
-                    ],
+                  pattern: ['^(https?:\/\/.+|\/.*)?$', "Gunakan URL lengkap atau kosongkan"],
                 }
-              - {
-                  label: "Logo",
-                  name: "logo",
-                  widget: "image",
-                  choose_url: true,
-                  hint: "Unggah logo PNG transparan atau gunakan URL gambar.",
-                }
+              - { label: "Logo", name: "logo", widget: "image", choose_url: true, hint: "PNG transparan direkomendasikan." }

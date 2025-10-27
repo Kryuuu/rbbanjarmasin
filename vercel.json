@@ -2,13 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
   "rewrites": [
-    {
-      "source": "/admin",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/feedback/:id",
-      "destination": "/api/feedback/:id"
-    }
+    { "source": "/admin",  "destination": "/admin/index.html" },
+    { "source": "/admin/", "destination": "/admin/index.html" },
+    { "source": "/feedback/:id", "destination": "/api/feedback/:id" }
   ]
 }
