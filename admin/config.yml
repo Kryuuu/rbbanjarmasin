@@ -11,42 +11,63 @@ publish_mode: editorial_workflow
 collections:
   - name: "content"
     label: "Konten Situs"
+    label_singular: "Konten"
     files:
       - name: "news"
         label: "Berita Terkini"
+        label_singular: "Berita"
         file: "data/news.json"
         format: "json"
+        description: "Daftar berita yang akan ditampilkan pada halaman utama bagian berita."
         fields:
           - label: "Daftar Berita"
             name: "entries"
             widget: "list"
-            summary: "{{fields.tag}} - {{fields.title}}"
+            summary: "{{fields.tag}} • {{fields.title}}"
+            collapsed: true
             fields:
-              - { label: "Judul", name: "title", widget: "string" }
-              - { label: "Kategori / Tag", name: "tag", widget: "string" }
+              - label: "Judul"
+                name: "title"
+                widget: "string"
+                hint: "Judul utama berita (maksimal 80 karakter)."
+                pattern: ['^.{1,80}$', "Gunakan maksimal 80 karakter"]
+              - label: "Kategori / Tag"
+                name: "tag"
+                widget: "string"
+                hint: "Contoh: Program, Event, Pembinaan"
               - {
                   label: "Gambar",
                   name: "image",
                   widget: "image",
                   allow_multiple: false,
                   choose_url: true,
+                  hint: "Resolusi ideal 1280x720px. Gunakan tombol Upload atau paste URL gambar.",
                 }
-              - { label: "Ringkasan", name: "excerpt", widget: "text" }
+              - label: "Ringkasan"
+                name: "excerpt"
+                widget: "text"
+                hint: "Tulis ringkasan singkat 1-2 kalimat (maksimal 200 karakter)."
+                pattern: ['^.{1,200}$', "Gunakan maksimal 200 karakter"]
               - {
                   label: "Tautan (Opsional)",
                   name: "link",
                   widget: "string",
                   required: false,
+                  hint: "Link eksternal atau internal. Isi bila berita lengkap ada di tempat lain.",
+                  pattern: ['^(https?:\/\/.+|\/.*)?$', "Gunakan URL lengkap atau path relatif, atau kosongkan."],
                 }
       - name: "statistics"
         label: "Statistik Pembinaan"
+        label_singular: "Statistik"
         file: "data/statistics.json"
         format: "json"
+        description: "Data statistik untuk kartu angka dan grafik capaian pembinaan."
         fields:
           - label: "Kartu Statistik"
             name: "cards"
             widget: "list"
             summary: "{{fields.label}}"
+            collapsed: true
             fields:
               - { label: "Label", name: "label", widget: "string" }
               - {
@@ -65,6 +86,7 @@ collections:
           - label: "Data Chart"
             name: "charts"
             widget: "object"
+            collapsed: false
             fields:
               - label: "Go Digital"
                 name: "digital"
@@ -88,6 +110,7 @@ collections:
                     name: "entries"
                     widget: "list"
                     summary: "{{fields.tahun}} - {{fields.jumlah}}"
+                    collapsed: true
                     fields:
                       - { label: "Tahun", name: "tahun", widget: "string" }
                       - {
@@ -104,8 +127,9 @@ collections:
                   - {
                       label: "Warna",
                       name: "color",
-                      widget: "string",
+                      widget: "color",
                       default: "#A78BFA",
+                      allow_input: true,
                     }
                   - {
                       label: "Tinggi Chart",
@@ -118,6 +142,7 @@ collections:
                     name: "entries"
                     widget: "list"
                     summary: "{{fields.tahun}} - {{fields.jumlah}}"
+                    collapsed: true
                     fields:
                       - { label: "Tahun", name: "tahun", widget: "string" }
                       - {
@@ -134,8 +159,9 @@ collections:
                   - {
                       label: "Warna",
                       name: "color",
-                      widget: "string",
+                      widget: "color",
                       default: "#34D399",
+                      allow_input: true,
                     }
                   - {
                       label: "Tinggi Chart",
@@ -158,30 +184,43 @@ collections:
                         }
       - name: "testimonials"
         label: "Apa Kata UMKM Binaan"
+        label_singular: "Testimoni"
         file: "data/testimonials.json"
         format: "json"
+        description: "Testimoni singkat dari UMKM binaan terkait dampak program Rumah BUMN."
         fields:
           - label: "Daftar Testimoni"
             name: "entries"
             widget: "list"
+            summary: "{{fields.name}} • {{fields.role}}"
+            collapsed: true
             fields:
-              - { label: "Testimoni", name: "quote", widget: "text" }
+              - label: "Testimoni"
+                name: "quote"
+                widget: "text"
+                hint: "Gunakan 1 paragraf singkat (maksimal 280 karakter)."
+                pattern: ['^.{1,280}$', "Gunakan maksimal 280 karakter"]
               - { label: "Nama", name: "name", widget: "string" }
               - {
                   label: "Peran / Usaha",
                   name: "role",
                   widget: "string",
                   required: false,
+                  hint: "Contoh: Owner Batik Banjar, Pendiri UMKM X",
                 }
 
       - name: "partners"
         label: "Mitra & Kolaborator"
+        label_singular: "Mitra"
         file: "data/partners.json"
         format: "json"
+        description: "Logo mitra dan kolaborator yang tampil pada bagian marquee mitra."
         fields:
           - label: "Daftar Mitra"
             name: "entries"
             widget: "list"
+            summary: "{{fields.name}}"
+            collapsed: true
             fields:
               - { label: "Nama Mitra", name: "name", widget: "string" }
               - {
@@ -189,10 +228,12 @@ collections:
                   name: "url",
                   widget: "string",
                   required: false,
+                  pattern: ['^(https?:\/\/.+|\/.*)?$', "Gunakan URL lengkap atau kosongkan"],
                 }
               - {
                   label: "Logo",
                   name: "logo",
                   widget: "image",
                   choose_url: true,
+                  hint: "Unggah logo PNG transparan atau gunakan URL gambar."
                 }
