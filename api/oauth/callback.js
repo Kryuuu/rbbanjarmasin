@@ -1,28 +1,50 @@
-function detectProtocol(req) {
-  if (req.headers['x-forwarded-proto']) {
-    return String(req.headers['x-forwarded-proto']).split(',')[0];
-  }
-  return req.connection && req.connection.encrypted ? 'https' : 'http';
-}
-
+// /api/oauth/callback.js
 export default async function handler(req, res) {
   const code = req.query.code;
-  const state = req.query.state || '';
   if (!code) return res.status(400).send('Missing code');
 
-  const proto = detectProtocol(req);
-  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const proto = req.headers['x-forwarded-proto'] || 'https';
+  const host = req.headers.host;
 
+  // Tukar code -> access_token via function internal kita
   const tokenRes = await fetch(`${proto}://${host}/api/oauth/token`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ code })
+    body: JSON.stringify({ code }),
   });
-
   const data = await tokenRes.json();
-  if (!tokenRes.ok) return res.status(400).json(data);
 
-  const adminUrl = new URL(`${proto}://${host}/admin/`);
-  adminUrl.hash = `#access_token=${data.access_token}&token_type=${data.token_type || 'bearer'}&state=${encodeURIComponent(state)}`;
-  res.redirect(adminUrl.toString());
+  // Helper untuk merender HTML yang mengirim postMessage ke window opener
+  const render = (status, content) => `<!doctype html>
+<html><body><script>
+(function() {
+  function receiveMessage(event) {
+    try {
+      // Kirim ke origin yang sama dengan pengirim untuk keamanan
+      window.opener.postMessage(
+        'authorization:github:${status}:' + JSON.stringify(${JSON.stringify(content)}),
+        event.origin
+      );
+      window.removeEventListener('message', receiveMessage, false);
+      window.close();
+    } catch (e) {
+      document.body.innerText = 'Auth messaging failed';
+    }
+  }
+  window.addEventListener('message', receiveMessage, false);
+  // Trigger handshake agar CMS mengirim balik origin-nya
+  window.opener.postMessage('authorizing:github', '*');
+})();
+</script></body></html>`;
+
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+
+  if (!tokenRes.ok || !data.access_token) {
+    // Kirim pesan gagal ke CMS (akan menampilkan error di UI)
+    return res.status(200).send(render('error', data));
+  }
+
+  // Sukses: kirim token ke CMS
+  const payload = { token: data.access_token, provider: 'github' };
+  return res.status(200).send(render('success', payload));
 }
