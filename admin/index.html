@@ -7,74 +7,218 @@
     <link rel="icon" type="image/png" href="../assets/png/rumah-bumn.png">
     <style>
         :root {
-            color-scheme: light dark;
+            color-scheme: light;
+            --bg-primary: radial-gradient(120% 120% at 50% -10%, #3ac3f6 0%, #195770 55%, #0f2534 100%);
+            --surface-glass: rgba(15, 23, 42, 0.6);
+            --surface-card: rgba(15, 23, 42, 0.82);
+            --border-glass: rgba(148, 163, 184, 0.22);
+            --text-primary: #f8fafc;
+            --text-muted: rgba(226, 232, 240, 0.7);
+            --accent: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            font-family: 'Manrope', 'Segoe UI', 'Roboto', sans-serif;
         }
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: 'Manrope', 'Segoe UI', 'Roboto', sans-serif;
-            background: radial-gradient(120% 120% at 50% 0%, #1ba0db 0%, #195770 60%, #0f2534 100%);
-            color: #f8fafc;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            transition: background 0.35s ease;
         }
         body.cms-active {
             background: #0f172a;
             color: initial;
         }
-        #welcome {
-            flex: 1;
-            width: 100%;
+        header {
+            display: flex;
+            justify-content: center;
+            padding: clamp(1rem, 2vw, 1.75rem) clamp(1.25rem, 4vw, 3rem);
+        }
+        .nav-shell {
+            width: min(1080px, 100%);
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            background: rgba(15, 23, 42, 0.55);
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            padding: clamp(0.9rem, 2vw, 1.2rem) clamp(1.3rem, 3vw, 2rem);
+            box-shadow: 0 18px 60px rgba(8, 47, 73, 0.45);
+            backdrop-filter: blur(18px);
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .brand img {
+            width: clamp(48px, 6vw, 64px);
+            height: clamp(48px, 6vw, 64px);
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.6);
+            padding: 0.4rem;
+        }
+        .brand span {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            display: grid;
+            gap: 0.15rem;
+        }
+        .brand span small {
+            text-transform: uppercase;
+            font-size: 0.68rem;
+            color: rgba(226, 232, 240, 0.7);
+            letter-spacing: 0.3em;
+        }
+        .brand span strong {
+            font-size: clamp(1.1rem, 2.3vw, 1.5rem);
+        }
+        .nav-actions {
+            display: flex;
+            gap: 0.6rem;
+        }
+        .nav-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(56, 189, 248, 0.18);
+            color: rgba(226, 232, 240, 0.92);
+            border-radius: 999px;
+            padding: 0.45rem 0.9rem;
+            font-size: 0.76rem;
+            font-weight: 600;
+        }
+        #welcome {
+            display: flex;
             justify-content: center;
-            padding: 2rem 1rem;
+            padding: clamp(1.5rem, 3vw, 4rem) clamp(1.2rem, 4vw, 3rem) clamp(2.5rem, 6vw, 5rem);
         }
         body.cms-active #welcome {
             display: none;
         }
-        .card {
-            width: min(420px, 100%);
-            background: rgba(15, 23, 42, 0.55);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 1.5rem;
-            padding: 2.5rem 2rem;
-            box-shadow: 0 24px 60px rgba(8, 47, 73, 0.35);
-            backdrop-filter: blur(18px);
-            text-align: center;
+        .layout {
+            width: min(1080px, 100%);
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(1.8rem, 4vw, 2.8rem);
+            align-items: stretch;
+        }
+        .intro {
+            background: rgba(15, 23, 42, 0.52);
+            border-radius: 30px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            padding: clamp(1.8rem, 4vw, 2.8rem);
+            box-shadow: 0 26px 70px rgba(8, 47, 73, 0.48);
             position: relative;
             overflow: hidden;
         }
-        body.cms-active .card {
-            display: none;
-        }
-        .card::before {
+        .intro::before {
             content: '';
             position: absolute;
-            inset: -40%;
-            background: conic-gradient(from 180deg, rgba(56, 189, 248, 0.4), transparent 45%, rgba(14, 165, 233, 0.35), transparent 75%);
-            filter: blur(40px);
-            z-index: 0;
+            inset: 8% -35% -25% 35%;
+            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.35), transparent 60%);
+            pointer-events: none;
         }
-        .card > * {
+        .intro::after {
+            content: '';
+            position: absolute;
+            inset: 45% -15% 15% 45%;
+            background: radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.2), transparent 70%);
+            pointer-events: none;
+        }
+        .intro > * {
             position: relative;
             z-index: 1;
         }
-        .card h1 {
-            font-size: clamp(1.8rem, 5vw, 2.4rem);
-            margin-bottom: 0.75rem;
-            font-weight: 700;
+        .intro h1 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            margin: 0 0 1rem;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
         }
-        .card p {
-            margin: 0 0 2rem;
-            color: rgba(241, 245, 249, 0.75);
-            line-height: 1.6;
+        .intro p {
+            margin: 0;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            color: rgba(226, 232, 240, 0.78);
+            line-height: 1.7;
+        }
+        .intro .feature-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: clamp(1.8rem, 4vw, 2.4rem);
+        }
+        .feature-item {
+            display: grid;
+            gap: 0.35rem;
+            padding: 1rem 1.2rem;
+            background: rgba(15, 23, 42, 0.68);
+            border-radius: 18px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+        .feature-item strong {
+            font-size: 0.92rem;
+        }
+        .feature-item span {
+            color: rgba(226, 232, 240, 0.65);
+            font-size: 0.82rem;
+            line-height: 1.5;
+        }
+        .panel {
+            display: grid;
+            gap: clamp(1.4rem, 3vw, 2.2rem);
+        }
+        .panel-card {
+            background: var(--surface-card);
+            border-radius: 28px;
+            border: 1px solid var(--border-glass);
+            padding: clamp(1.8rem, 3vw, 2.4rem);
+            box-shadow: 0 24px 65px rgba(8, 47, 73, 0.5);
+            backdrop-filter: blur(20px);
+        }
+        .panel-card h2 {
+            margin: 0 0 1.2rem;
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            letter-spacing: -0.01em;
+        }
+        .stats-grid {
+            display: grid;
+            gap: 0.9rem;
+        }
+        .stat-chip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.9rem 1.1rem;
+            border-radius: 18px;
+            background: rgba(15, 23, 42, 0.72);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+        }
+        .stat-chip span {
+            display: grid;
+            gap: 0.2rem;
+        }
+        .stat-chip strong {
+            font-size: 0.88rem;
+            letter-spacing: 0.01em;
+        }
+        .stat-chip small {
+            font-size: 0.75rem;
+            color: rgba(148, 163, 184, 0.75);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+        .stat-value {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #38bdf8;
         }
         .actions {
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
+            display: grid;
+            gap: 0.8rem;
+            margin-top: clamp(1.2rem, 2vw, 1.8rem);
         }
         .btn {
             display: inline-flex;
@@ -85,24 +229,31 @@
             border-radius: 999px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            cursor: pointer;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            background: var(--accent);
             color: #0f172a;
             border: none;
-            box-shadow: 0 14px 30px rgba(56, 189, 248, 0.35);
+            box-shadow: 0 18px 42px rgba(56, 189, 248, 0.35);
         }
         .btn-primary:hover {
-            filter: brightness(1.05);
+            transform: translateY(-1px);
+            filter: brightness(1.04);
         }
         .btn-secondary {
             background: transparent;
-            border: 1px solid rgba(241, 245, 249, 0.4);
-            color: #e2e8f0;
+            border: 1px solid rgba(241, 245, 249, 0.35);
+            color: rgba(226, 232, 240, 0.92);
         }
         .btn-secondary:hover {
-            background: rgba(241, 245, 249, 0.1);
+            background: rgba(241, 245, 249, 0.12);
+        }
+        body.cms-active .panel-card,
+        body.cms-active .intro,
+        body.cms-active header {
+            display: none;
         }
         #nc-root {
             display: none;
@@ -127,18 +278,125 @@
         body.cms-active footer {
             display: none;
         }
+        .quick-note {
+            background: rgba(15, 23, 42, 0.74);
+            border-radius: 22px;
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            padding: 1.4rem 1.6rem;
+            font-size: 0.86rem;
+            line-height: 1.6;
+            color: rgba(226, 232, 240, 0.78);
+        }
+        .quick-note strong {
+            color: #38bdf8;
+        }
+        footer {
+            margin: 0 auto clamp(1.5rem, 4vw, 2.8rem);
+            font-size: 0.72rem;
+            color: rgba(226, 232, 240, 0.4);
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            .panel {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 640px) {
+            header {
+                padding: 1rem;
+            }
+            .nav-shell {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: flex-start;
+            }
+            .nav-actions {
+                order: -1;
+            }
+            .intro,
+            .panel-card {
+                border-radius: 22px;
+            }
+            .actions {
+                grid-template-columns: 1fr;
+            }
+            .nav-pill {
+                font-size: 0.7rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <main class="welcome" id="welcome">
-        <div class="card">
-            <h1>Rumah BUMN CMS</h1>
-            <p>Kelola berita, statistik pembinaan, testimoni UMKM, serta mitra & kolaborator secara terpusat.</p>
-            <div class="actions">
-                <a class="btn btn-primary" href="#" id="open-cms">Buka Dashboard</a>
-                <a class="btn btn-secondary" href="/" target="_blank" rel="noopener noreferrer">Lihat Halaman Utama</a>
+    <header>
+        <div class="nav-shell">
+            <div class="brand">
+                <img src="../assets/png/rumah-bumn.png" alt="Rumah BUMN">
+                <span>
+                    <small>Konten Manajemen</small>
+                    <strong>Rumah BUMN Banjarmasin</strong>
+                </span>
             </div>
-            <small>Masuk menggunakan akun staf yang telah diundang.</small>
+            <div class="nav-actions">
+                <div class="nav-pill">
+                    ● Mode Editorial Workflow
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="welcome" id="welcome">
+        <div class="layout">
+            <section class="intro">
+                <h1>Kelola konten situs dalam satu tempat</h1>
+                <p>
+                    Buat, perbarui, dan publikasikan berita, statistik pembinaan, testimoni UMKM, serta mitra kolaborator dengan proses yang terkontrol. Workflow publikasi memastikan setiap perubahan direview sebelum tampil di situs utama.
+                </p>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <strong>✓ Workflow editor → review → publish</strong>
+                        <span>Setiap perubahan tersimpan sebagai draft hingga disetujui, sehingga versi yang tayang selalu terkurasi.</span>
+                    </div>
+                    <div class="feature-item">
+                        <strong>✓ Upload gambar langsung ke media library</strong>
+                        <span>Gunakan tombol upload pada field gambar untuk menambahkan aset baru atau pilih dari arsip yang ada.</span>
+                    </div>
+                    <div class="feature-item">
+                        <strong>✓ Preview responsif sebelum publikasi</strong>
+                        <span>Gunakan tombol Preview di CMS untuk melihat tampilan konten di berbagai ukuran layar.</span>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="panel">
+                <div class="panel-card">
+                    <h2>Status Konten</h2>
+                    <div class="stats-grid" id="dataset-stats">
+                        <div class="stat-chip">
+                            <span>
+                                <small>Memuat</small>
+                                <strong>Menarik data...</strong>
+                            </span>
+                            <div class="stat-value">–</div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn btn-primary" id="open-cms">
+                            Buka Dashboard CMS
+                        </button>
+                        <a class="btn btn-secondary" href="/" target="_blank" rel="noopener noreferrer">
+                            Lihat Halaman Utama
+                        </a>
+                    </div>
+                </div>
+
+                <div class="quick-note">
+                    <strong>Tips:</strong> Jika tombol Publish tidak aktif, pastikan Anda sudah login melalui Netlify Identity. Untuk uji lokal jalankan perintah <code>npx netlify-cms-proxy-server</code> agar mode <em>local backend</em> berfungsi.
+                </div>
+            </aside>
         </div>
     </main>
 
@@ -186,6 +444,46 @@
                 }
             });
         }
+
+        const datasetStats = document.getElementById('dataset-stats');
+        const datasets = [
+            { key: 'news', label: 'Berita Terkini', path: '../data/news.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'artikel' },
+            { key: 'statistics', label: 'Statistik Pembinaan', path: '../data/statistics.json', resolve: (data) => (Array.isArray(data?.cards) ? data.cards.length : 0), suffix: 'kartu' },
+            { key: 'testimonials', label: 'Testimoni UMKM', path: '../data/testimonials.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'testimoni' },
+            { key: 'partners', label: 'Mitra & Kolaborator', path: '../data/partners.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'mitra' }
+        ];
+
+        function renderStats() {
+            if (!datasetStats) return;
+            datasetStats.innerHTML = datasets.map((item) => `
+                <div class="stat-chip" data-dataset="${item.key}">
+                    <span>
+                        <small>${item.label}</small>
+                        <strong>Mengambil data...</strong>
+                    </span>
+                    <div class="stat-value">…</div>
+                </div>
+            `).join('');
+
+            datasets.forEach(async (item) => {
+                const chip = datasetStats.querySelector(`[data-dataset="${item.key}"]`);
+                if (!chip) return;
+                try {
+                    const response = await fetch(item.path + `?ts=${Date.now()}`, { cache: 'no-store' });
+                    if (!response.ok) throw new Error(`Gagal memuat ${item.label}`);
+                    const data = await response.json();
+                    const total = item.resolve(data);
+                    chip.querySelector('strong').textContent = total ? 'Tersedia' : 'Belum ada data';
+                    chip.querySelector('.stat-value').textContent = Number.isFinite(total) ? `${total} ${item.suffix}` : '0';
+                } catch (error) {
+                    console.error(error);
+                    chip.querySelector('strong').textContent = 'Gagal memuat';
+                    chip.querySelector('.stat-value').textContent = '!';
+                }
+            });
+        }
+
+        renderStats();
     </script>
 </body>
 </html>
