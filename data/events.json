@@ -65,6 +65,19 @@
       ],
       "link": "https://forms.gle/DV5gBanjarmasinEvent",
       "link_label": "Daftar Sekarang"
+    },
+    {
+      "badge_label": "Test pelatihan",
+      "badge": "accent",
+      "link_label": "Daftar Sekarang",
+      "title": "TTest",
+      "description": "ad",
+      "details": [
+        {
+          "icon": "users",
+          "text": "21"
+        }
+      ]
     }
   ]
 }
