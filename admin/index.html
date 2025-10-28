@@ -538,11 +538,167 @@
                     font-size: 0.78rem;
                     color: #64748b;
                 }
+                .event-preview-grid {
+                    display: grid;
+                    gap: 1.5rem;
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                }
+                .event-card {
+                    background: #ffffff;
+                    border-radius: 18px;
+                    border: 1px solid rgba(15, 118, 180, 0.12);
+                    padding: 1.75rem;
+                    box-shadow: 0 24px 38px -18px rgba(15, 23, 42, 0.28);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.25rem;
+                }
+                .event-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.4rem;
+                    font-size: 0.78rem;
+                    font-weight: 600;
+                    border-radius: 999px;
+                    padding: 0.35rem 0.85rem;
+                    letter-spacing: 0.12em;
+                    text-transform: uppercase;
+                }
+                .event-badge--primary {
+                    background: rgba(25, 87, 112, 0.12);
+                    color: #195770;
+                }
+                .event-badge--secondary {
+                    background: rgba(27, 160, 219, 0.15);
+                    color: #0c87ba;
+                }
+                .event-badge--accent {
+                    background: rgba(15, 143, 171, 0.15);
+                    color: #0f8fab;
+                }
+                .event-card__title {
+                    margin: 0;
+                    font-size: 1.35rem;
+                    font-weight: 700;
+                    color: #0f172a;
+                    letter-spacing: -0.01em;
+                }
+                .event-card__desc {
+                    margin: 0;
+                    color: #475569;
+                    line-height: 1.6;
+                    font-size: 0.92rem;
+                }
+                .event-meta {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    display: grid;
+                    gap: 0.75rem;
+                }
+                .event-meta__item {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 0.65rem;
+                    font-size: 0.9rem;
+                    color: #475569;
+                }
+                .event-meta__text {
+                    flex: 1;
+                    line-height: 1.5;
+                }
+                .event-meta__icon {
+                    width: 1.65rem;
+                    height: 1.65rem;
+                    border-radius: 999px;
+                    background: rgba(14, 165, 233, 0.12);
+                    color: #0284c7;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 0.9rem;
+                    flex-shrink: 0;
+                    margin-top: 0.1rem;
+                }
+                .event-meta__empty {
+                    font-size: 0.85rem;
+                    color: #94a3b8;
+                }
+                .event-card__cta {
+                    margin-top: auto;
+                    display: grid;
+                    gap: 0.45rem;
+                }
+                .event-card__button {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.4rem;
+                    padding: 0.55rem 1.4rem;
+                    border-radius: 999px;
+                    background: linear-gradient(135deg, #1ba0db, #195770);
+                    color: #ffffff;
+                    font-weight: 600;
+                    font-size: 0.85rem;
+                }
+                .event-card__link-note {
+                    font-size: 0.78rem;
+                    color: #94a3b8;
+                    word-break: break-word;
+                }
+                .event-card__link-note--warning {
+                    color: #ef4444;
+                }
             `, { raw: true });
 
             const getList = (entry, path) => {
                 const value = entry.getIn(path);
                 return value ? value.toJS() : [];
+            };
+
+            const getBadgeClass = (badge) => {
+                switch (badge) {
+                    case 'secondary':
+                        return 'event-badge event-badge--secondary';
+                    case 'accent':
+                        return 'event-badge event-badge--accent';
+                    default:
+                        return 'event-badge event-badge--primary';
+                }
+            };
+
+            const iconEmojiMap = {
+                calendar: '📅',
+                clock: '🕒',
+                location: '📍',
+                check: '✔'
+            };
+
+            const buildEventMeta = (item) => {
+                const meta = [];
+                if (item?.schedule_date) {
+                    meta.push({ icon: 'calendar', text: item.schedule_date });
+                }
+                if (item?.schedule_time) {
+                    meta.push({ icon: 'clock', text: item.schedule_time });
+                }
+                if (item?.location) {
+                    meta.push({ icon: 'location', text: item.location });
+                }
+                if (Array.isArray(item?.highlights)) {
+                    item.highlights.forEach((highlight) => {
+                        if (highlight) {
+                            meta.push({ icon: 'check', text: highlight });
+                        }
+                    });
+                } else if (Array.isArray(item?.details)) {
+                    item.details.forEach((legacy) => {
+                        if (legacy?.text) {
+                            meta.push({ icon: legacy.icon || 'check', text: legacy.text });
+                        }
+                    });
+                }
+                return meta;
             };
 
             const NewsPreview = createClass({
@@ -608,6 +764,43 @@
                 }
             });
 
+            const EventsPreview = createClass({
+                render() {
+                    const entries = getList(this.props.entry, ['data', 'entries']);
+                    const cards = entries.length
+                        ? entries.map((item, idx) => {
+                            const meta = buildEventMeta(item);
+                            return h('article', { key: idx, className: 'event-card' },
+                                h('span', { className: getBadgeClass(item.badge) }, item.badge_label || item.badge || 'Event'),
+                                h('h2', { className: 'event-card__title' }, item.title || 'Judul Event'),
+                                item.description ? h('p', { className: 'event-card__desc' }, item.description) : null,
+                                meta.length
+                                    ? h('ul', { className: 'event-meta' },
+                                        meta.map((detail, detailIdx) =>
+                                            h('li', { key: detailIdx, className: 'event-meta__item' },
+                                                h('span', { className: 'event-meta__icon' }, iconEmojiMap[detail.icon] || '•'),
+                                                h('span', { className: 'event-meta__text' }, detail.text || '')
+                                            )
+                                        )
+                                    )
+                                    : h('p', { className: 'event-meta__empty' }, 'Detail event belum diatur.'),
+                                h('div', { className: 'event-card__cta' },
+                                    h('span', { className: 'event-card__button' }, item.link_label || 'Daftar Sekarang'),
+                                    item.link
+                                        ? h('span', { className: 'event-card__link-note' }, item.link)
+                                        : h('span', { className: 'event-card__link-note event-card__link-note--warning' }, 'Tautan pendaftaran belum diisi')
+                                )
+                            );
+                        })
+                        : h('p', { className: 'event-meta__empty' }, 'Belum ada jadwal event.');
+
+                    return h('div', {},
+                        h('div', { className: 'preview-heading' }, 'Pratinjau Jadwal Event'),
+                        h('div', { className: 'event-preview-grid' }, cards)
+                    );
+                }
+            });
+
             const StatisticsPreview = createClass({
                 render() {
                     const cards = getList(this.props.entry, ['data', 'cards']);
@@ -660,6 +853,7 @@
             CMS.registerPreviewTemplate('statistics', StatisticsPreview);
             CMS.registerPreviewTemplate('testimonials', TestimonialsPreview);
             CMS.registerPreviewTemplate('partners', PartnersPreview);
+            CMS.registerPreviewTemplate('events', EventsPreview);
         }
 
         function startCMS() {

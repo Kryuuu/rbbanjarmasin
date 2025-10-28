@@ -12,23 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const ICONS = {
         calendar: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z" /></svg>',
+        clock: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>',
         location: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m17.657 16.657-4.242 4.243a1.5 1.5 0 0 1-2.122 0l-4.243-4.243a8 8 0 1 1 10.607 0Z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>',
-        users: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.59 14.37a4.5 4.5 0 1 0-7.165-.007M12 17.25v3.75" /></svg>',
-        benefit: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m20.25 7.5-15 9.75L4.5 9l15-4.5Zm0 0L12 13.5m8.25-6L12 13.5m0 0L9.75 21l2.25-7.5" /></svg>'
+        check: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m4.5 12.75 6 6 9-13.5" /></svg>'
     };
 
-    const createDetailItem = (detail) => {
+    const createInfoItem = (iconKey, text) => {
+        if (!text) return null;
         const li = document.createElement('li');
-        li.className = 'flex items-center gap-2';
-        const iconType = detail?.icon && ICONS[detail.icon] ? detail.icon : 'benefit';
+        li.className = 'flex items-start gap-2';
 
+        const iconType = ICONS[iconKey] ? iconKey : 'check';
         const iconWrapper = document.createElement('span');
         iconWrapper.innerHTML = ICONS[iconType];
         li.appendChild(iconWrapper.firstChild);
 
         const textNode = document.createElement('span');
         textNode.className = 'text-gray-600 text-sm leading-relaxed';
-        textNode.textContent = detail?.text || '';
+        textNode.textContent = text;
         li.appendChild(textNode);
         return li;
     };
@@ -82,12 +83,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const detailsList = document.createElement('ul');
                 detailsList.className = 'text-sm text-gray-600 space-y-2';
-                const details = Array.isArray(item.details) ? item.details : [];
-                if (details.length) {
-                    details.forEach((detail) => {
-                        detailsList.appendChild(createDetailItem(detail));
+
+                const structuredItems = [];
+                if (item.schedule_date) {
+                    structuredItems.push(createInfoItem('calendar', item.schedule_date));
+                }
+                if (item.schedule_time) {
+                    structuredItems.push(createInfoItem('clock', item.schedule_time));
+                }
+                if (item.location) {
+                    structuredItems.push(createInfoItem('location', item.location));
+                }
+                const highlights = Array.isArray(item.highlights) ? item.highlights : [];
+                if (highlights.length) {
+                    highlights.forEach((highlight) => {
+                        structuredItems.push(createInfoItem('check', highlight));
                     });
                 }
+
+                // Fallback untuk data lama yang masih memakai item.details
+                if (!structuredItems.length) {
+                    const legacyDetails = Array.isArray(item.details) ? item.details : [];
+                    legacyDetails.forEach((detail) => {
+                        const legacyItem = createInfoItem(detail?.icon, detail?.text);
+                        if (legacyItem) structuredItems.push(legacyItem);
+                    });
+                }
+
+                if (structuredItems.length) {
+                    structuredItems.forEach((li) => {
+                        if (li) detailsList.appendChild(li);
+                    });
+                } else {
+                    const emptyRow = document.createElement('li');
+                    emptyRow.className = 'text-gray-400 text-sm';
+                    emptyRow.textContent = 'Detail event belum diatur.';
+                    detailsList.appendChild(emptyRow);
+                }
+
                 article.appendChild(detailsList);
 
                 const footer = document.createElement('div');

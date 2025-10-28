@@ -296,26 +296,32 @@ collections:
                   widget: "text",
                   hint: "Gambaran ringkas tujuan event."
                 }
-              - label: "Rincian Event"
-                name: "details"
+              - {
+                  label: "Tanggal Acara",
+                  name: "schedule_date",
+                  widget: "string",
+                  hint: "Contoh: Jumat, 15 November 2025"
+                }
+              - {
+                  label: "Waktu Acara",
+                  name: "schedule_time",
+                  widget: "string",
+                  hint: "Contoh: 09.00 - 15.00 WITA"
+                }
+              - {
+                  label: "Lokasi / Platform",
+                  name: "location",
+                  widget: "string",
+                  hint: "Contoh: Aula Rumah BUMN atau tautan platform online."
+                }
+              - label: "Highlight & Fasilitas"
+                name: "highlights"
                 widget: "list"
+                summary: "{{fields.item}}"
                 collapsed: true
-                summary: "{{fields.icon}} -- {{fields.text}}"
-                fields:
-                  - {
-                      label: "Ikon",
-                      name: "icon",
-                      widget: "select",
-                      options:
-                        [
-                          { label: "Kalender", value: "calendar" },
-                          { label: "Lokasi", value: "location" },
-                          { label: "Peserta", value: "users" },
-                          { label: "Fasilitas", value: "benefit" }
-                        ],
-                      default: "calendar"
-                    }
-                  - { label: "Teks Penjelasan", name: "text", widget: "string" }
+                hint: "Poin keunggulan acara, fasilitas, atau catatan penting."
+                field:
+                  { label: "Poin Highlight", name: "item", widget: "string" }
               - {
                   label: "Tautan Pendaftaran",
                   name: "link",
