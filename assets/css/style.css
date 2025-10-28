@@ -5,12 +5,25 @@
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     transition: background-color 0.2s ease, transform 0.2s ease;
+    font-weight: 600;
 }
 
 .nav-link:hover,
 .nav-link.active {
     background-color: rgba(27, 160, 219, 0.25);
     transform: translateY(-1px);
+}
+
+.nav-link--cta {
+    background: linear-gradient(135deg, rgba(27, 160, 219, 0.18), rgba(25, 87, 112, 0.18));
+    border: 1px solid rgba(27, 160, 219, 0.35);
+    padding-inline: 1.75rem;
+}
+
+.nav-link--cta:hover,
+.nav-link--cta.active {
+    background: linear-gradient(135deg, rgba(27, 160, 219, 0.25), rgba(25, 87, 112, 0.25));
+    border-color: rgba(27, 160, 219, 0.55);
 }
 
 .btn-outline {
