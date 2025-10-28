@@ -1,0 +1,70 @@
+{
+  "entries": [
+    {
+      "badge": "secondary",
+      "badge_label": "Workshop",
+      "title": "Pelatihan Branding & Packaging Produk UMKM",
+      "description": "Pelajari strategi branding dan desain kemasan yang menarik untuk meningkatkan daya saing produk lokal di pasar modern.",
+      "details": [
+        {
+          "icon": "calendar",
+          "text": "Jumat, 15 November 2025 • 09.00 - 15.00 WITA"
+        },
+        {
+          "icon": "location",
+          "text": "Aula Rumah BUMN Banjarmasin"
+        },
+        {
+          "icon": "users",
+          "text": "Kuota 40 peserta • Sertifikat & materi pelatihan"
+        }
+      ],
+      "link": "https://forms.gle/DV5gBanjarmasinEvent",
+      "link_label": "Daftar Sekarang"
+    },
+    {
+      "badge": "primary",
+      "badge_label": "Coaching Clinic",
+      "title": "Business Coaching: Strategi Peningkatan Penjualan Digital",
+      "description": "Sesi mentoring intensif bersama fasilitator untuk menyusun rencana peningkatan penjualan secara online dan optimasi marketplace.",
+      "details": [
+        {
+          "icon": "calendar",
+          "text": "Sabtu, 23 November 2025 • 13.00 - 17.00 WITA"
+        },
+        {
+          "icon": "location",
+          "text": "Ruang Coaching Rumah BUMN & live via Zoom"
+        },
+        {
+          "icon": "benefit",
+          "text": "Termasuk template rencana bisnis & sesi konsultasi 1-on-1"
+        }
+      ],
+      "link": "https://forms.gle/DV5gBanjarmasinEvent",
+      "link_label": "Daftar Sekarang"
+    },
+    {
+      "badge": "accent",
+      "badge_label": "Talkshow",
+      "title": "Forum Kolaborasi UMKM & BUMN",
+      "description": "Diskusi panel bersama perwakilan BUMN, marketplace, dan UMKM inspiratif mengenai kolaborasi program pemasaran 2026.",
+      "details": [
+        {
+          "icon": "calendar",
+          "text": "Kamis, 12 Desember 2025 • 09.30 - 12.00 WITA"
+        },
+        {
+          "icon": "location",
+          "text": "Ballroom Hotel Galaxy Banjarmasin & live streaming YouTube"
+        },
+        {
+          "icon": "users",
+          "text": "Gratis & terbuka untuk umum • Goodie bag bagi 100 peserta pertama"
+        }
+      ],
+      "link": "https://forms.gle/DV5gBanjarmasinEvent",
+      "link_label": "Daftar Sekarang"
+    }
+  ]
+}

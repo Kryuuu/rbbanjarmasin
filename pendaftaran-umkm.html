@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar UMKM Binaan | Rumah BUMN Banjarmasin</title>
+    <link rel="icon" type="image/png" href="assets/png/rumah-bumn.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="font-manrope text-gray-900 bg-gray-50">
+<header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="max-w-screen-xl mx-4 sm:mx-6 lg:mx-12 2xl:mx-auto py-3 flex items-center gap-4">
+        <a href="index.html" class="flex items-center gap-3">
+            <img src="assets/png/rumah-bumn.png" alt="Logo Rumah BUMN" class="h-12 w-auto">
+            <div class="flex flex-col">
+                <span class="text-sm text-gray-500 uppercase tracking-widest">Rumah BUMN</span>
+                <span class="font-bold text-lg text-primary leading-tight">Banjarmasin</span>
+            </div>
+        </a>
+        <div class="ml-auto flex items-center gap-3">
+            <a href="index.html#layanan" class="hidden sm:inline-flex border border-primary text-primary font-semibold rounded-md px-4 py-2 hover:bg-primary hover:text-white transition">
+                Kembali ke Beranda
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="py-20">
+    <div class="max-w-screen-lg mx-6 lg:mx-12 2xl:mx-auto space-y-12">
+        <div class="text-center space-y-4">
+            <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+                Formulir Pendaftaran
+            </span>
+            <h1 class="text-3xl md:text-4xl font-bold text-primary leading-tight">
+                Bergabung Menjadi UMKM Binaan Rumah BUMN Banjarmasin
+            </h1>
+            <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed">
+                Isi data usaha Anda dengan lengkap agar kami dapat melakukan proses kurasi dan pendampingan lanjutan. Tim Rumah BUMN akan menghubungi melalui email atau nomor telepon yang tercantum.
+            </p>
+        </div>
+
+        <div class="bg-white border border-primary/10 shadow-xl rounded-3xl p-8 md:p-12">
+            <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] items-start">
+                <div class="space-y-4">
+                    <h2 class="text-2xl md:text-3xl font-bold text-primary leading-tight">
+                        Manfaat Bergabung
+                    </h2>
+                    <ul class="space-y-3 text-gray-600 text-sm">
+                        <li class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>
+                            Akses program pembinaan berkelanjutan, mulai dari pelatihan, mentoring bisnis, hingga dukungan pemasaran.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>
+                            Pendampingan legalitas dan sertifikasi usaha untuk meningkatkan kredibilitas dan akses pasar.
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>
+                            Jejaring kolaborasi dengan BUMN, marketplace, dan komunitas UMKM untuk memperluas peluang usaha.
+                        </li>
+                    </ul>
+                    <div class="rounded-2xl bg-primary/5 p-6 text-sm text-gray-600 space-y-2">
+                        <p class="font-semibold text-primary">Syarat umum pendaftaran:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Memiliki usaha aktif berbadan usaha atau perorangan di wilayah Kalimantan Selatan.</li>
+                            <li>Siap mengikuti program pembinaan minimal 6 bulan.</li>
+                            <li>Bersedia mengisi data perkembangan usaha secara berkala.</li>
+                        </ul>
+                    </div>
+                </div>
+                <form action="https://formsubmit.co/rumahbumnbanjarmasinkalsel@gmail.com" method="POST" class="space-y-6">
+                    <input type="hidden" name="_subject" value="Pendaftaran UMKM Baru - Rumah BUMN Banjarmasin">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://rbbanjarmasin.vercel.app/thank-you.html">
+
+                    <div>
+                        <label for="umkm-nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama UMKM</label>
+                        <input id="umkm-nama" name="nama_umkm" type="text" required
+                               class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-800 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
+                               placeholder="Contoh: Batik Banjar Sejahtera">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="umkm-telp" class="block text-sm font-semibold text-gray-700 mb-2">No. Telepon / WhatsApp</label>
+                            <input id="umkm-telp" name="telepon" type="tel" required
+                                   class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-800 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
+                                   placeholder="Contoh: 0812-3456-7890">
+                        </div>
+                        <div>
+                            <label for="umkm-email" class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+                            <input id="umkm-email" name="email" type="email" required
+                                   class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-800 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
+                                   placeholder="email@usahaanda.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="umkm-pemilik" class="block text-sm font-semibold text-gray-700 mb-2">Nama Pemilik / Penanggung Jawab</label>
+                        <input id="umkm-pemilik" name="nama_pemilik" type="text" required
+                               class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-800 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
+                               placeholder="Nama lengkap penanggung jawab">
+                    </div>
+                    <div>
+                        <label for="umkm-sektor" class="block text-sm font-semibold text-gray-700 mb-2">Sektor Usaha</label>
+                        <input id="umkm-sektor" name="sektor_usaha" type="text" required
+                               class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-800 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
+                               placeholder="Contoh: Kuliner, Fashion, Kerajinan, Jasa">
+                    </div>
+                    <div>
+                        <label for="umkm-pesan" class="block text-sm font-semibold text-gray-700 mb-2">Pesan / Kebutuhan Pendampingan</label>
+                        <textarea id="umkm-pesan" name="pesan" rows="5" required
+                                  class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-gray-800 shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
+                                  placeholder="Ceritakan singkat profil usaha Anda, capaian saat ini, dan dukungan yang diharapkan."></textarea>
+                    </div>
+                    <button type="submit"
+                            class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-black shadow-lg shadow-primary/20 transition hover:bg-secondary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-white">
+                        Kirim Pendaftaran
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </button>
+                    <p class="text-xs text-gray-500">
+                        Dengan mengirim formulir ini Anda menyetujui penggunaan data untuk keperluan seleksi dan pendampingan UMKM oleh Rumah BUMN Banjarmasin.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-gray-100 text-black">
+    <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="space-y-4">
+            <img src="assets/png/rumah-bumn.png" alt="Logo Rumah BUMN putih" class="h-14 w-auto">
+            <p class="text-gray-700 leading-relaxed">
+                Jl. Jalur I No.5, Surgi Mufti, Kec. Banjarmasin Utara, Kota Banjarmasin, Kalimantan Selatan 70122
+            </p>
+            <p class="text-gray-500">Senin - Jumat, 08.00 - 17.00 WITA</p>
+        </div>
+        <div class="space-y-3">
+            <h4 class="font-semibold text-lg">Kontak</h4>
+            <a href="mailto:rumahbumnbanjarmasinkalsel@gmail.com" class="block text-gray-700 hover:text-primary transition">
+                rumahbumnbanjarmasinkalsel@gmail.com
+            </a>
+            <a href="tel:+62 811-5080-7009" class="block text-gray-700 hover:text-primary transition">
+                +62 811-5080-7009
+            </a>
+            <a href="https://maps.app.goo.gl/BMwhxZ5Ygt8Bw2g87" target="_blank" class="block text-gray-700 hover:text-primary transition">
+                Lihat di Google Maps
+            </a>
+        </div>
+        <div class="space-y-3">
+            <h4 class="font-semibold text-lg">Ikuti Kami</h4>
+            <div class="flex gap-3">
+                <a href="https://www.instagram.com/rumahbumn.banjarmasin" class="social-icon" aria-label="Instagram">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT37uulR9B6vAjs0ISE5KqKuz4UlGCyhrm5iN-MWcbLWNtnnpvPmVgc2G5llq0" alt="Instagram" class="h-8 w-8">
+                </a>
+                <a href="https://www.tiktok.com/@rumahbumn.banjarmasin" class="social-icon" aria-label="TikTok">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtVkwkHpxzGP7PJX05oXZqgrVZ13LNPVQlA-Ntt6vTrjz_bMuh_LKYRmb6Bg" alt="TikTok" class="h-8 w-8">
+                </a>
+            </div>
+            <p class="text-sm text-gray-500">
+                <a href="/admin/" class="underline underline-offset-4 hover:text-primary">Staff Login</a>
+            </p>
+        </div>
+    </div>
+    <div class="bg-gray-200">
+        <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto py-4 flex flex-col sm:flex-row justify-between text-sm text-gray-600">
+            <span>&copy; 2025 Rumah BUMN Banjarmasin. Semua hak dilindungi.</span>
+            <span>Dikelola oleh Pertamina &amp; BUMN</span>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

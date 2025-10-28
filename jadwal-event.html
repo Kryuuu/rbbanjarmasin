@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Event Rumah BUMN | Rumah BUMN Banjarmasin</title>
+    <link rel="icon" type="image/png" href="assets/png/rumah-bumn.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="font-manrope text-gray-900 bg-gray-50">
+<header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="max-w-screen-xl mx-4 sm:mx-6 lg:mx-12 2xl:mx-auto py-3 flex items-center gap-4">
+        <a href="index.html" class="flex items-center gap-3">
+            <img src="assets/png/rumah-bumn.png" alt="Logo Rumah BUMN" class="h-12 w-auto">
+            <div class="flex flex-col">
+                <span class="text-sm text-gray-500 uppercase tracking-widest">Rumah BUMN</span>
+                <span class="font-bold text-lg text-primary leading-tight">Banjarmasin</span>
+            </div>
+        </a>
+        <div class="ml-auto flex items-center gap-3">
+            <a href="index.html#layanan" class="hidden sm:inline-flex border border-primary text-primary font-semibold rounded-md px-4 py-2 hover:bg-primary hover:text-white transition">
+                Kembali ke Beranda
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="py-20">
+    <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto space-y-12">
+        <div class="text-center space-y-4">
+            <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+                Agenda Rumah BUMN
+            </span>
+            <h1 class="text-3xl md:text-4xl font-bold text-primary leading-tight">
+                Jadwal Event & Pelatihan UMKM
+            </h1>
+            <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed">
+                Dapatkan informasi seputar pelatihan, workshop, dan program pendampingan terbaru dari Rumah BUMN Banjarmasin. Setiap kegiatan dirancang untuk membantu UMKM bertumbuh secara berkelanjutan.
+            </p>
+        </div>
+
+        <div class="grid gap-8 lg:grid-cols-2" data-events-list>
+            <p class="text-center text-gray-400 col-span-full py-10">Memuat jadwal acara terbaru...</p>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-gray-100 text-black">
+    <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="space-y-4">
+            <img src="assets/png/rumah-bumn.png" alt="Logo Rumah BUMN putih" class="h-14 w-auto">
+            <p class="text-gray-700 leading-relaxed">
+                Jl. Jalur I No.5, Surgi Mufti, Kec. Banjarmasin Utara, Kota Banjarmasin, Kalimantan Selatan 70122
+            </p>
+            <p class="text-gray-500">Senin - Jumat, 08.00 - 17.00 WITA</p>
+        </div>
+        <div class="space-y-3">
+            <h4 class="font-semibold text-lg">Kontak</h4>
+            <a href="mailto:rumahbumnbanjarmasinkalsel@gmail.com" class="block text-gray-700 hover:text-primary transition">
+                rumahbumnbanjarmasinkalsel@gmail.com
+            </a>
+            <a href="tel:+62 811-5080-7009" class="block text-gray-700 hover:text-primary transition">
+                +62 811-5080-7009
+            </a>
+            <a href="https://maps.app.goo.gl/BMwhxZ5Ygt8Bw2g87" target="_blank" class="block text-gray-700 hover:text-primary transition">
+                Lihat di Google Maps
+            </a>
+        </div>
+        <div class="space-y-3">
+            <h4 class="font-semibold text-lg">Ikuti Kami</h4>
+            <div class="flex gap-3">
+                <a href="https://www.instagram.com/rumahbumn.banjarmasin" class="social-icon" aria-label="Instagram">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT37uulR9B6vAjs0ISE5KqKuz4UlGCyhrm5iN-MWcbLWNtnnpvPmVgc2G5llq0" alt="Instagram" class="h-8 w-8">
+                </a>
+                <a href="https://www.tiktok.com/@rumahbumn.banjarmasin" class="social-icon" aria-label="TikTok">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtVkwkHpxzGP7PJX05oXZqgrVZ13LNPVQlA-Ntt6vTrjz_bMuh_LKYRmb6Bg" alt="TikTok" class="h-8 w-8">
+                </a>
+            </div>
+            <p class="text-sm text-gray-500">
+                <a href="/admin/" class="underline underline-offset-4 hover:text-primary">Staff Login</a>
+            </p>
+        </div>
+    </div>
+    <div class="bg-gray-200">
+        <div class="max-w-screen-xl mx-6 lg:mx-12 2xl:mx-auto py-4 flex flex-col sm:flex-row justify-between text-sm text-gray-600">
+            <span>&copy; 2025 Rumah BUMN Banjarmasin. Semua hak dilindungi.</span>
+            <span>Dikelola oleh Pertamina &amp; BUMN</span>
+        </div>
+    </div>
+</footer>
+<script src="assets/js/events.js"></script>
+</body>
+</html>

@@ -244,13 +244,89 @@ collections:
                   name: "url",
                   widget: "string",
                   required: false,
-                  pattern:
-                    ['^(https?:\/\/.+|\/.*)?$', "URL lengkap / kosongkan"],
+                  pattern: ['^(https?:\/\/.+|\/.*)?$', "URL lengkap / kosongkan"]
                 }
               - {
                   label: "Logo",
                   name: "logo",
                   widget: "image",
                   choose_url: true,
-                  hint: "PNG transparan direkomendasikan",
+                  hint: "PNG transparan direkomendasikan"
+                }
+
+  - name: "events"
+    label: "Jadwal Event"
+    label_singular: "Event"
+    files:
+      - name: "event_schedule"
+        label: "Daftar Jadwal Event"
+        file: "data/events.json"
+        format: "json"
+        description: "Daftar agenda event dan pelatihan pada halaman Jadwal Event."
+        fields:
+          - label: "Daftar Event"
+            name: "entries"
+            widget: "list"
+            summary: "{{fields.badge_label}} -- {{fields.title}}"
+            collapsed: true
+            fields:
+              - { label: "Judul Event", name: "title", widget: "string" }
+              - {
+                  label: "Label Badge",
+                  name: "badge_label",
+                  widget: "string",
+                  default: "Event",
+                  hint: "Teks kecil di atas judul, misal: Workshop, Coaching Clinic."
+                }
+              - {
+                  label: "Tema Warna Badge",
+                  name: "badge",
+                  widget: "select",
+                  options:
+                    [
+                      { label: "Biru (Primary)", value: "primary" },
+                      { label: "Turquoise (Secondary)", value: "secondary" },
+                      { label: "Hijau Kebiruan (Accent)", value: "accent" }
+                    ],
+                  default: "primary"
+                }
+              - {
+                  label: "Deskripsi Singkat",
+                  name: "description",
+                  widget: "text",
+                  hint: "Gambaran ringkas tujuan event."
+                }
+              - label: "Rincian Event"
+                name: "details"
+                widget: "list"
+                collapsed: true
+                summary: "{{fields.icon}} -- {{fields.text}}"
+                fields:
+                  - {
+                      label: "Ikon",
+                      name: "icon",
+                      widget: "select",
+                      options:
+                        [
+                          { label: "Kalender", value: "calendar" },
+                          { label: "Lokasi", value: "location" },
+                          { label: "Peserta", value: "users" },
+                          { label: "Fasilitas", value: "benefit" }
+                        ],
+                      default: "calendar"
+                    }
+                  - { label: "Teks Penjelasan", name: "text", widget: "string" }
+              - {
+                  label: "Tautan Pendaftaran",
+                  name: "link",
+                  widget: "string",
+                  hint: "URL form pendaftaran (mis. Google Form).",
+                  pattern: ['^https?:\/\/.+$', "Masukkan URL lengkap diawali http/https"]
+                }
+              - {
+                  label: "Teks Tombol",
+                  name: "link_label",
+                  widget: "string",
+                  default: "Daftar Sekarang",
+                  required: false
                 }

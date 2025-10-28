@@ -690,7 +690,8 @@
             { key: 'news', label: 'Berita Terkini', path: '../data/news.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'artikel' },
             { key: 'statistics', label: 'Statistik Pembinaan', path: '../data/statistics.json', resolve: (data) => (Array.isArray(data?.cards) ? data.cards.length : 0), suffix: 'kartu' },
             { key: 'testimonials', label: 'Testimoni UMKM', path: '../data/testimonials.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'testimoni' },
-            { key: 'partners', label: 'Mitra & Kolaborator', path: '../data/partners.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'mitra' }
+            { key: 'partners', label: 'Mitra & Kolaborator', path: '../data/partners.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'mitra' },
+            { key: 'events', label: 'Jadwal Event', path: '../data/events.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'event' }
         ];
 
         function renderStats() {
