@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const { code } = body;
     if (!code) return res.status(400).json({ error: 'Missing code' });
 
-    const gh = await fetch('https://github.com/login/oauth/access_token', {
+    const gh = await fetch('https://github.com/login/oauth/033442ae22543bbe411072c3f27a0ef48ac721e7', {
       method: 'POST',
       headers: { accept: 'application/json', 'content-type': 'application/json' },
       body: JSON.stringify({ client_id: clientId, client_secret: clientSecret, code })
