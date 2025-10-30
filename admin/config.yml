@@ -7,10 +7,10 @@ backend:
 
 media_folder: "static/uploads"
 public_folder: "/static/uploads"
-
-publish_mode: simple
+publish_mode: editorial_workflow
 
 collections:
+  # KOLEKSI 1: Berisi beberapa file JSON di /data
   - name: content
     label: "Konten Situs"
     label_singular: "Konten"
@@ -20,7 +20,7 @@ collections:
         label_singular: "Berita"
         file: "data/news.json"
         format: json
-        description: "Daftar berita yang akan ditampilkan pada halaman utama bagian berita."
+        description: "Daftar berita pada beranda."
         fields:
           - label: "Daftar Berita"
             name: entries
@@ -28,18 +28,53 @@ collections:
             summary: "{{fields.tag}} - {{fields.title}}"
             collapsed: true
             fields:
-              - { label: "Judul", name: title, widget: string, hint: "Maksimal 200 karakter.", pattern: ["^.{1,200}$", "Gunakan maksimal 200 karakter"] }
-              - { label: "Kategori / Tag", name: tag, widget: string, hint: "Contoh: Program, Event, Pembinaan" }
-              - { label: "Gambar", name: image, widget: image, allow_multiple: false, choose_url: true, hint: "Ideal 1280x720px" }
-              - { label: "Ringkasan", name: excerpt, widget: text, hint: "1-2 kalimat, maksimal 200 karakter.", pattern: ["^.{1,200}$", "Gunakan maksimal 200 karakter"] }
-              - { label: "Tautan (Opsional)", name: link, widget: string, required: false, hint: "URL penuh atau path relatif", pattern: ["^(https?:\\/\\/.+|\\/.*)?$", "Gunakan URL lengkap atau kosongkan"] }
+              - {
+                  label: "Judul",
+                  name: title,
+                  widget: string,
+                  hint: "Maksimal 200 karakter.",
+                  pattern: ["^.{1,200}$", "Gunakan maksimal 200 karakter"],
+                }
+              - {
+                  label: "Kategori / Tag",
+                  name: tag,
+                  widget: string,
+                  hint: "Contoh: Program, Event, Pembinaan",
+                }
+              - {
+                  label: "Gambar",
+                  name: image,
+                  widget: image,
+                  allow_multiple: false,
+                  choose_url: true,
+                  hint: "Ideal 1280x720px",
+                }
+              - {
+                  label: "Ringkasan",
+                  name: excerpt,
+                  widget: text,
+                  hint: "1-2 kalimat, maksimal 200 karakter.",
+                  pattern: ["^.{1,200}$", "Gunakan maksimal 200 karakter"],
+                }
+              - {
+                  label: "Tautan (Opsional)",
+                  name: link,
+                  widget: string,
+                  required: false,
+                  hint: "URL penuh atau path relatif",
+                  pattern:
+                    [
+                      "^(https?:\\/\\/.+|\\/.*)?$",
+                      "Gunakan URL lengkap atau kosongkan",
+                    ],
+                }
 
       - name: statistics
         label: "Statistik Pembinaan"
         label_singular: "Statistik"
         file: "data/statistics.json"
         format: json
-        description: "Data statistik untuk kartu angka dan grafik capaian pembinaan."
+        description: "Data statistik untuk kartu angka dan grafik."
         fields:
           - label: "Kartu Statistik"
             name: cards
@@ -49,7 +84,13 @@ collections:
             fields:
               - { label: "Label", name: label, widget: string }
               - { label: "Nilai", name: value, widget: number, value_type: int }
-              - { label: "Ikon", name: icon, widget: string, required: false, hint: "URL atau path relatif ikon" }
+              - {
+                  label: "Ikon (opsional)",
+                  name: icon,
+                  widget: string,
+                  required: false,
+                  hint: "Nama ikon/URL",
+                }
           - label: "Data Chart"
             name: charts
             widget: object
@@ -59,8 +100,19 @@ collections:
                 widget: object
                 fields:
                   - { label: "Judul", name: title, widget: string }
-                  - { label: "Warna", name: color, widget: string, default: "#4FC3F7" }
-                  - { label: "Tinggi Chart", name: height, widget: number, default: 320, value_type: int }
+                  - {
+                      label: "Warna",
+                      name: color,
+                      widget: string,
+                      default: "#4FC3F7",
+                    }
+                  - {
+                      label: "Tinggi Chart",
+                      name: height,
+                      widget: number,
+                      default: 320,
+                      value_type: int,
+                    }
                   - label: "Data Tahunan"
                     name: entries
                     widget: list
@@ -68,14 +120,32 @@ collections:
                     collapsed: true
                     fields:
                       - { label: "Tahun", name: tahun, widget: string }
-                      - { label: "Jumlah", name: jumlah, widget: number, value_type: int }
+                      - {
+                          label: "Jumlah",
+                          name: jumlah,
+                          widget: number,
+                          value_type: int,
+                        }
+
               - label: "Go Modern"
                 name: modern
                 widget: object
                 fields:
                   - { label: "Judul", name: title, widget: string }
-                  - { label: "Warna", name: color, widget: color, default: "#A78BFA", allow_input: true }
-                  - { label: "Tinggi Chart", name: height, widget: number, default: 260, value_type: int }
+                  - {
+                      label: "Warna",
+                      name: color,
+                      widget: color,
+                      default: "#A78BFA",
+                      allow_input: true,
+                    }
+                  - {
+                      label: "Tinggi Chart",
+                      name: height,
+                      widget: number,
+                      default: 260,
+                      value_type: int,
+                    }
                   - label: "Data Tahunan"
                     name: entries
                     widget: list
@@ -83,14 +153,32 @@ collections:
                     collapsed: true
                     fields:
                       - { label: "Tahun", name: tahun, widget: string }
-                      - { label: "Jumlah", name: jumlah, widget: number, value_type: int }
+                      - {
+                          label: "Jumlah",
+                          name: jumlah,
+                          widget: number,
+                          value_type: int,
+                        }
+
               - label: "Go Online"
                 name: online
                 widget: object
                 fields:
                   - { label: "Judul", name: title, widget: string }
-                  - { label: "Warna", name: color, widget: color, default: "#34D399", allow_input: true }
-                  - { label: "Tinggi Chart", name: height, widget: number, default: 260, value_type: int }
+                  - {
+                      label: "Warna",
+                      name: color,
+                      widget: color,
+                      default: "#34D399",
+                      allow_input: true,
+                    }
+                  - {
+                      label: "Tinggi Chart",
+                      name: height,
+                      widget: number,
+                      default: 260,
+                      value_type: int,
+                    }
                   - label: "Data Tahunan"
                     name: entries
                     widget: list
@@ -98,7 +186,12 @@ collections:
                     collapsed: true
                     fields:
                       - { label: "Tahun", name: tahun, widget: string }
-                      - { label: "Jumlah", name: jumlah, widget: number, value_type: int }
+                      - {
+                          label: "Jumlah",
+                          name: jumlah,
+                          widget: number,
+                          value_type: int,
+                        }
 
       - name: testimonials
         label: "Apa Kata UMKM Binaan"
@@ -113,16 +206,27 @@ collections:
             summary: "{{fields.name}} - {{fields.role}}"
             collapsed: true
             fields:
-              - { label: "Testimoni", name: quote, widget: text, hint: "Maksimal 280 karakter.", pattern: ["^.{1,280}$", "Gunakan maksimal 280 karakter"] }
+              - {
+                  label: "Testimoni",
+                  name: quote,
+                  widget: text,
+                  hint: "Maksimal 280 karakter.",
+                  pattern: ["^.{1,280}$", "Gunakan maksimal 280 karakter"],
+                }
               - { label: "Nama", name: name, widget: string }
-              - { label: "Peran / Usaha", name: role, widget: string, required: false }
+              - {
+                  label: "Peran / Usaha (opsional)",
+                  name: role,
+                  widget: string,
+                  required: false,
+                }
 
       - name: partners
         label: "Mitra & Kolaborator"
         label_singular: "Mitra"
         file: "data/partners.json"
         format: json
-        description: "Logo mitra yang tampil pada bagian marquee."
+        description: "Logo mitra di bagian marquee."
         fields:
           - label: "Daftar Mitra"
             name: entries
@@ -131,9 +235,26 @@ collections:
             collapsed: true
             fields:
               - { label: "Nama Mitra", name: name, widget: string }
-              - { label: "Tautan (Opsional)", name: url, widget: string, required: false, pattern: ["^(https?:\\/\\/.+|\\/.*)?$", "Gunakan URL lengkap atau kosongkan"] }
-              - { label: "Logo", name: logo, widget: image, choose_url: true, hint: "PNG transparan direkomendasikan" }
+              - {
+                  label: "Tautan (opsional)",
+                  name: url,
+                  widget: string,
+                  required: false,
+                  pattern:
+                    [
+                      "^(https?:\\/\\/.+|\\/.*)?$",
+                      "Gunakan URL lengkap atau kosongkan",
+                    ],
+                }
+              - {
+                  label: "Logo",
+                  name: logo,
+                  widget: image,
+                  choose_url: true,
+                  hint: "PNG transparan direkomendasikan",
+                }
 
+  # KOLEKSI 2: File terpisah untuk Jadwal Event
   - name: events
     label: "Jadwal Event"
     label_singular: "Event"
@@ -142,7 +263,7 @@ collections:
         label: "Daftar Jadwal Event"
         file: "data/events.json"
         format: json
-        description: "Daftar agenda event dan pelatihan pada halaman Jadwal Event."
+        description: "Daftar agenda event & pelatihan."
         fields:
           - label: "Daftar Event"
             name: entries
@@ -151,7 +272,13 @@ collections:
             collapsed: true
             fields:
               - { label: "Judul Event", name: title, widget: string }
-              - { label: "Label Badge", name: badge_label, widget: string, default: "Event", hint: "Misal: Workshop / Coaching Clinic" }
+              - {
+                  label: "Label Badge",
+                  name: badge_label,
+                  widget: string,
+                  default: "Event",
+                  hint: "Misal: Workshop, Coaching Clinic",
+                }
               - label: "Tema Warna Badge"
                 name: badge
                 widget: select
@@ -161,12 +288,40 @@ collections:
                   - { label: "Turquoise (Secondary)", value: "secondary" }
                   - { label: "Hijau Kebiruan (Accent)", value: "accent" }
               - { label: "Deskripsi Singkat", name: description, widget: text }
-              - { label: "Tanggal Acara", name: schedule_date, widget: string, hint: "Contoh: Jumat, 15 November 2025" }
-              - { label: "Waktu Acara", name: schedule_time, widget: string, hint: "Contoh: 09.00 - 15.00 WITA" }
+              - {
+                  label: "Tanggal Acara",
+                  name: schedule_date,
+                  widget: string,
+                  hint: "Contoh: Jumat, 15 November 2025",
+                }
+              - {
+                  label: "Waktu Acara",
+                  name: schedule_time,
+                  widget: string,
+                  hint: "Contoh: 09.00 - 15.00 WITA",
+                }
               - { label: "Lokasi / Platform", name: location, widget: string }
               - label: "Highlight & Fasilitas"
                 name: highlights
                 widget: list
+                summary: "{{fields.item}}"
+                collapsed: true
                 field: { label: "Poin Highlight", name: item, widget: string }
-              - { label: "Tautan Pendaftaran", name: link, widget: string, pattern: ["^https?:\\/\\/.+$", "Masukkan URL lengkap diawali http atau https"] }
-              - { label: "Teks Tombol", name: link_label, widget: string, default: "Daftar Sekarang", required: false }
+              - {
+                  label: "Tautan Pendaftaran",
+                  name: link,
+                  widget: string,
+                  hint: "URL (Google Form, dsb.)",
+                  pattern:
+                    [
+                      "^https?:\\/\\/.+$",
+                      "Masukkan URL lengkap diawali http/https",
+                    ],
+                }
+              - {
+                  label: "Teks Tombol",
+                  name: link_label,
+                  widget: string,
+                  default: "Daftar Sekarang",
+                  required: false,
+                }
