@@ -1,852 +1,452 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="utf-8">
-    <base href="/admin/">
-    <title>Panel Konten | Rumah BUMN Banjarmasin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../assets/png/rumah-bumn.png">
-    <style>
-        :root {
-            color-scheme: light;
-            font-family: 'Manrope', 'Segoe UI', 'Roboto', sans-serif;
-            background: #0f172a;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: radial-gradient(circle at top right, #1ba0db 0%, #195770 35%, #0f172a 70%, #0b1220 100%);
-            color: #f8fafc;
-            display: flex;
-            flex-direction: column;
-        }
-
-        body.cms-active {
-            background: #0f172a;
-            color: inherit;
-        }
-
-        header {
-            padding: clamp(1.25rem, 4vw, 2rem) clamp(1.75rem, 5vw, 4rem);
-        }
-
-        .glass {
-            background: rgba(15, 23, 42, 0.55);
-            border-radius: 24px;
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            backdrop-filter: blur(18px);
-            box-shadow: 0 24px 48px rgba(8, 47, 73, 0.35);
-        }
-
-        .topbar {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: clamp(1.2rem, 3.2vw, 1.8rem);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .brand img {
-            width: clamp(52px, 6vw, 64px);
-            height: clamp(52px, 6vw, 64px);
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 0.35rem;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        .brand span {
-            display: grid;
-            gap: 0.15rem;
-        }
-
-        .brand small {
-            text-transform: uppercase;
-            font-size: 0.68rem;
-            letter-spacing: 0.32em;
-            color: rgba(148, 163, 184, 0.85);
-        }
-
-        .brand strong {
-            font-size: clamp(1.15rem, 3vw, 1.65rem);
-        }
-
-        .topbar-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .topbar-actions a {
-            font-size: 0.82rem;
-            padding: 0.55rem 1.15rem;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: 600;
-            color: rgba(226, 232, 240, 0.85);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            transition: all 0.25s ease;
-        }
-
-        .topbar-actions a:hover {
-            color: #0f172a;
-            background: rgba(226, 232, 240, 0.9);
-        }
-
-        main {
-            flex: 1;
-            padding: 0 clamp(1.75rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4rem);
-        }
-
-        .layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-            gap: clamp(1.75rem, 5vw, 2.5rem);
-            margin-top: 1.5rem;
-        }
-
-        .panel {
-            padding: clamp(1.6rem, 4vw, 2.4rem);
-        }
-
-        .panel h2 {
-            margin: 0 0 1rem;
-            font-size: clamp(1.4rem, 3vw, 1.75rem);
-            letter-spacing: -0.01em;
-        }
-
-        .panel p {
-            margin: 0 0 1rem;
-            color: rgba(226, 232, 240, 0.78);
-            line-height: 1.65;
-            font-size: 0.95rem;
-        }
-
-        .actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            padding: 0.85rem 1.75rem;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            border: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #38bdf8, #1ba0db, #195770);
-            color: #0f172a;
-            box-shadow: 0 16px 32px rgba(14, 165, 233, 0.35);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.42);
-        }
-
-        .btn-ghost {
-            background: rgba(15, 23, 42, 0.45);
-            color: rgba(226, 232, 240, 0.9);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-        }
-
-        .btn-ghost:hover {
-            transform: translateY(-2px);
-            border-color: rgba(148, 163, 184, 0.32);
-        }
-
-        .checklist {
-            display: grid;
-            gap: 0.9rem;
-            margin: 1.5rem 0 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .checklist li {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 0.65rem;
-            align-items: start;
-            font-size: 0.9rem;
-            color: rgba(226, 232, 240, 0.78);
-        }
-
-        .checklist li span {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.4rem;
-            height: 1.4rem;
-            border-radius: 999px;
-            background: rgba(148, 163, 184, 0.2);
-            color: #38bdf8;
-            font-size: 0.85rem;
-            margin-top: 0.1rem;
-        }
-
-        .stat-grid {
-            margin-top: clamp(1.8rem, 4vw, 2.5rem);
-            display: grid;
-            gap: 1rem;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        }
-
-        .stat-chip {
-            background: rgba(15, 23, 42, 0.45);
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            border-radius: 16px;
-            padding: 1.15rem 1.35rem;
-            display: grid;
-            gap: 0.4rem;
-        }
-
-        .stat-chip small {
-            text-transform: uppercase;
-            letter-spacing: 0.32em;
-            font-size: 0.62rem;
-            color: rgba(148, 163, 184, 0.72);
-        }
-
-        .stat-chip strong {
-            font-size: 0.85rem;
-            color: rgba(226, 232, 240, 0.82);
-        }
-
-        .stat-value {
-            font-size: 1.45rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: #38bdf8;
-        }
-
-        @media (max-width: 1024px) {
-            .layout {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 720px) {
-            header {
-                padding: 1.25rem 1.35rem;
-            }
-
-            main {
-                padding: 0 1.35rem 2rem;
-            }
-
-            .topbar {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.25rem;
-            }
-
-            .topbar-actions {
-                flex-wrap: wrap;
-            }
-        }
-
-        #nc-root[hidden] {
-            display: none;
-        }
-    </style>
+  <meta charset="utf-8">
+  <base href="/admin/">
+  <title>Panel Konten | Rumah BUMN Banjarmasin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/png/rumah-bumn.png">
+  <style>
+    :root{
+      color-scheme: light;
+      font-family:'Manrope','Segoe UI','Roboto',sans-serif;
+      background:#0f172a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;
+      background:radial-gradient(circle at top right,#1ba0db 0%,#195770 35%,#0f172a 70%,#0b1220 100%);
+      color:#f8fafc;display:flex;flex-direction:column;
+    }
+    body.cms-active{background:#0f172a;color:inherit}
+    header{padding:clamp(1.25rem,4vw,2rem) clamp(1.75rem,5vw,4rem)}
+    .glass{
+      background:rgba(15,23,42,.55);
+      border-radius:24px;border:1px solid rgba(148,163,184,.16);
+      backdrop-filter:blur(18px);
+      box-shadow:0 24px 48px rgba(8,47,73,.35)
+    }
+    .topbar{width:100%;display:flex;align-items:center;justify-content:space-between;padding:clamp(1.2rem,3.2vw,1.8rem)}
+    .brand{display:flex;align-items:center;gap:1rem}
+    .brand img{width:clamp(52px,6vw,64px);height:clamp(52px,6vw,64px);border-radius:18px;background:rgba(255,255,255,.08);padding:.35rem;border:1px solid rgba(255,255,255,.12)}
+    .brand span{display:grid;gap:.15rem}
+    .brand small{text-transform:uppercase;font-size:.68rem;letter-spacing:.32em;color:rgba(148,163,184,.85)}
+    .brand strong{font-size:clamp(1.15rem,3vw,1.65rem)}
+    .topbar-actions{display:flex;align-items:center;gap:.8rem}
+    .topbar-actions a{font-size:.82rem;padding:.55rem 1.15rem;border-radius:999px;text-decoration:none;font-weight:600;color:rgba(226,232,240,.85);border:1px solid rgba(148,163,184,.18);transition:all .25s ease}
+    .topbar-actions a:hover{color:#0f172a;background:rgba(226,232,240,.9)}
+    main{flex:1;padding:0 clamp(1.75rem,5vw,4rem) clamp(2.5rem,6vw,4rem)}
+    .layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(1.75rem,5vw,2.5rem);margin-top:1.5rem}
+    .panel{padding:clamp(1.6rem,4vw,2.4rem)}
+    .panel h2{margin:0 0 1rem;font-size:clamp(1.4rem,3vw,1.75rem);letter-spacing:-.01em}
+    .panel p{margin:0 0 1rem;color:rgba(226,232,240,.78);line-height:1.65;font-size:.95rem}
+    .actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.85rem 1.75rem;border-radius:16px;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .2s ease,box-shadow .2s ease}
+    .btn-primary{background:linear-gradient(135deg,#38bdf8,#1ba0db,#195770);color:#0f172a;box-shadow:0 16px 32px rgba(14,165,233,.35)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 40px rgba(14,165,233,.42)}
+    .btn-ghost{background:rgba(15,23,42,.45);color:rgba(226,232,240,.9);border:1px solid rgba(148,163,184,.18)}
+    .btn-ghost:hover{transform:translateY(-2px);border-color:rgba(148,163,184,.32)}
+    .checklist{display:grid;gap:.9rem;margin:1.5rem 0 0;padding:0;list-style:none}
+    .checklist li{display:grid;grid-template-columns:auto 1fr;gap:.65rem;align-items:start;font-size:.9rem;color:rgba(226,232,240,.78)}
+    .checklist li span{display:inline-flex;align-items:center;justify-content:center;width:1.4rem;height:1.4rem;border-radius:999px;background:rgba(148,163,184,.2);color:#38bdf8;font-size:.85rem;margin-top:.1rem}
+    .stat-grid{margin-top:clamp(1.8rem,4vw,2.5rem);display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .stat-chip{background:rgba(15,23,42,.45);border:1px solid rgba(148,163,184,.16);border-radius:16px;padding:1.15rem 1.35rem;display:grid;gap:.4rem}
+    .stat-chip small{text-transform:uppercase;letter-spacing:.32em;font-size:.62rem;color:rgba(148,163,184,.72)}
+    .stat-chip strong{font-size:.85rem;color:rgba(226,232,240,.82)}
+    .stat-value{font-size:1.45rem;font-weight:700;letter-spacing:-.02em;color:#38bdf8}
+    @media (max-width:1024px){.layout{grid-template-columns:1fr}}
+    @media (max-width:720px){
+      header{padding:1.25rem 1.35rem}
+      main{padding:0 1.35rem 2rem}
+      .topbar{flex-direction:column;align-items:flex-start;gap:1.25rem}
+      .topbar-actions{flex-wrap:wrap}
+    }
+    #nc-root[hidden]{display:none}
+  </style>
 </head>
 <body>
 <header>
-    <div class="glass topbar">
-        <div class="brand">
-            <img src="../assets/png/rumah-bumn.png" alt="Rumah BUMN">
-            <span>
-                <small>Dashboard Konten</small>
-                <strong>Rumah BUMN Banjarmasin</strong>
-            </span>
-        </div>
-        <div class="topbar-actions">
-            <a href="../index.html" target="_blank" rel="noopener">Lihat Halaman Utama</a>
-            <a href="mailto:rumahbumnbanjarmasinkalsel@gmail.com" target="_blank" rel="noopener">Bantuan Tim</a>
-        </div>
+  <div class="glass topbar">
+    <div class="brand">
+      <img src="../assets/png/rumah-bumn.png" alt="Rumah BUMN">
+      <span>
+        <small>Dashboard Konten</small>
+        <strong>Rumah BUMN Banjarmasin</strong>
+      </span>
     </div>
+    <div class="topbar-actions">
+      <a href="../index.html" target="_blank" rel="noopener noreferrer">Lihat Halaman Utama</a>
+      <a href="mailto:rumahbumnbanjarmasinkalsel@gmail.com" target="_blank" rel="noopener noreferrer">Bantuan Tim</a>
+    </div>
+  </div>
 </header>
 
 <main>
-    <div class="layout">
-        <section class="glass panel">
-            <h2>Selamat datang, Tim Konten!</h2>
-            <p>Klik tombol di bawah untuk membuka editor visual Decap CMS. Semua perubahan yang disimpan akan otomatis
-                dikirim ke repositori dan terpublikasi di situs.</p>
-            <div class="actions">
-                <button id="open-cms" class="btn btn-primary" type="button">
-                    Buka Editor Konten
-                </button>
-                <a class="btn btn-ghost" href="https://decapcms.org/docs/intro/" target="_blank" rel="noopener">
-                    Panduan Decap CMS
-                </a>
-            </div>
+  <div class="layout">
+    <section class="glass panel">
+      <h2>Selamat datang, Tim Konten!</h2>
+      <p>Klik tombol di bawah untuk membuka editor visual Decap CMS. Semua perubahan yang disimpan akan otomatis
+        dikirim ke repositori dan terpublikasi di situs.</p>
+      <div class="actions">
+        <button id="open-cms" class="btn btn-primary" type="button" aria-label="Buka editor konten">
+          Buka Editor Konten
+        </button>
+        <a class="btn btn-ghost" href="https://decapcms.org/docs/intro/" target="_blank" rel="noopener noreferrer">
+          Panduan Decap CMS
+        </a>
+      </div>
 
-            <ul class="checklist">
-                <li>
-                    <span>1</span>
-                    Pastikan sudah login GitHub saat pop-up otorisasi muncul.
-                </li>
-                <li>
-                    <span>2</span>
-                    Gunakan tombol <strong>Save</strong> untuk menyimpan draft, dan <strong>Publish</strong> untuk menerbitkan ke situs.
-                </li>
-                <li>
-                    <span>3</span>
-                    Jika mencoba secara lokal, jalankan <code>npx decap-server</code> sebelum membuka dashboard.
-                </li>
-            </ul>
+      <ul class="checklist">
+        <li><span>1</span> Pastikan sudah login GitHub saat pop-up otorisasi muncul.</li>
+        <li><span>2</span> Gunakan tombol <strong>Save</strong> untuk menyimpan draft, dan <strong>Publish</strong> untuk menerbitkan ke situs.</li>
+        <li><span>3</span> Jika mencoba secara lokal, jalankan <code>npx decap-server</code> sebelum membuka dashboard.</li>
+      </ul>
 
-            <div class="stat-grid" id="dataset-stats">
-                <div class="stat-chip">
-                    <span>
-                        <small>Memuat</small>
-                        <strong>Memuat dataset...</strong>
-                    </span>
-                    <div class="stat-value">...</div>
-                </div>
-            </div>
-        </section>
+      <div class="stat-grid" id="dataset-stats">
+        <div class="stat-chip">
+          <span>
+            <small>Memuat</small>
+            <strong>Memuat dataset...</strong>
+          </span>
+          <div class="stat-value">...</div>
+        </div>
+      </div>
+    </section>
 
-        <section class="glass panel">
-            <h2>Panduan Koleksi Konten</h2>
-            <p>Berikut kategori konten yang dapat Anda kelola. Gunakan editor visual untuk menambah, mengubah, atau menghapus data.</p>
-            <ul class="checklist">
-                <li>
-                    <span>BR</span>
-                    <strong>Berita Terkini</strong> — atur kartu berita pada beranda lengkap dengan gambar hero dan tautan.
-                </li>
-                <li>
-                    <span>ST</span>
-                    <strong>Statistik Pembinaan</strong> — update angka UMKM serta grafik transformasi digital.
-                </li>
-                <li>
-                    <span>TS</span>
-                    <strong>Testimoni UMKM</strong> — masukkan kutipan singkat dan profil pelaku usaha binaan.
-                </li>
-                <li>
-                    <span>MT</span>
-                    <strong>Mitra & Kolaborator</strong> — unggah atau ubah logo, beserta tautan resmi mitra.
-                </li>
-                <li>
-                    <span>EV</span>
-                    <strong>Jadwal Event</strong> — kelola detail agenda pelatihan, talkshow, dan coaching clinic.
-                </li>
-            </ul>
-        </section>
-    </div>
+    <section class="glass panel">
+      <h2>Panduan Koleksi Konten</h2>
+      <p>Berikut kategori konten yang dapat Anda kelola. Gunakan editor visual untuk menambah, mengubah, atau menghapus data.</p>
+      <ul class="checklist">
+        <li><span>BR</span> <strong>Berita Terkini</strong> - atur kartu berita pada beranda lengkap dengan gambar hero dan tautan.</li>
+        <li><span>ST</span> <strong>Statistik Pembinaan</strong> - update angka UMKM serta grafik transformasi digital.</li>
+        <li><span>TS</span> <strong>Testimoni UMKM</strong> - masukkan kutipan singkat dan profil pelaku usaha binaan.</li>
+        <li><span>MT</span> <strong>Mitra & Kolaborator</strong> - unggah atau ubah logo, beserta tautan resmi mitra.</li>
+        <li><span>EV</span> <strong>Jadwal Event</strong> - kelola detail agenda pelatihan, talkshow, dan coaching clinic.</li>
+      </ul>
+    </section>
+  </div>
 </main>
 
 <div id="nc-root" hidden></div>
 
 <script>
-    window.CMS_MANUAL_INIT = true;
+  // Manual init agar CMS tidak langsung mengambil alih halaman
+  window.CMS_MANUAL_INIT = true;
 </script>
 <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
 <script>
-    const body = document.body;
-    const cmsRoot = document.getElementById('nc-root');
-    const openCmsButton = document.getElementById('open-cms');
-    const datasetStats = document.getElementById('dataset-stats');
+  const body = document.body;
+  const cmsRoot = document.getElementById('nc-root');
+  const openCmsButton = document.getElementById('open-cms');
+  const datasetStats = document.getElementById('dataset-stats');
 
-    let cmsHasStarted = false;
-    let cmsConfigured = false;
+  let cmsHasStarted = false;
+  let cmsConfigured = false;
 
-    function configureCMS() {
-        if (cmsConfigured || !window.CMS) return;
-        cmsConfigured = true;
+  function configureCMS(){
+    if (cmsConfigured || !window.CMS) return;
 
-        const { CMS } = window;
-        const { h, createClass } = window;
+    // Fallback aman untuk API preview
+    const CMS = window.CMS;
+    const h = window.h || (CMS && CMS.h);
+    const createClass = window.createClass || (CMS && CMS.createClass);
 
-        CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap');
-        CMS.registerPreviewStyle(`
-            :root { color-scheme: light; font-family: 'Manrope', system-ui, sans-serif; background: #f5f7fb; }
-            body {
-                margin: 0;
-                background: #f5f7fb;
-                color: #0f172a;
-                padding: 2.5rem clamp(1.75rem, 5vw, 4rem);
-                min-height: 100vh;
-            }
-            .preview-heading {
-                font-size: 1.6rem;
-                font-weight: 700;
-                margin-bottom: 1.5rem;
-                color: #0f172a;
-            }
-            .preview-grid {
-                display: grid;
-                gap: 1.5rem;
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            }
-            .preview-card,
-            .event-card {
-                background: #ffffff;
-                border-radius: 20px;
-                border: 1px solid rgba(148, 163, 184, 0.18);
-                padding: 1.6rem;
-                box-shadow: 0 24px 45px -22px rgba(15, 23, 42, 0.25);
-            }
-            .preview-card h3 {
-                margin: 0 0 0.75rem;
-                font-size: 1.1rem;
-                color: #0f172a;
-            }
-            .preview-card p {
-                margin: 0;
-                color: #475569;
-                line-height: 1.6;
-                font-size: 0.92rem;
-            }
-            .preview-tag {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.35rem;
-                padding: 0.35rem 0.75rem;
-                border-radius: 999px;
-                font-size: 0.75rem;
-                font-weight: 600;
-                background: rgba(56, 189, 248, 0.18);
-                color: #0ea5e9;
-                margin-bottom: 0.9rem;
-            }
-            .preview-table {
-                width: 100%;
-                border-collapse: collapse;
-                background: #ffffff;
-                border-radius: 20px;
-                overflow: hidden;
-                box-shadow: 0 24px 45px -20px rgba(15, 23, 42, 0.2);
-            }
-            .preview-table th,
-            .preview-table td {
-                padding: 0.85rem 1rem;
-                border-bottom: 1px solid rgba(15, 118, 180, 0.08);
-                text-align: left;
-                font-size: 0.88rem;
-            }
-            .preview-table th {
-                background: rgba(14, 165, 233, 0.12);
-                font-weight: 700;
-                color: #0369a1;
-            }
-            .quote {
-                font-size: 1.05rem;
-                line-height: 1.7;
-                color: #1f2937;
-            }
-            .quote::before,
-            .quote::after { content: '"'; color: #0ea5e9; }
-            .author {
-                margin-top: 0.75rem;
-                font-weight: 600;
-                color: #0f172a;
-            }
-            .author small {
-                display: block;
-                font-weight: 500;
-                margin-top: 0.15rem;
-                color: #64748b;
-            }
-            .partner-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1rem;
-            }
-            .partner-item {
-                background: #ffffff;
-                border-radius: 16px;
-                border: 1px solid rgba(148, 163, 184, 0.18);
-                padding: 1.25rem;
-                display: grid;
-                gap: 0.55rem;
-                justify-items: center;
-                text-align: center;
-            }
-            .partner-item strong {
-                font-size: 0.95rem;
-                color: #0f172a;
-            }
-            .partner-item span {
-                font-size: 0.78rem;
-                color: #64748b;
-            }
-            .event-preview-grid {
-                display: grid;
-                gap: 1.5rem;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-            .event-card {
-                display: flex;
-                flex-direction: column;
-                gap: 1.25rem;
-            }
-            .event-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.35rem;
-                font-size: 0.75rem;
-                font-weight: 600;
-                border-radius: 999px;
-                padding: 0.35rem 0.85rem;
-                text-transform: uppercase;
-                letter-spacing: 0.12em;
-            }
-            .event-badge--primary { background: rgba(25, 87, 112, 0.12); color: #195770; }
-            .event-badge--secondary { background: rgba(27, 160, 219, 0.15); color: #0c87ba; }
-            .event-badge--accent { background: rgba(15, 143, 171, 0.15); color: #0f8fab; }
-            .event-card__title {
-                margin: 0;
-                font-size: 1.3rem;
-                font-weight: 700;
-                color: #0f172a;
-                letter-spacing: -0.01em;
-            }
-            .event-card__desc {
-                margin: 0;
-                color: #475569;
-                line-height: 1.65;
-                font-size: 0.92rem;
-            }
-            .event-meta {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-                display: grid;
-                gap: 0.8rem;
-            }
-            .event-meta__item {
-                display: flex;
-                gap: 0.75rem;
-                align-items: flex-start;
-                font-size: 0.92rem;
-                color: #475569;
-            }
-            .event-meta__icon {
-                width: 1.6rem;
-                height: 1.6rem;
-                border-radius: 999px;
-                background: rgba(14, 165, 233, 0.12);
-                color: #0284c7;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 0.95rem;
-                flex-shrink: 0;
-                margin-top: 0.1rem;
-            }
-            .event-meta__empty {
-                font-size: 0.85rem;
-                color: #94a3b8;
-            }
-            .event-card__cta {
-                margin-top: auto;
-                display: grid;
-                gap: 0.35rem;
-            }
-            .event-card__button {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.4rem;
-                padding: 0.55rem 1.4rem;
-                border-radius: 999px;
-                background: linear-gradient(135deg, #1ba0db, #195770);
-                color: #ffffff;
-                font-weight: 600;
-                font-size: 0.85rem;
-            }
-            .event-card__link-note {
-                font-size: 0.78rem;
-                color: #94a3b8;
-                word-break: break-word;
-            }
-            .event-card__link-note--warning {
-                color: #ef4444;
-            }
-        `, { raw: true });
+    if (!h || !createClass){
+      console.warn('Preview API belum siap. Pastikan decap-cms termuat.');
+      return;
+    }
 
-        const getList = (entry, path) => {
-            const value = entry.getIn(path);
-            return value ? value.toJS() : [];
-        };
+    cmsConfigured = true;
 
-        const getBadgeClass = (badge) => {
-            switch (badge) {
-                case 'secondary':
-                    return 'event-badge event-badge--secondary';
-                case 'accent':
-                    return 'event-badge event-badge--accent';
-                default:
-                    return 'event-badge event-badge--primary';
-            }
-        };
+    CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap');
+    CMS.registerPreviewStyle(`
+      :root { color-scheme: light; font-family: 'Manrope', system-ui, sans-serif; background: #f5f7fb; }
+      body { margin: 0; background: #f5f7fb; color: #0f172a; padding: 2.5rem clamp(1.75rem, 5vw, 4rem); min-height: 100vh; }
+      .preview-heading { font-size: 1.6rem; font-weight: 700; margin-bottom: 1.5rem; color: #0f172a; }
+      .preview-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+      .preview-card, .event-card { background: #ffffff; border-radius: 20px; border: 1px solid rgba(148,163,184,.18); padding: 1.6rem; box-shadow: 0 24px 45px -22px rgba(15,23,42,.25); }
+      .preview-card h3 { margin: 0 0 .75rem; font-size: 1.1rem; color: #0f172a; }
+      .preview-card p { margin: 0; color: #475569; line-height: 1.6; font-size: .92rem; }
+      .preview-tag { display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .75rem; border-radius: 999px; font-size: .75rem; font-weight: 600; background: rgba(56,189,248,.18); color: #0ea5e9; margin-bottom: .9rem; }
+      .preview-table { width:100%; border-collapse: collapse; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 45px -20px rgba(15,23,42,.2); }
+      .preview-table th, .preview-table td { padding: .85rem 1rem; border-bottom: 1px solid rgba(15,118,180,.08); text-align: left; font-size: .88rem; }
+      .preview-table th { background: rgba(14,165,233,.12); font-weight: 700; color: #0369a1; }
+      .quote { font-size: 1.05rem; line-height: 1.7; color: #1f2937; }
+      .quote::before, .quote::after { content: '"'; color: #0ea5e9; }
+      .author { margin-top: .75rem; font-weight: 600; color: #0f172a; }
+      .author small { display: block; font-weight: 500; margin-top: .15rem; color: #64748b; }
+      .partner-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
+      .partner-item { background:#fff; border-radius:16px; border:1px solid rgba(148,163,184,.18); padding:1.25rem; display:grid; gap:.55rem; justify-items:center; text-align:center; }
+      .partner-item strong { font-size:.95rem; color:#0f172a; }
+      .partner-item span { font-size:.78rem; color:#64748b; }
+      .event-preview-grid { display:grid; gap:1.5rem; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); }
+      .event-card { display:flex; flex-direction:column; gap:1.25rem; }
+      .event-badge { display:inline-flex; align-items:center; gap:.35rem; font-size:.75rem; font-weight:600; border-radius:999px; padding:.35rem .85rem; text-transform:uppercase; letter-spacing:.12em; }
+      .event-badge--primary{ background:rgba(25,87,112,.12); color:#195770; }
+      .event-badge--secondary{ background:rgba(27,160,219,.15); color:#0c87ba; }
+      .event-badge--accent{ background:rgba(15,143,171,.15); color:#0f8fab; }
+      .event-card__title{ margin:0; font-size:1.3rem; font-weight:700; color:#0f172a; letter-spacing:-.01em; }
+      .event-card__desc{ margin:0; color:#475569; line-height:1.65; font-size:.92rem; }
+      .event-meta{ list-style:none; margin:0; padding:0; display:grid; gap:.8rem; }
+      .event-meta__item{ display:flex; gap:.75rem; align-items:flex-start; font-size:.92rem; color:#475569; }
+      .event-meta__icon{ width:1.6rem; height:1.6rem; border-radius:999px; background:rgba(14,165,233,.12); color:#0284c7; display:inline-flex; align-items:center; justify-content:center; font-size:.95rem; flex-shrink:0; margin-top:.1rem; }
+      .event-meta__empty{ font-size:.85rem; color:#94a3b8; }
+      .event-card__cta{ margin-top:auto; display:grid; gap:.35rem; }
+      .event-card__button{ display:inline-flex; align-items:center; justify-content:center; gap:.4rem; padding:.55rem 1.4rem; border-radius:999px; background:linear-gradient(135deg,#1ba0db,#195770); color:#fff; font-weight:600; font-size:.85rem; }
+      .event-card__link-note{ font-size:.78rem; color:#94a3b8; word-break:break-word; }
+      .event-card__link-note--warning{ color:#ef4444; }
+    `, { raw: true });
 
-        const iconEmojiMap = {
-            calendar: '[Tanggal]',
-            clock: '[Waktu]',
-            location: '[Lokasi]',
-            check: '[Info]'
-        };
+    const getList = (entry, path) => {
+      const v = entry && entry.getIn(path);
+      return v ? v.toJS() : [];
+    };
 
-        const buildEventMeta = (item) => {
-            const meta = [];
-            if (item?.schedule_date) meta.push({ icon: 'calendar', text: item.schedule_date });
-            if (item?.schedule_time) meta.push({ icon: 'clock', text: item.schedule_time });
-            if (item?.location) meta.push({ icon: 'location', text: item.location });
-            if (Array.isArray(item?.highlights)) {
-                item.highlights.forEach((highlight) => {
-                    if (highlight) meta.push({ icon: 'check', text: highlight });
-                });
-            } else if (Array.isArray(item?.details)) {
-                item.details.forEach((legacy) => {
-                    if (legacy?.text) meta.push({ icon: legacy.icon || 'check', text: legacy.text });
-                });
-            }
-            return meta;
-        };
+    const getBadgeClass = (badge) => {
+      switch (badge){
+        case 'secondary': return 'event-badge event-badge--secondary';
+        case 'accent': return 'event-badge event-badge--accent';
+        default: return 'event-badge event-badge--primary';
+      }
+    };
 
-        const NewsPreview = createClass({
-            render() {
-                const entries = getList(this.props.entry, ['data', 'entries']);
-                return h('div', {},
-                    h('div', { className: 'preview-heading' }, 'Pratinjau Berita'),
-                    h('div', { className: 'preview-grid' },
-                        entries.length
-                            ? entries.map((item, idx) =>
-                                h('article', { key: idx, className: 'preview-card' },
-                                    item.tag ? h('div', { className: 'preview-tag' }, item.tag) : null,
-                                    h('h3', {}, item.title || 'Judul Berita'),
-                                    h('p', {}, item.excerpt || 'Ringkasan singkat akan tampil di sini.'),
-                                    item.link ? h('p', { style: { marginTop: '0.85rem', fontSize: '0.8rem', color: '#0ea5e9' } }, \`Tautan: \${item.link}\`) : null
-                                )
-                            )
-                            : h('p', {}, 'Belum ada berita.')
-                    )
-                );
-            }
+    const iconEmojiMap = { calendar:'[Tanggal]', clock:'[Waktu]', location:'[Lokasi]', check:'[Info]' };
+
+    const buildEventMeta = (item) => {
+      if (!item) return [];
+      const meta = [];
+      if (item.schedule_date) meta.push({ icon:'calendar', text:item.schedule_date });
+      if (item.schedule_time) meta.push({ icon:'clock', text:item.schedule_time });
+      if (item.location) meta.push({ icon:'location', text:item.location });
+      if (Array.isArray(item.highlights)){
+        item.highlights.forEach(t => { if (t) meta.push({ icon:'check', text:t }); });
+      } else if (Array.isArray(item.details)){
+        item.details.forEach(legacy => {
+          if (legacy && legacy.text) meta.push({ icon: legacy.icon || 'check', text: legacy.text });
         });
+      }
+      return meta;
+    };
 
-        const TestimonialsPreview = createClass({
-            render() {
-                const entries = getList(this.props.entry, ['data', 'entries']);
-                return h('div', {},
-                    h('div', { className: 'preview-heading' }, 'Pratinjau Testimoni'),
-                    h('div', { className: 'preview-grid' },
-                        entries.length
-                            ? entries.map((item, idx) =>
-                                h('article', { key: idx, className: 'preview-card' },
-                                    h('p', { className: 'quote' }, item.quote || 'Testimoni singkat UMKM.'),
-                                    h('p', { className: 'author' },
-                                        item.name || 'Nama UMKM',
-                                        item.role ? h('small', {}, item.role) : null
-                                    )
-                                )
-                            )
-                            : h('p', {}, 'Belum ada testimoni.')
+    const NewsPreview = createClass({
+      render(){
+        const entries = getList(this.props.entry, ['data','entries']);
+        return h('div',{},
+          h('div',{className:'preview-heading'},'Pratinjau Berita'),
+          h('div',{className:'preview-grid'},
+            entries.length
+              ? entries.map((item,idx)=>
+                  h('article',{key:idx,className:'preview-card'},
+                    item.tag && h('div',{className:'preview-tag'},item.tag),
+                    h('h3',{}, item.title || 'Judul Berita'),
+                    h('p',{}, item.excerpt || 'Ringkasan singkat akan tampil di sini.'),
+                    item.link && h('p',{style:{marginTop:'.85rem',fontSize:'.8rem',color:'#0ea5e9'}}, `Tautan: ${item.link}`)
+                  )
+                )
+              : h('p',{},'Belum ada berita.')
+          )
+        );
+      }
+    });
+
+    const TestimonialsPreview = createClass({
+      render(){
+        const entries = getList(this.props.entry, ['data','entries']);
+        return h('div',{},
+          h('div',{className:'preview-heading'},'Pratinjau Testimoni'),
+          h('div',{className:'preview-grid'},
+            entries.length
+              ? entries.map((item,idx)=>
+                  h('article',{key:idx,className:'preview-card'},
+                    h('p',{className:'quote'}, item.quote || 'Testimoni singkat UMKM.'),
+                    h('p',{className:'author'},
+                      item.name || 'Nama UMKM',
+                      item.role && h('small',{}, item.role)
                     )
-                );
-            }
-        });
+                  )
+                )
+              : h('p',{},'Belum ada testimoni.')
+          )
+        );
+      }
+    });
 
-        const PartnersPreview = createClass({
-            render() {
-                const entries = getList(this.props.entry, ['data', 'entries']);
-                return h('div', {},
-                    h('div', { className: 'preview-heading' }, 'Pratinjau Mitra'),
-                    h('div', { className: 'partner-grid' },
-                        entries.length
-                            ? entries.map((item, idx) =>
-                                h('div', { key: idx, className: 'partner-item' },
-                                    h('strong', {}, item.name || 'Nama Mitra'),
-                                    item.url ? h('span', {}, item.url) : h('span', {}, 'Tidak ada tautan'),
-                                    item.logo ? h('span', { style: { fontSize: '0.75rem', color: '#0ea5e9' } }, 'Logo terlampir') : h('span', {}, 'Logo belum diatur')
-                                )
-                            )
-                            : h('p', {}, 'Belum ada mitra.')
+    const PartnersPreview = createClass({
+      render(){
+        const entries = getList(this.props.entry, ['data','entries']);
+        return h('div',{},
+          h('div',{className:'preview-heading'},'Pratinjau Mitra'),
+          h('div',{className:'partner-grid'},
+            entries.length
+              ? entries.map((item,idx)=>
+                  h('div',{key:idx,className:'partner-item'},
+                    h('strong',{}, item.name || 'Nama Mitra'),
+                    h('span',{}, item.url || 'Tidak ada tautan'),
+                    h('span',{style:{fontSize:'.75rem',color:item.logo?'#0ea5e9':'#64748b'}},
+                      item.logo ? 'Logo terlampir' : 'Logo belum diatur'
                     )
-                );
-            }
-        });
+                  )
+                )
+              : h('p',{},'Belum ada mitra.')
+          )
+        );
+      }
+    });
 
-        const StatisticsPreview = createClass({
-            render() {
-                const cards = getList(this.props.entry, ['data', 'cards']);
-                const charts = this.props.entry.getIn(['data', 'charts']);
-                const chartData = charts ? charts.toJS() : {};
-
-                return h('div', {},
-                    h('div', { className: 'preview-heading' }, 'Pratinjau Statistik'),
-                    h('div', { className: 'preview-grid' },
-                        h('div', { className: 'preview-card', style: { gridColumn: '1 / -1' } },
-                            h('h3', {}, 'Kartu Statistik'),
-                            cards.length
-                                ? h('div', { className: 'preview-grid', style: { marginTop: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(220px,1fr))' } },
-                                    cards.map((item, idx) =>
-                                        h('div', { key: idx, className: 'preview-card', style: { boxShadow: 'none', borderRadius: '14px', border: '1px solid rgba(14,165,233,0.12)' } },
-                                            h('span', { className: 'preview-tag', style: { marginBottom: '0.6rem' } }, item.label || 'Label'),
-                                            h('p', { style: { fontSize: '1.6rem', fontWeight: 700, color: '#0ea5e9' } }, Number(item.value ?? 0).toLocaleString('id-ID')),
-                                            item.icon ? h('p', { style: { fontSize: '0.76rem', color: '#64748b', marginTop: '0.4rem' } }, \`Ikon: \${item.icon}\`) : null
-                                        )
-                                    )
-                                )
-                                : h('p', {}, 'Belum ada kartu statistik.')
-                        )
-                    ),
-                    h('table', { className: 'preview-table', style: { marginTop: '2rem' } },
-                        h('thead', {},
-                            h('tr', {},
-                                h('th', {}, 'Chart'),
-                                h('th', {}, 'Judul'),
-                                h('th', {}, 'Data Poin')
-                            )
+    const StatisticsPreview = createClass({
+      render(){
+        const cards = getList(this.props.entry, ['data','cards']);
+        const charts = this.props.entry.getIn(['data','charts']);
+        const chartData = charts ? charts.toJS() : {};
+        return h('div',{},
+          h('div',{className:'preview-heading'},'Pratinjau Statistik'),
+          h('div',{className:'preview-grid'},
+            h('div',{className:'preview-card',style:{gridColumn:'1 / -1'}},
+              h('h3',{},'Kartu Statistik'),
+              cards.length
+                ? h('div',{className:'preview-grid',style:{marginTop:'1rem',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))'}},
+                    cards.map((item,idx)=>
+                      h('div',{key:idx,className:'preview-card',style:{boxShadow:'none',borderRadius:'14px',border:'1px solid rgba(14,165,233,.12)'}},
+                        h('span',{className:'preview-tag',style:{marginBottom:'.6rem'}}, item.label || 'Label'),
+                        h('p',{style:{fontSize:'1.6rem',fontWeight:700,color:'#0ea5e9'}},
+                          Number(item && item.value ? item.value : 0).toLocaleString('id-ID')
                         ),
-                        h('tbody', {},
-                            ['digital', 'modern', 'online'].map((key) => {
-                                const chart = chartData[key] || {};
-                                const entries = chart.entries || [];
-                                return h('tr', { key },
-                                    h('td', {}, key.charAt(0).toUpperCase() + key.slice(1)),
-                                    h('td', {}, chart.title || 'Belum diatur'),
-                                    h('td', {}, entries.length ? \`\${entries.length} data\` : '0 data')
-                                );
-                            })
-                        )
+                        item && item.icon && h('p',{style:{fontSize:'.76rem',color:'#64748b',marginTop:'.4rem'}}, `Ikon: ${item.icon}`)
+                      )
                     )
+                  )
+                : h('p',{},'Belum ada kartu statistik.')
+            )
+          ),
+          h('table',{className:'preview-table',style:{marginTop:'2rem'}},
+            h('thead',{}, h('tr',{}, h('th',{},'Chart'), h('th',{},'Judul'), h('th',{},'Data Poin'))),
+            h('tbody',{},
+              ['digital','modern','online'].map((key)=>{
+                const chart = chartData[key] || {};
+                const entries = chart.entries || [];
+                return h('tr',{key},
+                  h('td',{}, key.charAt(0).toUpperCase()+key.slice(1)),
+                  h('td',{}, chart.title || 'Belum diatur'),
+                  h('td',{}, entries.length ? `${entries.length} data` : '0 data')
                 );
-            }
-        });
+              })
+            )
+          )
+        );
+      }
+    });
 
-        const EventsPreview = createClass({
-            render() {
-                const entries = getList(this.props.entry, ['data', 'entries']);
-                const cards = entries.length
-                    ? entries.map((item, idx) => {
-                        const meta = buildEventMeta(item);
-                        return h('article', { key: idx, className: 'event-card' },
-                            h('span', { className: getBadgeClass(item.badge) }, item.badge_label || item.badge || 'Event'),
-                            h('h2', { className: 'event-card__title' }, item.title || 'Judul Event'),
-                            item.description ? h('p', { className: 'event-card__desc' }, item.description) : null,
-                            meta.length
-                                ? h('ul', { className: 'event-meta' },
-                                    meta.map((detail, detailIdx) =>
-                                        h('li', { key: detailIdx, className: 'event-meta__item' },
-                                            h('span', { className: 'event-meta__icon' }, iconEmojiMap[detail.icon] || '•'),
-                                            h('span', { className: 'event-meta__text' }, detail.text || '')
-                                        )
-                                    )
-                                )
-                                : h('p', { className: 'event-meta__empty' }, 'Detail event belum diatur.'),
-                            h('div', { className: 'event-card__cta' },
-                                h('span', { className: 'event-card__button' }, item.link_label || 'Daftar Sekarang'),
-                                item.link
-                                    ? h('span', { className: 'event-card__link-note' }, item.link)
-                                    : h('span', { className: 'event-card__link-note event-card__link-note--warning' }, 'Tautan pendaftaran belum diisi')
-                            )
-                        );
-                    })
-                    : h('p', { className: 'event-meta__empty' }, 'Belum ada jadwal event.');
+    const EventsPreview = createClass({
+      render(){
+        const entries = getList(this.props.entry, ['data','entries']);
+        const cards = entries.length
+          ? entries.map((item,idx)=>{
+              const meta = buildEventMeta(item);
+              return h('article',{key:idx,className:'event-card'},
+                h('span',{className:getBadgeClass(item.badge)}, item.badge_label || item.badge || 'Event'),
+                h('h2',{className:'event-card__title'}, item.title || 'Judul Event'),
+                item.description && h('p',{className:'event-card__desc'}, item.description),
+                meta.length
+                  ? h('ul',{className:'event-meta'},
+                      meta.map((detail,i)=>
+                        h('li',{key:i,className:'event-meta__item'},
+                          h('span',{className:'event-meta__icon'}, iconEmojiMap[detail.icon] || '[Info]'),
+                          h('span',{className:'event-meta__text'}, detail.text || '')
+                        )
+                      )
+                    )
+                  : h('p',{className:'event-meta__empty'},'Detail event belum diatur.'),
+                h('div',{className:'event-card__cta'},
+                  h('span',{className:'event-card__button'}, item.link_label || 'Daftar Sekarang'),
+                  item.link
+                    ? h('span',{className:'event-card__link-note'}, item.link)
+                    : h('span',{className:'event-card__link-note event-card__link-note--warning'}, 'Tautan pendaftaran belum diisi')
+                )
+              );
+            })
+          : h('p',{className:'event-meta__empty'},'Belum ada jadwal event.');
 
-                return h('div', {},
-                    h('div', { className: 'preview-heading' }, 'Pratinjau Jadwal Event'),
-                    h('div', { className: 'event-preview-grid' }, cards)
-                );
-            }
-        });
+        return h('div',{},
+          h('div',{className:'preview-heading'},'Pratinjau Jadwal Event'),
+          h('div',{className:'event-preview-grid'}, cards)
+        );
+      }
+    });
 
-        CMS.registerPreviewTemplate('news', NewsPreview);
-        CMS.registerPreviewTemplate('statistics', StatisticsPreview);
-        CMS.registerPreviewTemplate('testimonials', TestimonialsPreview);
-        CMS.registerPreviewTemplate('partners', PartnersPreview);
-        CMS.registerPreviewTemplate('events', EventsPreview);
+    CMS.registerPreviewTemplate('news', NewsPreview);
+    CMS.registerPreviewTemplate('statistics', StatisticsPreview);
+    CMS.registerPreviewTemplate('testimonials', TestimonialsPreview);
+    CMS.registerPreviewTemplate('partners', PartnersPreview);
+    CMS.registerPreviewTemplate('events', EventsPreview);
+  }
+
+  function startCMS(){
+    if (cmsHasStarted) return;
+    if (!window.CMS){
+      console.warn('CMS belum dimuat. Coba lagi sesaat lagi.');
+      return;
     }
 
-    function startCMS() {
-        if (cmsHasStarted) {
-            return;
-        }
-        if (!window.CMS) {
-            console.warn('CMS belum dimuat.');
-            return;
-        }
+    configureCMS();
 
-        configureCMS();
-
-        cmsHasStarted = true;
-        body.classList.add('cms-active');
-        cmsRoot.removeAttribute('hidden');
-        window.CMS.init();
+    cmsHasStarted = true;
+    body.classList.add('cms-active');
+    cmsRoot.removeAttribute('hidden');
+    try {
+      window.CMS.init(); // akan otomatis membaca /admin/config.yml
+    } catch (err){
+      console.error('Gagal menginisialisasi CMS:', err);
+      alert('Gagal membuka CMS. Cek konsol untuk detail error.');
     }
+  }
 
-    if (openCmsButton) {
-        openCmsButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            startCMS();
-        });
-    }
+  if (openCmsButton){
+    openCmsButton.addEventListener('click', (e)=>{
+      e.preventDefault();
+      startCMS();
+    });
+  }
 
-    const datasets = [
-        { key: 'news', label: 'Berita Terkini', path: '../data/news.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'artikel' },
-        { key: 'statistics', label: 'Statistik Pembinaan', path: '../data/statistics.json', resolve: (data) => (Array.isArray(data?.cards) ? data.cards.length : 0), suffix: 'kartu' },
-        { key: 'testimonials', label: 'Testimoni UMKM', path: '../data/testimonials.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'testimoni' },
-        { key: 'partners', label: 'Mitra & Kolaborator', path: '../data/partners.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'mitra' },
-        { key: 'events', label: 'Jadwal Event', path: '../data/events.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'event' }
-    ];
+  const datasets = [
+    { key:'news',         label:'Berita Terkini',       path:'../data/news.json',        resolve:(d)=> (d && Array.isArray(d.entries) ? d.entries.length : 0),      suffix:'artikel'  },
+    { key:'statistics',   label:'Statistik Pembinaan',  path:'../data/statistics.json',  resolve:(d)=> (d && Array.isArray(d.cards) ? d.cards.length : 0),          suffix:'kartu'    },
+    { key:'testimonials', label:'Testimoni UMKM',       path:'../data/testimonials.json',resolve:(d)=> (d && Array.isArray(d.entries) ? d.entries.length : 0),      suffix:'testimoni'},
+    { key:'partners',     label:'Mitra & Kolaborator',  path:'../data/partners.json',    resolve:(d)=> (d && Array.isArray(d.entries) ? d.entries.length : 0),      suffix:'mitra'    },
+    { key:'events',       label:'Jadwal Event',         path:'../data/events.json',      resolve:(d)=> (d && Array.isArray(d.entries) ? d.entries.length : 0),      suffix:'event'    }
+  ];
 
-    function renderStats() {
-        if (!datasetStats) return;
-        datasetStats.innerHTML = datasets.map((item) => `
-            <div class="stat-chip" data-dataset="${item.key}">
-                <span>
-                    <small>${item.label}</small>
-                    <strong>Mengambil data...</strong>
-                </span>
-                <div class="stat-value">...</div>
-            </div>
-        `).join('');
+  function renderStats(){
+    if (!datasetStats) return;
+    datasetStats.innerHTML = datasets.map(item=>`
+      <div class="stat-chip" data-dataset="${item.key}">
+        <span>
+          <small>${item.label}</small>
+          <strong>Mengambil data...</strong>
+        </span>
+        <div class="stat-value">...</div>
+      </div>
+    `).join('');
 
-        datasets.forEach(async (item) => {
-            const chip = datasetStats.querySelector(\`[data-dataset="\${item.key}"]\`);
-            if (!chip) return;
-            try {
-                const response = await fetch(item.path + \`?ts=\${Date.now()}\`, { cache: 'no-store' });
-                if (!response.ok) throw new Error(\`Gagal memuat \${item.label}\`);
-                const data = await response.json();
-                const total = item.resolve(data);
-                chip.querySelector('strong').textContent = total ? 'Tersedia' : 'Belum ada data';
-                chip.querySelector('.stat-value').textContent = Number.isFinite(total) ? \`\${total} \${item.suffix}\` : '0';
-            } catch (error) {
-                console.error(error);
-                chip.querySelector('strong').textContent = 'Gagal memuat';
-                chip.querySelector('.stat-value').textContent = '!';
-            }
-        });
-    }
+    datasets.forEach(async (item)=>{
+      const chip = datasetStats.querySelector(`[data-dataset="${item.key}"]`);
+      if (!chip) return;
+      try{
+        const res = await fetch(item.path + `?ts=${Date.now()}`, { cache:'no-store' });
+        if (!res.ok) throw new Error(`Gagal memuat ${item.label} (${res.status})`);
+        const data = await res.json();
+        const total = item.resolve(data);
+        chip.querySelector('strong').textContent = Number(total) > 0 ? 'Tersedia' : 'Belum ada data';
+        chip.querySelector('.stat-value').textContent =
+          (Number.isFinite(total) ? Number(total).toLocaleString('id-ID') : '0') + ' ' + item.suffix;
+      }catch(err){
+        console.error(err);
+        chip.querySelector('strong').textContent = 'Gagal memuat';
+        chip.querySelector('.stat-value').textContent = '!';
+      }
+    });
+  }
 
-    renderStats();
+  renderStats();
 </script>
 </body>
 </html>
