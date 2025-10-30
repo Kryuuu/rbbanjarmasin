@@ -26,7 +26,7 @@ collections:
           - label: "Daftar Berita"
             name: "entries"
             widget: "list"
-            summary: "{{fields.tag}} • {{fields.title}}"
+            summary: "{{fields.tag}} - {{fields.title}}"
             collapsed: true
             fields:
               - {
@@ -55,7 +55,7 @@ collections:
                   label: "Ringkasan",
                   name: "excerpt",
                   widget: "text",
-                  hint: "1–2 kalimat, maks 200 karakter",
+                  hint: "1-2 kalimat, maks 200 karakter",
                   pattern: ["^.{1,200}$", "Maks 200 karakter"],
                 }
               - {
@@ -208,7 +208,7 @@ collections:
           - label: "Daftar Testimoni"
             name: "entries"
             widget: "list"
-            summary: "{{fields.name}} • {{fields.role}}"
+            summary: "{{fields.name}} - {{fields.role}}"
             collapsed: true
             fields:
               - {
@@ -341,3 +341,6 @@ collections:
                   default: "Daftar Sekarang",
                   required: false,
                 }
+
+
+
