@@ -3,922 +3,850 @@
 <head>
     <meta charset="utf-8">
     <base href="/admin/">
-    <title>Dashboard Konten | Rumah BUMN Banjarmasin</title>
+    <title>Panel Konten | Rumah BUMN Banjarmasin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../assets/png/rumah-bumn.png">
     <style>
         :root {
             color-scheme: light;
-            --bg-primary: radial-gradient(120% 120% at 50% -10%, #3ac3f6 0%, #195770 55%, #0f2534 100%);
-            --surface-glass: rgba(15, 23, 42, 0.6);
-            --surface-card: rgba(15, 23, 42, 0.82);
-            --border-glass: rgba(148, 163, 184, 0.22);
-            --text-primary: #f8fafc;
-            --text-muted: rgba(226, 232, 240, 0.7);
-            --accent: linear-gradient(135deg, #38bdf8, #0ea5e9);
             font-family: 'Manrope', 'Segoe UI', 'Roboto', sans-serif;
+            background: #0f172a;
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             min-height: 100vh;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            transition: background 0.35s ease;
+            background: radial-gradient(circle at top right, #1ba0db 0%, #195770 35%, #0f172a 70%, #0b1220 100%);
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
         }
+
         body.cms-active {
             background: #0f172a;
-            color: initial;
+            color: inherit;
         }
+
         header {
-            display: flex;
-            justify-content: center;
-            padding: clamp(1rem, 2vw, 1.75rem) clamp(1.25rem, 4vw, 3rem);
+            padding: clamp(1.25rem, 4vw, 2rem) clamp(1.75rem, 5vw, 4rem);
         }
-        .nav-shell {
-            width: min(1080px, 100%);
+
+        .glass {
+            background: rgba(15, 23, 42, 0.55);
+            border-radius: 24px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 24px 48px rgba(8, 47, 73, 0.35);
+        }
+
+        .topbar {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(15, 23, 42, 0.55);
-            border-radius: 18px;
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            padding: clamp(0.9rem, 2vw, 1.2rem) clamp(1.3rem, 3vw, 2rem);
-            box-shadow: 0 18px 60px rgba(8, 47, 73, 0.45);
-            backdrop-filter: blur(18px);
+            padding: clamp(1.2rem, 3.2vw, 1.8rem);
         }
+
         .brand {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
+
         .brand img {
-            width: clamp(48px, 6vw, 64px);
-            height: clamp(48px, 6vw, 64px);
+            width: clamp(52px, 6vw, 64px);
+            height: clamp(52px, 6vw, 64px);
             border-radius: 18px;
-            border: 1px solid rgba(148, 163, 184, 0.25);
-            background: rgba(15, 23, 42, 0.6);
-            padding: 0.4rem;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.35rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
+
         .brand span {
-            font-weight: 700;
-            letter-spacing: 0.02em;
             display: grid;
             gap: 0.15rem;
         }
-        .brand span small {
+
+        .brand small {
             text-transform: uppercase;
             font-size: 0.68rem;
-            color: rgba(226, 232, 240, 0.7);
-            letter-spacing: 0.3em;
+            letter-spacing: 0.32em;
+            color: rgba(148, 163, 184, 0.85);
         }
-        .brand span strong {
-            font-size: clamp(1.1rem, 2.3vw, 1.5rem);
+
+        .brand strong {
+            font-size: clamp(1.15rem, 3vw, 1.65rem);
         }
-        .nav-actions {
-            display: flex;
-            gap: 0.6rem;
-        }
-        .nav-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: rgba(56, 189, 248, 0.18);
-            color: rgba(226, 232, 240, 0.92);
-            border-radius: 999px;
-            padding: 0.45rem 0.9rem;
-            font-size: 0.76rem;
-            font-weight: 600;
-        }
-        #welcome {
-            display: flex;
-            justify-content: center;
-            padding: clamp(1.5rem, 3vw, 4rem) clamp(1.2rem, 4vw, 3rem) clamp(2.5rem, 6vw, 5rem);
-        }
-        body.cms-active #welcome {
-            display: none;
-        }
-        .layout {
-            width: min(1080px, 100%);
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: clamp(1.8rem, 4vw, 2.8rem);
-            align-items: stretch;
-        }
-        .intro {
-            background: rgba(15, 23, 42, 0.52);
-            border-radius: 30px;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            padding: clamp(1.8rem, 4vw, 2.8rem);
-            box-shadow: 0 26px 70px rgba(8, 47, 73, 0.48);
-            position: relative;
-            overflow: hidden;
-        }
-        .intro::before {
-            content: '';
-            position: absolute;
-            inset: 8% -35% -25% 35%;
-            background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.35), transparent 60%);
-            pointer-events: none;
-        }
-        .intro::after {
-            content: '';
-            position: absolute;
-            inset: 45% -15% 15% 45%;
-            background: radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.2), transparent 70%);
-            pointer-events: none;
-        }
-        .intro > * {
-            position: relative;
-            z-index: 1;
-        }
-        .intro h1 {
-            font-size: clamp(2rem, 4.5vw, 3.2rem);
-            margin: 0 0 1rem;
-            line-height: 1.1;
-            letter-spacing: -0.01em;
-        }
-        .intro p {
-            margin: 0;
-            font-size: clamp(1rem, 2vw, 1.1rem);
-            color: rgba(226, 232, 240, 0.78);
-            line-height: 1.7;
-        }
-        .intro .feature-grid {
-            display: grid;
-            gap: 1rem;
-            margin-top: clamp(1.8rem, 4vw, 2.4rem);
-        }
-        .feature-item {
-            display: grid;
-            gap: 0.35rem;
-            padding: 1rem 1.2rem;
-            background: rgba(15, 23, 42, 0.68);
-            border-radius: 18px;
-            border: 1px solid rgba(148, 163, 184, 0.18);
-        }
-        .feature-item strong {
-            font-size: 0.92rem;
-        }
-        .feature-item span {
-            color: rgba(226, 232, 240, 0.65);
-            font-size: 0.82rem;
-            line-height: 1.5;
-        }
-        .panel {
-            display: grid;
-            gap: clamp(1.4rem, 3vw, 2.2rem);
-        }
-        .panel-card {
-            background: var(--surface-card);
-            border-radius: 28px;
-            border: 1px solid var(--border-glass);
-            padding: clamp(1.8rem, 3vw, 2.4rem);
-            box-shadow: 0 24px 65px rgba(8, 47, 73, 0.5);
-            backdrop-filter: blur(20px);
-        }
-        .panel-card h2 {
-            margin: 0 0 1.2rem;
-            font-size: clamp(1.4rem, 3vw, 1.8rem);
-            letter-spacing: -0.01em;
-        }
-        .stats-grid {
-            display: grid;
-            gap: 0.9rem;
-        }
-        .stat-chip {
+
+        .topbar-actions {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: 0.9rem 1.1rem;
-            border-radius: 18px;
-            background: rgba(15, 23, 42, 0.72);
-            border: 1px solid rgba(148, 163, 184, 0.22);
-        }
-        .stat-chip span {
-            display: grid;
-            gap: 0.2rem;
-        }
-        .stat-chip strong {
-            font-size: 0.88rem;
-            letter-spacing: 0.01em;
-        }
-        .stat-chip small {
-            font-size: 0.75rem;
-            color: rgba(148, 163, 184, 0.75);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-        }
-        .stat-value {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: #38bdf8;
-        }
-        .actions {
-            display: grid;
             gap: 0.8rem;
-            margin-top: clamp(1.2rem, 2vw, 1.8rem);
         }
+
+        .topbar-actions a {
+            font-size: 0.82rem;
+            padding: 0.55rem 1.15rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            color: rgba(226, 232, 240, 0.85);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            transition: all 0.25s ease;
+        }
+
+        .topbar-actions a:hover {
+            color: #0f172a;
+            background: rgba(226, 232, 240, 0.9);
+        }
+
+        main {
+            flex: 1;
+            padding: 0 clamp(1.75rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4rem);
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+            gap: clamp(1.75rem, 5vw, 2.5rem);
+            margin-top: 1.5rem;
+        }
+
+        .panel {
+            padding: clamp(1.6rem, 4vw, 2.4rem);
+        }
+
+        .panel h2 {
+            margin: 0 0 1rem;
+            font-size: clamp(1.4rem, 3vw, 1.75rem);
+            letter-spacing: -0.01em;
+        }
+
+        .panel p {
+            margin: 0 0 1rem;
+            color: rgba(226, 232, 240, 0.78);
+            line-height: 1.65;
+            font-size: 0.95rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
         .btn {
             display: inline-flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             gap: 0.6rem;
-            padding: 0.85rem 1.5rem;
-            border-radius: 999px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            padding: 0.85rem 1.75rem;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.95rem;
             cursor: pointer;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: #0f172a;
             border: none;
-            box-shadow: 0 18px 42px rgba(56, 189, 248, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #38bdf8, #1ba0db, #195770);
+            color: #0f172a;
+            box-shadow: 0 16px 32px rgba(14, 165, 233, 0.35);
+        }
+
         .btn-primary:hover {
-            transform: translateY(-1px);
-            filter: brightness(1.04);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.42);
         }
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid rgba(241, 245, 249, 0.35);
-            color: rgba(226, 232, 240, 0.92);
+
+        .btn-ghost {
+            background: rgba(15, 23, 42, 0.45);
+            color: rgba(226, 232, 240, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.18);
         }
-        .btn-secondary:hover {
-            background: rgba(241, 245, 249, 0.12);
+
+        .btn-ghost:hover {
+            transform: translateY(-2px);
+            border-color: rgba(148, 163, 184, 0.32);
         }
-        body.cms-active .panel-card,
-        body.cms-active .intro,
-        body.cms-active header {
-            display: none;
+
+        .checklist {
+            display: grid;
+            gap: 0.9rem;
+            margin: 1.5rem 0 0;
+            padding: 0;
+            list-style: none;
         }
-        #nc-root {
-            display: none;
-            flex: 1;
-            min-height: 100vh;
-        }
-        body.cms-active #nc-root {
-            display: block;
-        }
-        small {
-            display: block;
-            margin-top: 2.2rem;
-            font-size: 0.78rem;
-            color: rgba(226, 232, 240, 0.55);
-        }
-        footer {
-            margin: 1.5rem auto 0;
-            font-size: 0.7rem;
-            color: rgba(226, 232, 240, 0.3);
-            text-align: center;
-        }
-        body.cms-active footer {
-            display: none;
-        }
-        .quick-note {
-            background: rgba(15, 23, 42, 0.74);
-            border-radius: 22px;
-            border: 1px solid rgba(148, 163, 184, 0.28);
-            padding: 1.4rem 1.6rem;
-            font-size: 0.86rem;
-            line-height: 1.6;
+
+        .checklist li {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.65rem;
+            align-items: start;
+            font-size: 0.9rem;
             color: rgba(226, 232, 240, 0.78);
         }
-        .quick-note strong {
+
+        .checklist li span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.4rem;
+            height: 1.4rem;
+            border-radius: 999px;
+            background: rgba(148, 163, 184, 0.2);
             color: #38bdf8;
+            font-size: 0.85rem;
+            margin-top: 0.1rem;
         }
-        footer {
-            margin: 0 auto clamp(1.5rem, 4vw, 2.8rem);
-            font-size: 0.72rem;
-            color: rgba(226, 232, 240, 0.4);
-            text-align: center;
+
+        .stat-grid {
+            margin-top: clamp(1.8rem, 4vw, 2.5rem);
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .stat-chip {
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 16px;
+            padding: 1.15rem 1.35rem;
+            display: grid;
+            gap: 0.4rem;
+        }
+
+        .stat-chip small {
+            text-transform: uppercase;
+            letter-spacing: 0.32em;
+            font-size: 0.62rem;
+            color: rgba(148, 163, 184, 0.72);
+        }
+
+        .stat-chip strong {
+            font-size: 0.85rem;
+            color: rgba(226, 232, 240, 0.82);
+        }
+
+        .stat-value {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #38bdf8;
         }
 
         @media (max-width: 1024px) {
             .layout {
                 grid-template-columns: 1fr;
             }
-            .panel {
-                grid-template-columns: 1fr;
+        }
+
+        @media (max-width: 720px) {
+            header {
+                padding: 1.25rem 1.35rem;
+            }
+
+            main {
+                padding: 0 1.35rem 2rem;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.25rem;
+            }
+
+            .topbar-actions {
+                flex-wrap: wrap;
             }
         }
-        @media (max-width: 640px) {
-            header {
-                padding: 1rem;
-            }
-            .nav-shell {
-                flex-direction: column;
-                gap: 0.8rem;
-                align-items: flex-start;
-            }
-            .nav-actions {
-                order: -1;
-            }
-            .intro,
-            .panel-card {
-                border-radius: 22px;
-            }
-            .actions {
-                grid-template-columns: 1fr;
-            }
-            .nav-pill {
-                font-size: 0.7rem;
-            }
+
+        #nc-root[hidden] {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="nav-shell">
-            <div class="brand">
-                <img src="../assets/png/rumah-bumn.png" alt="Rumah BUMN">
-                <span>
-                    <small>Konten Manajemen</small>
-                    <strong>Rumah BUMN Banjarmasin</strong>
-                </span>
-            </div>
-            <div class="nav-actions">
-                <div class="nav-pill">
-                    ● Mode Editorial Workflow
-                </div>
-            </div>
+<header>
+    <div class="glass topbar">
+        <div class="brand">
+            <img src="../assets/png/rumah-bumn.png" alt="Rumah BUMN">
+            <span>
+                <small>Dashboard Konten</small>
+                <strong>Rumah BUMN Banjarmasin</strong>
+            </span>
         </div>
-    </header>
-
-    <main class="welcome" id="welcome">
-        <div class="layout">
-            <section class="intro">
-                <h1>Kelola konten situs dalam satu tempat</h1>
-                <p>
-                    Buat, perbarui, dan publikasikan berita, statistik pembinaan, testimoni UMKM, serta mitra kolaborator dengan proses yang terkontrol. Workflow publikasi memastikan setiap perubahan direview sebelum tampil di situs utama.
-                </p>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <strong>✓ Workflow editor → review → publish</strong>
-                        <span>Setiap perubahan tersimpan sebagai draft hingga disetujui, sehingga versi yang tayang selalu terkurasi.</span>
-                    </div>
-                    <div class="feature-item">
-                        <strong>✓ Upload gambar langsung ke media library</strong>
-                        <span>Gunakan tombol upload pada field gambar untuk menambahkan aset baru atau pilih dari arsip yang ada.</span>
-                    </div>
-                    <div class="feature-item">
-                        <strong>✓ Preview responsif sebelum publikasi</strong>
-                        <span>Gunakan tombol Preview di CMS untuk melihat tampilan konten di berbagai ukuran layar.</span>
-                    </div>
-                </div>
-            </section>
-
-            <aside class="panel">
-                <div class="panel-card">
-                    <h2>Status Konten</h2>
-                    <div class="stats-grid" id="dataset-stats">
-                        <div class="stat-chip">
-                            <span>
-                                <small>Memuat</small>
-                                <strong>Menarik data...</strong>
-                            </span>
-                            <div class="stat-value">–</div>
-                        </div>
-                    </div>
-                    <div class="actions">
-                        <button class="btn btn-primary" id="open-cms">
-                            Buka Dashboard CMS
-                        </button>
-                        <a class="btn btn-secondary" href="/" target="_blank" rel="noopener noreferrer">
-                            Lihat Halaman Utama
-                        </a>
-                    </div>
-                </div>
-
-                <div class="quick-note">
-                    <strong>Tips:</strong> Pada produksi Anda akan diminta login GitHub melalui jendela pop-up. Untuk uji lokal jalankan perintah <code>npx decap-server</code> agar mode <em>local backend</em> berfungsi.
-                </div>
-            </aside>
+        <div class="topbar-actions">
+            <a href="../index.html" target="_blank" rel="noopener">Lihat Halaman Utama</a>
+            <a href="mailto:rumahbumnbanjarmasinkalsel@gmail.com" target="_blank" rel="noopener">Bantuan Tim</a>
         </div>
-    </main>
+    </div>
+</header>
 
-    <div id="nc-root" hidden></div>
+<main>
+    <div class="layout">
+        <section class="glass panel">
+            <h2>Selamat datang, Tim Konten!</h2>
+            <p>Klik tombol di bawah untuk membuka editor visual Decap CMS. Semua perubahan yang disimpan akan otomatis
+                dikirim ke repositori dan terpublikasi di situs.</p>
+            <div class="actions">
+                <button id="open-cms" class="btn btn-primary" type="button">
+                    Buka Editor Konten
+                </button>
+                <a class="btn btn-ghost" href="https://decapcms.org/docs/intro/" target="_blank" rel="noopener">
+                    Panduan Decap CMS
+                </a>
+            </div>
 
-    <footer>&copy; 2025 Rumah BUMN Banjarmasin</footer>
+            <ul class="checklist">
+                <li>
+                    <span>1</span>
+                    Pastikan sudah login GitHub saat pop-up otorisasi muncul.
+                </li>
+                <li>
+                    <span>2</span>
+                    Gunakan tombol <strong>Save</strong> untuk menyimpan draft, dan <strong>Publish</strong> untuk menerbitkan ke situs.
+                </li>
+                <li>
+                    <span>3</span>
+                    Jika mencoba secara lokal, jalankan <code>npx decap-server</code> sebelum membuka dashboard.
+                </li>
+            </ul>
 
-    <script>
-        window.CMS_MANUAL_INIT = true;
-    </script>
-    <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
-    <script>
-        const body = document.body;
-        const cmsRoot = document.getElementById('nc-root');
-        const openCmsButton = document.getElementById('open-cms');
-        let cmsHasStarted = false;
-        let cmsConfigured = false;
+            <div class="stat-grid" id="dataset-stats">
+                <div class="stat-chip">
+                    <span>
+                        <small>Memuat</small>
+                        <strong>Memuat dataset...</strong>
+                    </span>
+                    <div class="stat-value">...</div>
+                </div>
+            </div>
+        </section>
 
-        function configureCMS() {
-            if (cmsConfigured || !window.CMS) return;
-            cmsConfigured = true;
+        <section class="glass panel">
+            <h2>Panduan Koleksi Konten</h2>
+            <p>Berikut kategori konten yang dapat Anda kelola. Gunakan editor visual untuk menambah, mengubah, atau menghapus data.</p>
+            <ul class="checklist">
+                <li>
+                    <span>BR</span>
+                    <strong>Berita Terkini</strong> — atur kartu berita pada beranda lengkap dengan gambar hero dan tautan.
+                </li>
+                <li>
+                    <span>ST</span>
+                    <strong>Statistik Pembinaan</strong> — update angka UMKM serta grafik transformasi digital.
+                </li>
+                <li>
+                    <span>TS</span>
+                    <strong>Testimoni UMKM</strong> — masukkan kutipan singkat dan profil pelaku usaha binaan.
+                </li>
+                <li>
+                    <span>MT</span>
+                    <strong>Mitra & Kolaborator</strong> — unggah atau ubah logo, beserta tautan resmi mitra.
+                </li>
+                <li>
+                    <span>EV</span>
+                    <strong>Jadwal Event</strong> — kelola detail agenda pelatihan, talkshow, dan coaching clinic.
+                </li>
+            </ul>
+        </section>
+    </div>
+</main>
 
-            const { CMS } = window;
-            const { h, createClass } = window;
+<div id="nc-root" hidden></div>
 
-            CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap');
-            CMS.registerPreviewStyle(`
-                :root { color-scheme: light; }
-                body {
-                    font-family: 'Manrope', system-ui, sans-serif;
-                    background: #f2f6fb;
-                    color: #0f172a;
-                    padding: 2.5rem;
-                    min-height: 100vh;
-                }
-                .preview-heading {
-                    font-size: 1.5rem;
-                    font-weight: 700;
-                    margin-bottom: 1.5rem;
-                    color: #0f172a;
-                }
-                .preview-grid {
-                    display: grid;
-                    gap: 1.25rem;
-                    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-                }
-                .preview-card {
-                    background: #ffffff;
-                    border-radius: 16px;
-                    border: 1px solid rgba(15, 118, 180, 0.12);
-                    padding: 1.5rem;
-                    box-shadow: 0 18px 32px -18px rgba(15, 23, 42, 0.25);
-                }
-                .preview-card h3 {
-                    margin: 0 0 0.6rem;
-                    font-size: 1.1rem;
-                    color: #0f172a;
-                }
-                .preview-card p {
-                    margin: 0;
-                    color: #475569;
-                    line-height: 1.6;
-                    font-size: 0.9rem;
-                }
-                .preview-tag {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.35rem;
-                    background: rgba(56, 189, 248, 0.18);
-                    color: #0284c7;
-                    padding: 0.25rem 0.6rem;
-                    border-radius: 999px;
-                    font-size: 0.75rem;
-                    font-weight: 600;
-                    margin-bottom: 0.9rem;
-                }
-                .preview-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    background: #ffffff;
-                    border-radius: 16px;
-                    overflow: hidden;
-                    box-shadow: 0 18px 32px -18px rgba(15, 23, 42, 0.2);
-                }
-                .preview-table th,
-                .preview-table td {
-                    padding: 0.85rem 1rem;
-                    border-bottom: 1px solid rgba(15, 118, 180, 0.08);
-                    text-align: left;
-                    font-size: 0.88rem;
-                }
-                .preview-table th {
-                    background: rgba(14, 165, 233, 0.12);
-                    font-weight: 700;
-                    color: #0369a1;
-                }
-                .quote {
-                    font-size: 1rem;
-                    line-height: 1.7;
-                    color: #1f2937;
-                }
-                .quote::before,
-                .quote::after {
-                    content: '"';
-                    color: #0ea5e9;
-                }
-                .author {
-                    margin-top: 0.75rem;
-                    font-weight: 600;
-                    color: #0f172a;
-                }
-                .author small {
-                    display: block;
-                    font-weight: 500;
-                    margin-top: 0.15rem;
-                    color: #64748b;
-                }
-                .partner-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                    gap: 1rem;
-                }
-                .partner-item {
-                    background: #ffffff;
-                    border-radius: 14px;
-                    border: 1px solid rgba(15, 118, 180, 0.12);
-                    padding: 1.2rem;
-                    display: grid;
-                    gap: 0.5rem;
-                    justify-items: center;
-                    text-align: center;
-                }
-                .partner-item strong {
-                    font-size: 0.95rem;
-                    color: #0f172a;
-                }
-                .partner-item span {
-                    font-size: 0.78rem;
-                    color: #64748b;
-                }
-                .event-preview-grid {
-                    display: grid;
-                    gap: 1.5rem;
-                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                }
-                .event-card {
-                    background: #ffffff;
-                    border-radius: 18px;
-                    border: 1px solid rgba(15, 118, 180, 0.12);
-                    padding: 1.75rem;
-                    box-shadow: 0 24px 38px -18px rgba(15, 23, 42, 0.28);
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1.25rem;
-                }
-                .event-badge {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.4rem;
-                    font-size: 0.78rem;
-                    font-weight: 600;
-                    border-radius: 999px;
-                    padding: 0.35rem 0.85rem;
-                    letter-spacing: 0.12em;
-                    text-transform: uppercase;
-                }
-                .event-badge--primary {
-                    background: rgba(25, 87, 112, 0.12);
-                    color: #195770;
-                }
-                .event-badge--secondary {
-                    background: rgba(27, 160, 219, 0.15);
-                    color: #0c87ba;
-                }
-                .event-badge--accent {
-                    background: rgba(15, 143, 171, 0.15);
-                    color: #0f8fab;
-                }
-                .event-card__title {
-                    margin: 0;
-                    font-size: 1.35rem;
-                    font-weight: 700;
-                    color: #0f172a;
-                    letter-spacing: -0.01em;
-                }
-                .event-card__desc {
-                    margin: 0;
-                    color: #475569;
-                    line-height: 1.6;
-                    font-size: 0.92rem;
-                }
-                .event-meta {
-                    list-style: none;
-                    margin: 0;
-                    padding: 0;
-                    display: grid;
-                    gap: 0.75rem;
-                }
-                .event-meta__item {
-                    display: flex;
-                    align-items: flex-start;
-                    gap: 0.65rem;
-                    font-size: 0.9rem;
-                    color: #475569;
-                }
-                .event-meta__text {
-                    flex: 1;
-                    line-height: 1.5;
-                }
-                .event-meta__icon {
-                    width: 1.65rem;
-                    height: 1.65rem;
-                    border-radius: 999px;
-                    background: rgba(14, 165, 233, 0.12);
-                    color: #0284c7;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 0.9rem;
-                    flex-shrink: 0;
-                    margin-top: 0.1rem;
-                }
-                .event-meta__empty {
-                    font-size: 0.85rem;
-                    color: #94a3b8;
-                }
-                .event-card__cta {
-                    margin-top: auto;
-                    display: grid;
-                    gap: 0.45rem;
-                }
-                .event-card__button {
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 0.4rem;
-                    padding: 0.55rem 1.4rem;
-                    border-radius: 999px;
-                    background: linear-gradient(135deg, #1ba0db, #195770);
-                    color: #ffffff;
-                    font-weight: 600;
-                    font-size: 0.85rem;
-                }
-                .event-card__link-note {
-                    font-size: 0.78rem;
-                    color: #94a3b8;
-                    word-break: break-word;
-                }
-                .event-card__link-note--warning {
-                    color: #ef4444;
-                }
-            `, { raw: true });
+<script>
+    window.CMS_MANUAL_INIT = true;
+</script>
+<script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
+<script>
+    const body = document.body;
+    const cmsRoot = document.getElementById('nc-root');
+    const openCmsButton = document.getElementById('open-cms');
+    const datasetStats = document.getElementById('dataset-stats');
 
-            const getList = (entry, path) => {
-                const value = entry.getIn(path);
-                return value ? value.toJS() : [];
-            };
+    let cmsHasStarted = false;
+    let cmsConfigured = false;
 
-            const getBadgeClass = (badge) => {
-                switch (badge) {
-                    case 'secondary':
-                        return 'event-badge event-badge--secondary';
-                    case 'accent':
-                        return 'event-badge event-badge--accent';
-                    default:
-                        return 'event-badge event-badge--primary';
-                }
-            };
+    function configureCMS() {
+        if (cmsConfigured || !window.CMS) return;
+        cmsConfigured = true;
 
-            const iconEmojiMap = {
-                calendar: '📅',
-                clock: '🕒',
-                location: '📍',
-                check: '✔'
-            };
+        const { CMS } = window;
+        const { h, createClass } = window;
 
-            const buildEventMeta = (item) => {
-                const meta = [];
-                if (item?.schedule_date) {
-                    meta.push({ icon: 'calendar', text: item.schedule_date });
-                }
-                if (item?.schedule_time) {
-                    meta.push({ icon: 'clock', text: item.schedule_time });
-                }
-                if (item?.location) {
-                    meta.push({ icon: 'location', text: item.location });
-                }
-                if (Array.isArray(item?.highlights)) {
-                    item.highlights.forEach((highlight) => {
-                        if (highlight) {
-                            meta.push({ icon: 'check', text: highlight });
-                        }
-                    });
-                } else if (Array.isArray(item?.details)) {
-                    item.details.forEach((legacy) => {
-                        if (legacy?.text) {
-                            meta.push({ icon: legacy.icon || 'check', text: legacy.text });
-                        }
-                    });
-                }
-                return meta;
-            };
+        CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap');
+        CMS.registerPreviewStyle(`
+            :root { color-scheme: light; font-family: 'Manrope', system-ui, sans-serif; background: #f5f7fb; }
+            body {
+                margin: 0;
+                background: #f5f7fb;
+                color: #0f172a;
+                padding: 2.5rem clamp(1.75rem, 5vw, 4rem);
+                min-height: 100vh;
+            }
+            .preview-heading {
+                font-size: 1.6rem;
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                color: #0f172a;
+            }
+            .preview-grid {
+                display: grid;
+                gap: 1.5rem;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            }
+            .preview-card,
+            .event-card {
+                background: #ffffff;
+                border-radius: 20px;
+                border: 1px solid rgba(148, 163, 184, 0.18);
+                padding: 1.6rem;
+                box-shadow: 0 24px 45px -22px rgba(15, 23, 42, 0.25);
+            }
+            .preview-card h3 {
+                margin: 0 0 0.75rem;
+                font-size: 1.1rem;
+                color: #0f172a;
+            }
+            .preview-card p {
+                margin: 0;
+                color: #475569;
+                line-height: 1.6;
+                font-size: 0.92rem;
+            }
+            .preview-tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                padding: 0.35rem 0.75rem;
+                border-radius: 999px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                background: rgba(56, 189, 248, 0.18);
+                color: #0ea5e9;
+                margin-bottom: 0.9rem;
+            }
+            .preview-table {
+                width: 100%;
+                border-collapse: collapse;
+                background: #ffffff;
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 24px 45px -20px rgba(15, 23, 42, 0.2);
+            }
+            .preview-table th,
+            .preview-table td {
+                padding: 0.85rem 1rem;
+                border-bottom: 1px solid rgba(15, 118, 180, 0.08);
+                text-align: left;
+                font-size: 0.88rem;
+            }
+            .preview-table th {
+                background: rgba(14, 165, 233, 0.12);
+                font-weight: 700;
+                color: #0369a1;
+            }
+            .quote {
+                font-size: 1.05rem;
+                line-height: 1.7;
+                color: #1f2937;
+            }
+            .quote::before,
+            .quote::after { content: '"'; color: #0ea5e9; }
+            .author {
+                margin-top: 0.75rem;
+                font-weight: 600;
+                color: #0f172a;
+            }
+            .author small {
+                display: block;
+                font-weight: 500;
+                margin-top: 0.15rem;
+                color: #64748b;
+            }
+            .partner-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            .partner-item {
+                background: #ffffff;
+                border-radius: 16px;
+                border: 1px solid rgba(148, 163, 184, 0.18);
+                padding: 1.25rem;
+                display: grid;
+                gap: 0.55rem;
+                justify-items: center;
+                text-align: center;
+            }
+            .partner-item strong {
+                font-size: 0.95rem;
+                color: #0f172a;
+            }
+            .partner-item span {
+                font-size: 0.78rem;
+                color: #64748b;
+            }
+            .event-preview-grid {
+                display: grid;
+                gap: 1.5rem;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .event-card {
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+            }
+            .event-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                font-size: 0.75rem;
+                font-weight: 600;
+                border-radius: 999px;
+                padding: 0.35rem 0.85rem;
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+            }
+            .event-badge--primary { background: rgba(25, 87, 112, 0.12); color: #195770; }
+            .event-badge--secondary { background: rgba(27, 160, 219, 0.15); color: #0c87ba; }
+            .event-badge--accent { background: rgba(15, 143, 171, 0.15); color: #0f8fab; }
+            .event-card__title {
+                margin: 0;
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #0f172a;
+                letter-spacing: -0.01em;
+            }
+            .event-card__desc {
+                margin: 0;
+                color: #475569;
+                line-height: 1.65;
+                font-size: 0.92rem;
+            }
+            .event-meta {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: grid;
+                gap: 0.8rem;
+            }
+            .event-meta__item {
+                display: flex;
+                gap: 0.75rem;
+                align-items: flex-start;
+                font-size: 0.92rem;
+                color: #475569;
+            }
+            .event-meta__icon {
+                width: 1.6rem;
+                height: 1.6rem;
+                border-radius: 999px;
+                background: rgba(14, 165, 233, 0.12);
+                color: #0284c7;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.95rem;
+                flex-shrink: 0;
+                margin-top: 0.1rem;
+            }
+            .event-meta__empty {
+                font-size: 0.85rem;
+                color: #94a3b8;
+            }
+            .event-card__cta {
+                margin-top: auto;
+                display: grid;
+                gap: 0.35rem;
+            }
+            .event-card__button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.4rem;
+                padding: 0.55rem 1.4rem;
+                border-radius: 999px;
+                background: linear-gradient(135deg, #1ba0db, #195770);
+                color: #ffffff;
+                font-weight: 600;
+                font-size: 0.85rem;
+            }
+            .event-card__link-note {
+                font-size: 0.78rem;
+                color: #94a3b8;
+                word-break: break-word;
+            }
+            .event-card__link-note--warning {
+                color: #ef4444;
+            }
+        `, { raw: true });
 
-            const NewsPreview = createClass({
-                render() {
-                    const entries = getList(this.props.entry, ['data', 'entries']);
-                    return h('div', {},
-                        h('div', { className: 'preview-heading' }, 'Pratinjau Berita'),
-                        h('div', { className: 'preview-grid' },
-                            entries.length
-                                ? entries.map((item, idx) =>
-                                    h('article', { key: idx, className: 'preview-card' },
-                                        item.tag ? h('div', { className: 'preview-tag' }, item.tag) : null,
-                                        h('h3', {}, item.title || 'Judul Berita'),
-                                        h('p', {}, item.excerpt || 'Ringkasan singkat akan tampil di sini.'),
-                                        item.link ? h('p', { style: { marginTop: '0.85rem', fontSize: '0.8rem', color: '#0ea5e9' } }, `Tautan: ${item.link}`) : null
+        const getList = (entry, path) => {
+            const value = entry.getIn(path);
+            return value ? value.toJS() : [];
+        };
+
+        const getBadgeClass = (badge) => {
+            switch (badge) {
+                case 'secondary':
+                    return 'event-badge event-badge--secondary';
+                case 'accent':
+                    return 'event-badge event-badge--accent';
+                default:
+                    return 'event-badge event-badge--primary';
+            }
+        };
+
+        const iconEmojiMap = {
+            calendar: '[Tanggal]',
+            clock: '[Waktu]',
+            location: '[Lokasi]',
+            check: '[Info]'
+        };
+
+        const buildEventMeta = (item) => {
+            const meta = [];
+            if (item?.schedule_date) meta.push({ icon: 'calendar', text: item.schedule_date });
+            if (item?.schedule_time) meta.push({ icon: 'clock', text: item.schedule_time });
+            if (item?.location) meta.push({ icon: 'location', text: item.location });
+            if (Array.isArray(item?.highlights)) {
+                item.highlights.forEach((highlight) => {
+                    if (highlight) meta.push({ icon: 'check', text: highlight });
+                });
+            } else if (Array.isArray(item?.details)) {
+                item.details.forEach((legacy) => {
+                    if (legacy?.text) meta.push({ icon: legacy.icon || 'check', text: legacy.text });
+                });
+            }
+            return meta;
+        };
+
+        const NewsPreview = createClass({
+            render() {
+                const entries = getList(this.props.entry, ['data', 'entries']);
+                return h('div', {},
+                    h('div', { className: 'preview-heading' }, 'Pratinjau Berita'),
+                    h('div', { className: 'preview-grid' },
+                        entries.length
+                            ? entries.map((item, idx) =>
+                                h('article', { key: idx, className: 'preview-card' },
+                                    item.tag ? h('div', { className: 'preview-tag' }, item.tag) : null,
+                                    h('h3', {}, item.title || 'Judul Berita'),
+                                    h('p', {}, item.excerpt || 'Ringkasan singkat akan tampil di sini.'),
+                                    item.link ? h('p', { style: { marginTop: '0.85rem', fontSize: '0.8rem', color: '#0ea5e9' } }, \`Tautan: \${item.link}\`) : null
+                                )
+                            )
+                            : h('p', {}, 'Belum ada berita.')
+                    )
+                );
+            }
+        });
+
+        const TestimonialsPreview = createClass({
+            render() {
+                const entries = getList(this.props.entry, ['data', 'entries']);
+                return h('div', {},
+                    h('div', { className: 'preview-heading' }, 'Pratinjau Testimoni'),
+                    h('div', { className: 'preview-grid' },
+                        entries.length
+                            ? entries.map((item, idx) =>
+                                h('article', { key: idx, className: 'preview-card' },
+                                    h('p', { className: 'quote' }, item.quote || 'Testimoni singkat UMKM.'),
+                                    h('p', { className: 'author' },
+                                        item.name || 'Nama UMKM',
+                                        item.role ? h('small', {}, item.role) : null
                                     )
                                 )
-                                : h('p', {}, 'Belum ada berita.')
-                        )
-                    );
-                }
-            });
+                            )
+                            : h('p', {}, 'Belum ada testimoni.')
+                    )
+                );
+            }
+        });
 
-            const TestimonialsPreview = createClass({
-                render() {
-                    const entries = getList(this.props.entry, ['data', 'entries']);
-                    return h('div', {},
-                        h('div', { className: 'preview-heading' }, 'Pratinjau Testimoni'),
-                        h('div', { className: 'preview-grid' },
-                            entries.length
-                                ? entries.map((item, idx) =>
-                                    h('article', { key: idx, className: 'preview-card' },
-                                        h('p', { className: 'quote' }, item.quote || 'Testimoni singkat UMKM.'),
-                                        h('p', { className: 'author' },
-                                            item.name || 'Nama UMKM',
-                                            item.role ? h('small', {}, item.role) : null
+        const PartnersPreview = createClass({
+            render() {
+                const entries = getList(this.props.entry, ['data', 'entries']);
+                return h('div', {},
+                    h('div', { className: 'preview-heading' }, 'Pratinjau Mitra'),
+                    h('div', { className: 'partner-grid' },
+                        entries.length
+                            ? entries.map((item, idx) =>
+                                h('div', { key: idx, className: 'partner-item' },
+                                    h('strong', {}, item.name || 'Nama Mitra'),
+                                    item.url ? h('span', {}, item.url) : h('span', {}, 'Tidak ada tautan'),
+                                    item.logo ? h('span', { style: { fontSize: '0.75rem', color: '#0ea5e9' } }, 'Logo terlampir') : h('span', {}, 'Logo belum diatur')
+                                )
+                            )
+                            : h('p', {}, 'Belum ada mitra.')
+                    )
+                );
+            }
+        });
+
+        const StatisticsPreview = createClass({
+            render() {
+                const cards = getList(this.props.entry, ['data', 'cards']);
+                const charts = this.props.entry.getIn(['data', 'charts']);
+                const chartData = charts ? charts.toJS() : {};
+
+                return h('div', {},
+                    h('div', { className: 'preview-heading' }, 'Pratinjau Statistik'),
+                    h('div', { className: 'preview-grid' },
+                        h('div', { className: 'preview-card', style: { gridColumn: '1 / -1' } },
+                            h('h3', {}, 'Kartu Statistik'),
+                            cards.length
+                                ? h('div', { className: 'preview-grid', style: { marginTop: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(220px,1fr))' } },
+                                    cards.map((item, idx) =>
+                                        h('div', { key: idx, className: 'preview-card', style: { boxShadow: 'none', borderRadius: '14px', border: '1px solid rgba(14,165,233,0.12)' } },
+                                            h('span', { className: 'preview-tag', style: { marginBottom: '0.6rem' } }, item.label || 'Label'),
+                                            h('p', { style: { fontSize: '1.6rem', fontWeight: 700, color: '#0ea5e9' } }, Number(item.value ?? 0).toLocaleString('id-ID')),
+                                            item.icon ? h('p', { style: { fontSize: '0.76rem', color: '#64748b', marginTop: '0.4rem' } }, \`Ikon: \${item.icon}\`) : null
                                         )
                                     )
                                 )
-                                : h('p', {}, 'Belum ada testimoni.')
+                                : h('p', {}, 'Belum ada kartu statistik.')
                         )
-                    );
-                }
-            });
-
-            const PartnersPreview = createClass({
-                render() {
-                    const entries = getList(this.props.entry, ['data', 'entries']);
-                    return h('div', {},
-                        h('div', { className: 'preview-heading' }, 'Pratinjau Mitra'),
-                        h('div', { className: 'partner-grid' },
-                            entries.length
-                                ? entries.map((item, idx) =>
-                                    h('div', { key: idx, className: 'partner-item' },
-                                        h('strong', {}, item.name || 'Nama Mitra'),
-                                        item.url ? h('span', {}, item.url) : h('span', {}, 'Tidak ada tautan'),
-                                        item.logo ? h('span', { style: { fontSize: '0.75rem', color: '#0ea5e9' } }, 'Logo terlampir') : h('span', {}, 'Logo belum diatur')
-                                    )
-                                )
-                                : h('p', {}, 'Belum ada mitra.')
-                        )
-                    );
-                }
-            });
-
-            const EventsPreview = createClass({
-                render() {
-                    const entries = getList(this.props.entry, ['data', 'entries']);
-                    const cards = entries.length
-                        ? entries.map((item, idx) => {
-                            const meta = buildEventMeta(item);
-                            return h('article', { key: idx, className: 'event-card' },
-                                h('span', { className: getBadgeClass(item.badge) }, item.badge_label || item.badge || 'Event'),
-                                h('h2', { className: 'event-card__title' }, item.title || 'Judul Event'),
-                                item.description ? h('p', { className: 'event-card__desc' }, item.description) : null,
-                                meta.length
-                                    ? h('ul', { className: 'event-meta' },
-                                        meta.map((detail, detailIdx) =>
-                                            h('li', { key: detailIdx, className: 'event-meta__item' },
-                                                h('span', { className: 'event-meta__icon' }, iconEmojiMap[detail.icon] || '•'),
-                                                h('span', { className: 'event-meta__text' }, detail.text || '')
-                                            )
-                                        )
-                                    )
-                                    : h('p', { className: 'event-meta__empty' }, 'Detail event belum diatur.'),
-                                h('div', { className: 'event-card__cta' },
-                                    h('span', { className: 'event-card__button' }, item.link_label || 'Daftar Sekarang'),
-                                    item.link
-                                        ? h('span', { className: 'event-card__link-note' }, item.link)
-                                        : h('span', { className: 'event-card__link-note event-card__link-note--warning' }, 'Tautan pendaftaran belum diisi')
-                                )
-                            );
-                        })
-                        : h('p', { className: 'event-meta__empty' }, 'Belum ada jadwal event.');
-
-                    return h('div', {},
-                        h('div', { className: 'preview-heading' }, 'Pratinjau Jadwal Event'),
-                        h('div', { className: 'event-preview-grid' }, cards)
-                    );
-                }
-            });
-
-            const StatisticsPreview = createClass({
-                render() {
-                    const cards = getList(this.props.entry, ['data', 'cards']);
-                    const charts = this.props.entry.getIn(['data', 'charts']);
-                    const chartData = charts ? charts.toJS() : {};
-
-                    return h('div', {},
-                        h('div', { className: 'preview-heading' }, 'Pratinjau Statistik'),
-                        h('div', { className: 'preview-grid' },
-                            h('div', { className: 'preview-card', style: { gridColumn: '1 / -1' } },
-                                h('h3', {}, 'Kartu Statistik'),
-                                cards.length
-                                    ? h('div', { className: 'preview-grid', style: { marginTop: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(220px,1fr))' } },
-                                        cards.map((item, idx) =>
-                                            h('div', { key: idx, className: 'preview-card', style: { boxShadow: 'none', borderRadius: '14px', border: '1px solid rgba(14,165,233,0.12)' } },
-                                                h('span', { className: 'preview-tag', style: { marginBottom: '0.6rem' } }, item.label || 'Label'),
-                                                h('p', { style: { fontSize: '1.6rem', fontWeight: 700, color: '#0ea5e9' } }, Number(item.value ?? 0).toLocaleString('id-ID')),
-                                                item.icon ? h('p', { style: { fontSize: '0.76rem', color: '#64748b', marginTop: '0.4rem' } }, `Ikon: ${item.icon}`) : null
-                                            )
-                                        )
-                                    )
-                                    : h('p', {}, 'Belum ada kartu statistik.')
+                    ),
+                    h('table', { className: 'preview-table', style: { marginTop: '2rem' } },
+                        h('thead', {},
+                            h('tr', {},
+                                h('th', {}, 'Chart'),
+                                h('th', {}, 'Judul'),
+                                h('th', {}, 'Data Poin')
                             )
                         ),
-                        h('table', { className: 'preview-table', style: { marginTop: '2rem' } },
-                            h('thead', {},
-                                h('tr', {},
-                                    h('th', {}, 'Chart'),
-                                    h('th', {}, 'Judul'),
-                                    h('th', {}, 'Data Poin')
-                                )
-                            ),
-                            h('tbody', {},
-                                ['digital', 'modern', 'online'].map((key) => {
-                                    const chart = chartData[key] || {};
-                                    const entries = chart.entries || [];
-                                    return h('tr', { key },
-                                        h('td', {}, key.charAt(0).toUpperCase() + key.slice(1)),
-                                        h('td', {}, chart.title || 'Belum diatur'),
-                                        h('td', {}, entries.length ? `${entries.length} data` : '0 data')
-                                    );
-                                })
-                            )
+                        h('tbody', {},
+                            ['digital', 'modern', 'online'].map((key) => {
+                                const chart = chartData[key] || {};
+                                const entries = chart.entries || [];
+                                return h('tr', { key },
+                                    h('td', {}, key.charAt(0).toUpperCase() + key.slice(1)),
+                                    h('td', {}, chart.title || 'Belum diatur'),
+                                    h('td', {}, entries.length ? \`\${entries.length} data\` : '0 data')
+                                );
+                            })
                         )
-                    );
-                }
-            });
-
-            CMS.registerPreviewTemplate('news', NewsPreview);
-            CMS.registerPreviewTemplate('statistics', StatisticsPreview);
-            CMS.registerPreviewTemplate('testimonials', TestimonialsPreview);
-            CMS.registerPreviewTemplate('partners', PartnersPreview);
-            CMS.registerPreviewTemplate('events', EventsPreview);
-        }
-
-        function startCMS() {
-            if (cmsHasStarted) {
-                return;
+                    )
+                );
             }
-            if (!window.CMS) {
-                console.warn('CMS belum dimuat.');
-                return;
+        });
+
+        const EventsPreview = createClass({
+            render() {
+                const entries = getList(this.props.entry, ['data', 'entries']);
+                const cards = entries.length
+                    ? entries.map((item, idx) => {
+                        const meta = buildEventMeta(item);
+                        return h('article', { key: idx, className: 'event-card' },
+                            h('span', { className: getBadgeClass(item.badge) }, item.badge_label || item.badge || 'Event'),
+                            h('h2', { className: 'event-card__title' }, item.title || 'Judul Event'),
+                            item.description ? h('p', { className: 'event-card__desc' }, item.description) : null,
+                            meta.length
+                                ? h('ul', { className: 'event-meta' },
+                                    meta.map((detail, detailIdx) =>
+                                        h('li', { key: detailIdx, className: 'event-meta__item' },
+                                            h('span', { className: 'event-meta__icon' }, iconEmojiMap[detail.icon] || '•'),
+                                            h('span', { className: 'event-meta__text' }, detail.text || '')
+                                        )
+                                    )
+                                )
+                                : h('p', { className: 'event-meta__empty' }, 'Detail event belum diatur.'),
+                            h('div', { className: 'event-card__cta' },
+                                h('span', { className: 'event-card__button' }, item.link_label || 'Daftar Sekarang'),
+                                item.link
+                                    ? h('span', { className: 'event-card__link-note' }, item.link)
+                                    : h('span', { className: 'event-card__link-note event-card__link-note--warning' }, 'Tautan pendaftaran belum diisi')
+                            )
+                        );
+                    })
+                    : h('p', { className: 'event-meta__empty' }, 'Belum ada jadwal event.');
+
+                return h('div', {},
+                    h('div', { className: 'preview-heading' }, 'Pratinjau Jadwal Event'),
+                    h('div', { className: 'event-preview-grid' }, cards)
+                );
             }
+        });
 
-            configureCMS();
+        CMS.registerPreviewTemplate('news', NewsPreview);
+        CMS.registerPreviewTemplate('statistics', StatisticsPreview);
+        CMS.registerPreviewTemplate('testimonials', TestimonialsPreview);
+        CMS.registerPreviewTemplate('partners', PartnersPreview);
+        CMS.registerPreviewTemplate('events', EventsPreview);
+    }
 
-            cmsHasStarted = true;
-            body.classList.add('cms-active');
-            cmsRoot.removeAttribute('hidden');
-            window.CMS.init();
+    function startCMS() {
+        if (cmsHasStarted) {
+            return;
+        }
+        if (!window.CMS) {
+            console.warn('CMS belum dimuat.');
+            return;
         }
 
-        if (openCmsButton) {
-            openCmsButton.addEventListener('click', (event) => {
-                event.preventDefault();
-                startCMS();
-            });
-        }
-        const datasetStats = document.getElementById('dataset-stats');
-        const datasets = [
-            { key: 'news', label: 'Berita Terkini', path: '../data/news.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'artikel' },
-            { key: 'statistics', label: 'Statistik Pembinaan', path: '../data/statistics.json', resolve: (data) => (Array.isArray(data?.cards) ? data.cards.length : 0), suffix: 'kartu' },
-            { key: 'testimonials', label: 'Testimoni UMKM', path: '../data/testimonials.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'testimoni' },
-            { key: 'partners', label: 'Mitra & Kolaborator', path: '../data/partners.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'mitra' },
-            { key: 'events', label: 'Jadwal Event', path: '../data/events.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'event' }
-        ];
+        configureCMS();
 
-        function renderStats() {
-            if (!datasetStats) return;
-            datasetStats.innerHTML = datasets.map((item) => `
-                <div class="stat-chip" data-dataset="${item.key}">
-                    <span>
-                        <small>${item.label}</small>
-                        <strong>Mengambil data...</strong>
-                    </span>
-                    <div class="stat-value">…</div>
-                </div>
-            `).join('');
+        cmsHasStarted = true;
+        body.classList.add('cms-active');
+        cmsRoot.removeAttribute('hidden');
+        window.CMS.init();
+    }
 
-            datasets.forEach(async (item) => {
-                const chip = datasetStats.querySelector(`[data-dataset="${item.key}"]`);
-                if (!chip) return;
-                try {
-                    const response = await fetch(item.path + `?ts=${Date.now()}`, { cache: 'no-store' });
-                    if (!response.ok) throw new Error(`Gagal memuat ${item.label}`);
-                    const data = await response.json();
-                    const total = item.resolve(data);
-                    chip.querySelector('strong').textContent = total ? 'Tersedia' : 'Belum ada data';
-                    chip.querySelector('.stat-value').textContent = Number.isFinite(total) ? `${total} ${item.suffix}` : '0';
-                } catch (error) {
-                    console.error(error);
-                    chip.querySelector('strong').textContent = 'Gagal memuat';
-                    chip.querySelector('.stat-value').textContent = '!';
-                }
-            });
-        }
+    if (openCmsButton) {
+        openCmsButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            startCMS();
+        });
+    }
 
-        renderStats();
-    </script>
+    const datasets = [
+        { key: 'news', label: 'Berita Terkini', path: '../data/news.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'artikel' },
+        { key: 'statistics', label: 'Statistik Pembinaan', path: '../data/statistics.json', resolve: (data) => (Array.isArray(data?.cards) ? data.cards.length : 0), suffix: 'kartu' },
+        { key: 'testimonials', label: 'Testimoni UMKM', path: '../data/testimonials.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'testimoni' },
+        { key: 'partners', label: 'Mitra & Kolaborator', path: '../data/partners.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'mitra' },
+        { key: 'events', label: 'Jadwal Event', path: '../data/events.json', resolve: (data) => (Array.isArray(data?.entries) ? data.entries.length : 0), suffix: 'event' }
+    ];
+
+    function renderStats() {
+        if (!datasetStats) return;
+        datasetStats.innerHTML = datasets.map((item) => `
+            <div class="stat-chip" data-dataset="${item.key}">
+                <span>
+                    <small>${item.label}</small>
+                    <strong>Mengambil data...</strong>
+                </span>
+                <div class="stat-value">...</div>
+            </div>
+        `).join('');
+
+        datasets.forEach(async (item) => {
+            const chip = datasetStats.querySelector(\`[data-dataset="\${item.key}"]\`);
+            if (!chip) return;
+            try {
+                const response = await fetch(item.path + \`?ts=\${Date.now()}\`, { cache: 'no-store' });
+                if (!response.ok) throw new Error(\`Gagal memuat \${item.label}\`);
+                const data = await response.json();
+                const total = item.resolve(data);
+                chip.querySelector('strong').textContent = total ? 'Tersedia' : 'Belum ada data';
+                chip.querySelector('.stat-value').textContent = Number.isFinite(total) ? \`\${total} \${item.suffix}\` : '0';
+            } catch (error) {
+                console.error(error);
+                chip.querySelector('strong').textContent = 'Gagal memuat';
+                chip.querySelector('.stat-value').textContent = '!';
+            }
+        });
+    }
+
+    renderStats();
+</script>
 </body>
 </html>

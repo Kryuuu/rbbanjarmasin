@@ -244,14 +244,15 @@ collections:
                   name: "url",
                   widget: "string",
                   required: false,
-                  pattern: ['^(https?:\/\/.+|\/.*)?$', "URL lengkap / kosongkan"]
+                  pattern:
+                    ['^(https?:\/\/.+|\/.*)?$', "URL lengkap / kosongkan"],
                 }
               - {
                   label: "Logo",
                   name: "logo",
                   widget: "image",
                   choose_url: true,
-                  hint: "PNG transparan direkomendasikan"
+                  hint: "PNG transparan direkomendasikan",
                 }
 
   - name: "events"
@@ -276,7 +277,7 @@ collections:
                   name: "badge_label",
                   widget: "string",
                   default: "Event",
-                  hint: "Teks kecil di atas judul, misal: Workshop, Coaching Clinic."
+                  hint: "Teks kecil di atas judul, misal: Workshop, Coaching Clinic.",
                 }
               - {
                   label: "Tema Warna Badge",
@@ -286,33 +287,33 @@ collections:
                     [
                       { label: "Biru (Primary)", value: "primary" },
                       { label: "Turquoise (Secondary)", value: "secondary" },
-                      { label: "Hijau Kebiruan (Accent)", value: "accent" }
+                      { label: "Hijau Kebiruan (Accent)", value: "accent" },
                     ],
-                  default: "primary"
+                  default: "primary",
                 }
               - {
                   label: "Deskripsi Singkat",
                   name: "description",
                   widget: "text",
-                  hint: "Gambaran ringkas tujuan event."
+                  hint: "Gambaran ringkas tujuan event.",
                 }
               - {
                   label: "Tanggal Acara",
                   name: "schedule_date",
                   widget: "string",
-                  hint: "Contoh: Jumat, 15 November 2025"
+                  hint: "Contoh: Jumat, 15 November 2025",
                 }
               - {
                   label: "Waktu Acara",
                   name: "schedule_time",
                   widget: "string",
-                  hint: "Contoh: 09.00 - 15.00 WITA"
+                  hint: "Contoh: 09.00 - 15.00 WITA",
                 }
               - {
                   label: "Lokasi / Platform",
                   name: "location",
                   widget: "string",
-                  hint: "Contoh: Aula Rumah BUMN atau tautan platform online."
+                  hint: "Contoh: Aula Rumah BUMN atau tautan platform online.",
                 }
               - label: "Highlight & Fasilitas"
                 name: "highlights"
@@ -327,12 +328,16 @@ collections:
                   name: "link",
                   widget: "string",
                   hint: "URL form pendaftaran (mis. Google Form).",
-                  pattern: ['^https?:\/\/.+$', "Masukkan URL lengkap diawali http/https"]
+                  pattern:
+                    [
+                      '^https?:\/\/.+$',
+                      "Masukkan URL lengkap diawali http/https",
+                    ],
                 }
               - {
                   label: "Teks Tombol",
                   name: "link_label",
                   widget: "string",
                   default: "Daftar Sekarang",
-                  required: false
+                  required: false,
                 }
