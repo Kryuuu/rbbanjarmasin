@@ -8,7 +8,6 @@ backend:
 media_folder: "static/uploads"
 public_folder: "/static/uploads"
 
-# Supaya simpel & langsung commit ke main (bisa ubah ke editorial_workflow lagi nanti)
 publish_mode: simple
 
 collections:

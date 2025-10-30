@@ -7,26 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="../assets/png/rumah-bumn.png">
   <style>
-    :root{
-      color-scheme: light;
-      font-family:'Manrope','Segoe UI','Roboto',sans-serif;
-      background:#0f172a;
-    }
+    :root{ color-scheme: light; font-family:'Manrope','Segoe UI','Roboto',sans-serif; background:#0f172a; }
     *{box-sizing:border-box}
-    body{
-      margin:0;min-height:100vh;
-      background:radial-gradient(circle at top right,#1ba0db 0%,#195770 35%,#0f172a 70%,#0b1220 100%);
-      color:#f8fafc;display:flex;flex-direction:column;
-    }
-body.cms-active{background:#0f172a;color:inherit}
-body.cms-active header,body.cms-active main{display:none}
+    body{ margin:0;min-height:100vh; background:radial-gradient(circle at top right,#1ba0db 0%,#195770 35%,#0f172a 70%,#0b1220 100%); color:#f8fafc;display:flex;flex-direction:column; }
+    body.cms-active{background:#0f172a;color:inherit}
+    body.cms-active header,body.cms-active main{display:none}
     header{padding:clamp(1.25rem,4vw,2rem) clamp(1.75rem,5vw,4rem)}
-    .glass{
-      background:rgba(15,23,42,.55);
-      border-radius:24px;border:1px solid rgba(148,163,184,.16);
-      backdrop-filter:blur(18px);
-      box-shadow:0 24px 48px rgba(8,47,73,.35)
-    }
+    .glass{ background:rgba(15,23,42,.55); border-radius:24px;border:1px solid rgba(148,163,184,.16); backdrop-filter:blur(18px); box-shadow:0 24px 48px rgba(8,47,73,.35) }
     .topbar{width:100%;display:flex;align-items:center;justify-content:space-between;padding:clamp(1.2rem,3.2vw,1.8rem)}
     .brand{display:flex;align-items:center;gap:1rem}
     .brand img{width:clamp(52px,6vw,64px);height:clamp(52px,6vw,64px);border-radius:18px;background:rgba(255,255,255,.08);padding:.35rem;border:1px solid rgba(255,255,255,.12)}
@@ -87,15 +74,10 @@ body.cms-active header,body.cms-active main{display:none}
   <div class="layout">
     <section class="glass panel">
       <h2>Selamat datang, Tim Konten!</h2>
-      <p>Klik tombol di bawah untuk membuka editor visual Decap CMS. Semua perubahan yang disimpan akan otomatis
-        dikirim ke repositori dan terpublikasi di situs.</p>
+      <p>Klik tombol di bawah untuk membuka editor visual Decap CMS. Semua perubahan yang disimpan akan otomatis dikirim ke repositori dan terpublikasi di situs.</p>
       <div class="actions">
-        <button id="open-cms" class="btn btn-primary" type="button" aria-label="Buka editor konten">
-          Buka Editor Konten
-        </button>
-        <a class="btn btn-ghost" href="https://decapcms.org/docs/intro/" target="_blank" rel="noopener noreferrer">
-          Panduan Decap CMS
-        </a>
+        <button id="open-cms" class="btn btn-primary" type="button" aria-label="Buka editor konten">Buka Editor Konten</button>
+        <a class="btn btn-ghost" href="https://decapcms.org/docs/intro/" target="_blank" rel="noopener noreferrer">Panduan Decap CMS</a>
       </div>
 
       <ul class="checklist">
@@ -148,11 +130,9 @@ body.cms-active header,body.cms-active main{display:none}
   function configureCMS(){
     if (cmsConfigured || !window.CMS) return;
 
-    // Fallback aman untuk API preview
     const CMS = window.CMS;
     const h = window.h || (CMS && CMS.h);
     const createClass = window.createClass || (CMS && CMS.createClass);
-
     if (!h || !createClass){
       console.warn('Preview API belum siap. Pastikan decap-cms termuat.');
       return;
@@ -213,22 +193,6 @@ body.cms-active header,body.cms-active main{display:none}
     };
 
     const iconEmojiMap = { calendar:'[Tanggal]', clock:'[Waktu]', location:'[Lokasi]', check:'[Info]' };
-
-    const buildEventMeta = (item) => {
-      if (!item) return [];
-      const meta = [];
-      if (item.schedule_date) meta.push({ icon:'calendar', text:item.schedule_date });
-      if (item.schedule_time) meta.push({ icon:'clock', text:item.schedule_time });
-      if (item.location) meta.push({ icon:'location', text:item.location });
-      if (Array.isArray(item.highlights)){
-        item.highlights.forEach(t => { if (t) meta.push({ icon:'check', text:t }); });
-      } else if (Array.isArray(item.details)){
-        item.details.forEach(legacy => {
-          if (legacy && legacy.text) meta.push({ icon: legacy.icon || 'check', text: legacy.text });
-        });
-      }
-      return meta;
-    };
 
     const NewsPreview = createClass({
       render(){
@@ -343,9 +307,19 @@ body.cms-active header,body.cms-active main{display:none}
         const entries = getList(this.props.entry, ['data','entries']);
         const cards = entries.length
           ? entries.map((item,idx)=>{
-              const meta = buildEventMeta(item);
+              const meta = [];
+              if (item.schedule_date) meta.push({ icon:'calendar', text:item.schedule_date });
+              if (item.schedule_time) meta.push({ icon:'clock', text:item.schedule_time });
+              if (item.location) meta.push({ icon:'location', text:item.location });
+              (item.highlights || []).forEach(t => t && meta.push({ icon:'check', text:t }));
+
+              const badgeClass =
+                item.badge === 'secondary' ? 'event-badge event-badge--secondary' :
+                item.badge === 'accent'    ? 'event-badge event-badge--accent'    :
+                                             'event-badge event-badge--primary';
+
               return h('article',{key:idx,className:'event-card'},
-                h('span',{className:getBadgeClass(item.badge)}, item.badge_label || item.badge || 'Event'),
+                h('span',{className:badgeClass}, item.badge_label || item.badge || 'Event'),
                 h('h2',{className:'event-card__title'}, item.title || 'Judul Event'),
                 item.description && h('p',{className:'event-card__desc'}, item.description),
                 meta.length
@@ -375,12 +349,12 @@ body.cms-active header,body.cms-active main{display:none}
       }
     });
 
+    // Register preview templates
     CMS.registerPreviewTemplate('news', NewsPreview);
     CMS.registerPreviewTemplate('statistics', StatisticsPreview);
     CMS.registerPreviewTemplate('testimonials', TestimonialsPreview);
     CMS.registerPreviewTemplate('partners', PartnersPreview);
-    CMS.registerPreviewTemplate('event_schedule', EventsPreview);
-
+    CMS.registerPreviewTemplate('event_schedule', EventsPreview); // penting
   }
 
   function startCMS(){
@@ -389,14 +363,12 @@ body.cms-active header,body.cms-active main{display:none}
       console.warn('CMS belum dimuat. Coba lagi sesaat lagi.');
       return;
     }
-
     configureCMS();
-
     cmsHasStarted = true;
     body.classList.add('cms-active');
     cmsRoot.removeAttribute('hidden');
     try {
-      window.CMS.init(); // akan otomatis membaca /admin/config.yml
+      window.CMS.init(); // otomatis membaca /admin/config.yml
     } catch (err){
       console.error('Gagal menginisialisasi CMS:', err);
       alert('Gagal membuka CMS. Cek konsol untuk detail error.');
@@ -410,6 +382,7 @@ body.cms-active header,body.cms-active main{display:none}
     });
   }
 
+  // Statistik ringkas dataset (opsional)
   const datasets = [
     { key:'news',         label:'Berita Terkini',       path:'../data/news.json',        resolve:(d)=> (d && Array.isArray(d.entries) ? d.entries.length : 0),      suffix:'artikel'  },
     { key:'statistics',   label:'Statistik Pembinaan',  path:'../data/statistics.json',  resolve:(d)=> (d && Array.isArray(d.cards) ? d.cards.length : 0),          suffix:'kartu'    },
